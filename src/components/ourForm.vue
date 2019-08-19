@@ -1,6 +1,7 @@
 <template lang="html">
   <section class="our-form">
       <div class="form-group">
+        <h5>Car settings</h5>
         <div class='row'>
           <label class='col col-sm-6' for="">Weight KG</label>
           <input type="number" step=100 class="form-control form-control-sm col col-sm-6" value=1184 disabled readonly>
@@ -25,7 +26,10 @@
           <label class='col col-sm-6' for="">Initial speed km/h</label>
           <input type="number" class="form-control form-control-sm col col-sm-6" disabled readonly>
         </div>
+      </div>
 
+      <div class="form-group">
+        <h5>Test settings</h5>
         <div class='row form-check'>
           <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option0" checked>
           <label class="form-check-label" for="gridRadios1">one gear</label>
@@ -93,14 +97,36 @@
 
 <style scoped lang="scss">
 .our-form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  .row {
+    margin-right: 8px;
+  }
   .form-group {
     width: 400px;
+    h5 {
+      text-align: center;
+      margin-bottom: 14px;
+    }
     label {
       text-align: right;
       margin-top: .5rem;
     }
     input:disabled {
       color: darkgray;
+    }
+    .form-check {
+      margin-left: 196px;
+      label {
+        margin-top: 0px;
+      }
+      &:nth-of-type(3) {
+        label {
+          margin-bottom: 8px;
+        }
+      }
     }
   }
 }

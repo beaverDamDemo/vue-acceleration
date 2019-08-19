@@ -1,12 +1,20 @@
 <template>
   <div id="app">
     <ourForm class='ourForm'></ourForm>
-    <div class="myButContainer">
-      <div @click='startButtonClick' class="button"><p>Start</p></div>
-      <div class="button"><p>Pause</p></div>
-      <div class="button"><p>Stop calculations</p></div>
+
+    <div :class='{active: myChartShow, myChartContainer: true}'>
+      <canvas id="myChart"></canvas>
+      <label class="switch">
+        <input @change='myCSchange' type="checkbox">
+        <span class="slider round"></span>
+      </label>
     </div>
-    <canvas id="myChart"></canvas>
+
+    <div class="myButContainer">
+      <div @click='startButtonClick' class="button"><p>Run</p></div>
+      <!-- <div class="button"><p>Pause</p></div>
+      <div class="button"><p>Stop calculations</p></div> -->
+    </div>
     <ourOutput></ourOutput>
   </div>
 </template>
@@ -41,7 +49,8 @@ export default {
       finalGearMin: null,
       finalGearMax: null,
       splits: 5,
-      results: []
+      results: [],
+      myChartShow: false
     }
   },
   created() {
@@ -50,6 +59,9 @@ export default {
   methods: {
     sendData() {
       this.$eventBus.$emit('send-data', this.setup)
+    },
+    myCSchange(e) {
+      this.myChartShow = !this.myChartShow
     },
     startButtonClick(isMaximumSpeedRun) {
       var singleRun = (isMaximumSpeedRun, gearLength) => {
@@ -129,6 +141,7 @@ export default {
       this.splits = e
     })
 
+
     var difference = this.maxRpm/ (this.tor.length-1)
     var torStep = []
     var torqueLookupTable = [], rpmLookupTable = []
@@ -155,14 +168,9 @@ export default {
             datasets: [{
                 label: 'torque nm',
                 data: torqueLookupTable,
-                // backgroundColor: [
-                //     'rgba(255, 99, 132, 0.2)',
-                //     'rgba(54, 162, 235, 0.2)',
-                //     'rgba(255, 206, 86, 0.2)',
-                //     'rgba(75, 192, 192, 0.2)',
-                //     'rgba(153, 102, 255, 0.2)',
-                //     'rgba(255, 159, 64, 0.2)'
-                // ],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)'
+                ],
                 // borderColor: [
                 //     'rgba(255, 99, 132, 1)',
                 //     'rgba(54, 162, 235, 1)',
@@ -176,7 +184,7 @@ export default {
                 label: 'power kW',
                 data: this.powerLookupTable,
                 backgroundColor: [
-
+                  'rgba(127, 127, 127, 1)'
                 ],
                 // borderColor: [
                 //     'rgba(255, 99, 132, 1)',
@@ -230,6 +238,9 @@ const calculatePower = (speed, executionTime, _that, gearLength) => {0
 <style lang="scss">
 $bgr_0: rgb(109, 161, 174);
 $fg_0: rgb(184, 35, 126);
+html {
+  min-width: 440px;
+}
 #app {
   background: $bgr_0;
   color: $fg_0;
@@ -250,7 +261,7 @@ $fg_0: rgb(184, 35, 126);
     left: 0;
     top: 0px;
     height: 30px;
-    cursor: default;
+    cursor: pointer;
     margin-bottom: 3px;
     & p {
       background: #fff;
@@ -288,12 +299,94 @@ $fg_0: rgb(184, 35, 126);
     }
   }
 }
-#myChart {
+.myChartContainer {
   max-width: 750px;
   max-height: 500px;
   background-color: #fff;
   border: 2px solid $fg_0;
   border-radius: 9px;
-  margin-top: 10px;
+  position: relative;
+  left: 60px;
+  margin-bottom: 8px;
+  transform: translateX(-100%);
+  transition: all 0.2s;
+  max-height: 44px;
+  overflow: hidden;
+  &.active {
+    left: 50%;
+    max-height: 100%;
+    transform: translateX(-50%);
+    transition: all 0.2s;
+  }
+  .switch {
+    position: absolute;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    right: 4px;
+    top: 4px;
+  }
+
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  input + .slider {
+    background-color: #ccc;
+  }
+  input + .slider:before {
+    -webkit-transform: translateX(0px);
+    -ms-transform: translateX(0px);
+    transform: translateX(0px);
+  }
+  input:checked + .slider {
+    background-color: $fg_0;
+  }
+
+  input:focus + .slider {
+    box-shadow: 0 0 1px #ccc;
+  }
+
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+
+  .slider.round:before {
+    border-radius: 50%;
+  }
 }
 </style>
