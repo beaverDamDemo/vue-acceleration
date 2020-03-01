@@ -1,15 +1,34 @@
 <template lang="html">
   <section class="our-output">
     <h1>our-output Component</h1>
-    <table></table>
+    <table>
+        <div v-for='l in store.love'>gear length: {{l[0]}} km/h,
+        max reached rpm: {{l[1]}} rpm,
+        max reached speed: {{l[2]}} km/h,
+        covered distance: {{l[4]}} m,
+        time needed: {{l[6]}}</div>
+    </table>
+
   </section>
 </template>
 
 <script lang="js">
+import store from '../store.js'
+
 export default  {
   name: 'our-output',
-  props: [],
+  props: {
+
+  },
+  data() {
+    return {
+        store: store
+    }
+  },
   mounted() {
+    // this.$eventBus.$on("calculationDone", (e)=>{
+
+    // })
     // let i=0;
     // $('table').append("<tr id='tab-"+i+"'></tr>");
     // $('table tr#tab-'+i).append("<td>"+i+"</td>")
@@ -182,7 +201,7 @@ export default  {
   }
 table {
   border: 1px solid white;
-  text-align: center;
+  text-align: left;
 }
 td {
   height: 50px;

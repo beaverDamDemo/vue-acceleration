@@ -20,9 +20,6 @@ var currentRpm;
 var c, b, interval;
 var i;
 
-function quux() {
-    console.error(" quux")
-}
 function compute()
 {
     //ok initial speed že imamo
@@ -118,8 +115,6 @@ var calculatePower = function(speed)
         if (celica == tor.Length - 2)
         {
             //var currentTorque = tor[celica];
-            //currentTorque = currentTorque * 0.454 * 3.048;//preveri če prav konvertira v nm
-            //var rezultat = currentTorque * currentRpm / 7030;//tale 7000 ni natančen
             //tle bi moral returnat same as before? neee ohranit hitrost mora, če ohrani moč bo nadaljeval pospeševanje
             return 0;
         }
@@ -127,8 +122,8 @@ var calculatePower = function(speed)
         {
             var currentTorque = tor[celica] + (tor[celica + 1] - tor[celica]) * (visek_rpm / ena_celica);
             // sw.WriteLine("rpm: " + currentRpm + "       torque: " + Math.Round(currentTorque, 0) + "lb-ft");
-            currentTorque = currentTorque * 0.454 * 3.048;//preveri če prav konvertira v nm
-            var rezultat = currentTorque * currentRpm / 7030;//tale 7000 ni natančen
+            currentTorque = currentTorque;//preveri če prav konvertira v nm
+            var rezultat = currentTorque * currentRpm / 9549
 
             return rezultat;
         }
