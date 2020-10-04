@@ -32,6 +32,39 @@ export default {
             torqueData: [519, 576, 630, 685, 731, 779, 816, 854, 888, 924, 948, 971, 992, 1012, 1018, 1032, 1054, 1038, 1002, 992, 980, 969, 948, 819],
             torqueLookupTable: [],
             powerLookupTable: []
+        },
+        {
+            label: "Stock GTS from real dyno \"450hp\"",
+            effectiveMaxKw: "-",
+            maxRpm: 5750,
+            torqueData: [
+                476,
+                476,
+                476,
+                476,
+                476,
+                476,
+                476,
+                476,
+                476,
+                544,
+                544,
+                561,
+                584,
+                591,
+                612,
+                626,
+                618,
+                622,
+                612,
+                591,
+                578,
+                561,
+                527,
+                496
+            ],
+            torqueLookupTable: [],
+            powerLookupTable: []
         }
     ],
     carPresets: [{

@@ -118,10 +118,9 @@ export default  {
 
   },
   mounted() {
-    this.fillTorqueLookupTable(0)
-    this.fillTorqueLookupTable(1)
-    this.fillTorqueLookupTable(2)
-    this.fillTorqueLookupTable(3)
+    for( let i=0; i<store.engines.length; i++) {
+      this.fillTorqueLookupTable(i)
+    }
     console.error("Move this calls to a mixin, and it s function fillTorqueLookupTable")
   },
   methods: {
