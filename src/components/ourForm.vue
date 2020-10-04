@@ -118,7 +118,11 @@ export default  {
 
   },
   mounted() {
-    this.fillTorqueLookupTable(this.selectedEngine)
+    this.fillTorqueLookupTable(0)
+    this.fillTorqueLookupTable(1)
+    this.fillTorqueLookupTable(2)
+    this.fillTorqueLookupTable(3)
+    console.error("Move this calls to a mixin, and it s function fillTorqueLookupTable")
   },
   methods: {
     finalGearInputChange(e) {
@@ -188,6 +192,7 @@ export default  {
         }
         rpmLookupTable.push(currentRpm)
       }
+      store.engines[selectedEngine].torqueLookupTable = torqueLookupTable
       store.engines[selectedEngine].powerLookupTable = tmpPowerLookupTable
       store.engines[selectedEngine].effectiveMaxKw = '(' + Math.round(maxKw) + "kW@" + maxKwAtRpm +"rpm)"
     }
