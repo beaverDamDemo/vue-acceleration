@@ -41,7 +41,7 @@
             </div>
             <div class='row'>
                 <label class='col col-sm-6' for="">Initial speed km/h</label>
-                <input type="number" class="form-control form-control-sm col col-sm-6" disabled readonly>
+                <input v-model="csin" @change="initialSpeedInputChange" type="number" class="form-control form-control-sm col col-sm-6" disabled readonly>
             </div>
         </div>
         <div class="form-group">
@@ -103,6 +103,7 @@ export default {
             csac: 0.35,
             csrr: 0.015,
             csmag: 0.95,
+            csin: 100,
             divRpm: 50,
             selectedEngine: 0,
             formfixShow: true
@@ -123,6 +124,9 @@ export default {
         finalGearInputChange(e) {
             this.$eventBus.$emit("finalGearInputChange", this.finalGear)
         },
+        initialSpeedInputChange(e) {
+            this.$eventBus.$emit("initialSpeedInputChange", this.csin)
+        },
         finalGearMinChange(e) {
             this.$eventBus.$emit("finalGearMinChange", this.finalGearMin)
         },
@@ -141,22 +145,22 @@ export default {
         },
         scpChange(e) {
             this.$eventBus.$emit('scpChange', event.target.value)
-            switch (event.target.value) {
-                case '0':
-                    this.cskg = 1184
-                    this.csac = 0.35
-                    this.csrr = 0.015
-                    this.csmag = 0.95
-                    break;
-                case '1':
-                    this.cskg = 1628
-                    this.csac = 0.35
-                    this.csrr = 0.012
-                    this.csmag = 0.825
-                    break;
-                default:
-
-            }
+//             switch (event.target.value) {
+//                 case '0':
+//                     this.cskg = 1184
+//                     this.csac = 0.35
+//                     this.csrr = 0.015
+//                     this.csmag = 0.95
+//                     break;
+//                 case '1':
+//                     this.cskg = 1628
+//                     this.csac = 0.35
+//                     this.csrr = 0.012
+//                     this.csmag = 0.825
+//                     break;
+//                 default:
+//
+//             }
         },
         selectModeOneGear(e) {
           console.log("selected selectOneGear")

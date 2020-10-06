@@ -41,6 +41,7 @@ export default {
             divRpm: 50,
             finalGearMin: 200,
             finalGearMax: 400,
+            initialSpeed: 100,
             splits: 5,
             results: [],
             myChartShow: true,
@@ -67,7 +68,6 @@ export default {
             let love = []
 
             var singleRun = (isMaximumSpeedRun, maxDistance, gearLength) => {
-                console.log(" deautl : '", isMaximumSpeedRun)
                 var acceleration, brakeforce, pushforce, netforce, power;
                 var value = 0;
                 var calculate_interval_ms = 100; //tested 100
@@ -159,7 +159,7 @@ export default {
                         ],
                         borderWidth: 1
                     }, {
-                        label: 'power kW',
+                        label: 'power hp',
                         data: store.engines[this.selectedEngine].powerLookupTable,
                         backgroundColor: [
                             'rgba(127, 127, 127, 1)'
@@ -186,6 +186,9 @@ export default {
 
         this.$eventBus.$on("finalGearInputChange", (e) => {
             this.maxgearlength = e
+        })
+        this.$eventBus.$on("initialSpeedInputChange", (e) => {
+            this.initialSpeed = e
         })
         this.$eventBus.$on("finalGearMinChange", (e) => {
             this.finalGearMin = e

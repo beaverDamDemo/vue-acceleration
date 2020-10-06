@@ -30,7 +30,7 @@ export default {
                 let result = ((torStep[i] - currentRpm) / difference) * en[i - 1]
                 result += ((currentRpm - torStep[i - 1]) / difference) * en[i]
                 torqueLookupTable.push(result)
-                let tmp = (result) * currentRpm / 9549
+                let tmp = (result) * currentRpm / 7030
                 tmpPowerLookupTable.push(tmp)
                 if (tmp > maxKw) {
                     maxKw = tmp
