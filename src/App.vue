@@ -183,8 +183,6 @@ export default {
         })
         this.$eventBus.$on('seChange', (e) => {
             this.selectedEngine = e
-
-            console.log("Here we have to redraw the chart")
             this.drawPowerAndTorqueChart()
         })
         this.$eventBus.$on('scpChange', (e) => {
