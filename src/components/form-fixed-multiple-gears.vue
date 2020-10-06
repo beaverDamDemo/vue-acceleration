@@ -4,32 +4,32 @@
     <h5>Gear ratios</h5>
       <div class="form-group">
         <label for="customRange_0">1st gear</label>
-        <input @input='g_0_change($event)' type="range" class="custom-range" min="0.08" max="4" step="0.02" id="customRange_0" v-model="gear_0" disabled>
+        <input @input='g_0_change($event)' type="range" class="custom-range" min="0.08" max="4" step="0.02" id="customRange_0" v-model="gear_0" :disabled="isDisabled">
         <span v-text="gear_0"></span>
       </div>
       <div class='form-group'>
         <label for="customRange_1">2nd gear</label>
-        <input @input='g_1_change($event)' type="range" class="custom-range" min="0.08" max="4" step="0.02" id="customRange_1" v-model="gear_1" disabled>
+        <input @input='g_1_change($event)' type="range" class="custom-range" min="0.08" max="4" step="0.02" id="customRange_1" v-model="gear_1" :disabled="isDisabled">
         <span v-text="gear_1"></span>
       </div>
       <div class='form-group'>
         <label for="customRange_2">3th gear</label>
-        <input @input='g_2_change($event)' type="range" class="custom-range" min="0.08" max="4" step="0.02" id="customRange_2" v-model="gear_2" disabled>
+        <input @input='g_2_change($event)' type="range" class="custom-range" min="0.08" max="4" step="0.02" id="customRange_2" v-model="gear_2" :disabled="isDisabled">
         <span v-text="gear_2"></span>
       </div>
       <div class='form-group'>
         <label for="customRange_3">4th gear</label>
-        <input @input='g_3_change($event)' type="range" class="custom-range" min="0.08" max="4" step="0.02" id="customRange_3" v-model="gear_3" disabled>
+        <input @input='g_3_change($event)' type="range" class="custom-range" min="0.08" max="4" step="0.02" id="customRange_3" v-model="gear_3" :disabled="isDisabled">
         <span v-text="gear_3"></span>
       </div>
       <div class='form-group'>
         <label for="customRange_4">5th gear</label>
-        <input @input='g_4_change($event)' type="range" class="custom-range" min="0.08" max="4" step="0.02" id="customRange_4" v-model="gear_4" disabled>
+        <input @input='g_4_change($event)' type="range" class="custom-range" min="0.08" max="4" step="0.02" id="customRange_4" v-model="gear_4" :disabled="isDisabled">
         <span v-text="gear_4"></span>
       </div>
       <div class='form-group'>
         <label for="customRange_5">6th gear</label>
-        <input @input='g_5_change($event)' type="range" class="custom-range" min="0.08" max="4" step="0.02" id="customRange_5" v-model="gear_5" disabled>
+        <input @input='g_5_change($event)' type="range" class="custom-range" min="0.08" max="4" step="0.02" id="customRange_5" v-model="gear_5" :disabled="isDisabled">
         <span v-text="gear_5"></span>
       </div>
     </div>
@@ -42,7 +42,13 @@
     name: 'form-fixed-multiple-gears',
     props: [],
     mounted() {
-
+      this.$eventBus.$on('selectMode', (e) => {
+          if(e == "oneGear" || e == "topspeedRun") {
+            this.isDisabled = true
+          } else {
+            this.isDisabled = false
+          }
+        })
     },
     data() {
       return {
@@ -51,7 +57,8 @@
         gear_2: 1.30,
         gear_3: 1.00,
         gear_4: 0.74,
-        gear_5: 0.50
+        gear_5: 0.50,
+        isDisabled: true
       }
     },
     methods: {

@@ -126,14 +126,15 @@ export default {
                 store.tanja = tanja
                 store.love = love
             } else if (this.mode == "topspeedRun") {
-                console.log("this has yet to be done")
-                console.log("%cTo moramo prakticno ga pognat da tece vec kot 1609 metrov in kadar se neha pridobivanje hitrosti pac vrnit samo zadnjo vrednost", "color: sienna")
                 for (let i = 0; i < this.splits; i++) {
                     let tmp = parseFloat(this.finalGearMin) + i * parseFloat((this.finalGearMax - this.finalGearMin) / (this.splits - 1))
                     tanja.push(singleRun(true, Infinity, tmp))
                 }
                 store.tanja = tanja
                 store.love = love
+            } else if (this.mode == "fixedMultipleGears") {
+                    console.log("fixedMultipleGears")
+                    console.log("%cTo moramo dobit gear ratios is form fixed tralala", "color: sienna")
             }
             // this.$eventBus.$emit('calculationDone')
         },

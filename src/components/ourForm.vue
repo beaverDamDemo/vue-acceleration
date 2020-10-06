@@ -47,19 +47,19 @@
         <div class="form-group">
             <h5>Test settings</h5>
             <div class='row form-check'>
-                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option0" checked @change="selectModeOneGear">
+                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option0" checked @change="selectMode('oneGear')">
                 <label class="form-check-label" for="gridRadios1">one gear</label>
             </div>
             <div class='row form-check'>
-                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option1" disabled>
+                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option1" @change="selectMode('fixedMultipleGears')">
                 <label class="form-check-label" for="gridRadios2">fixed multiple gears</label>
             </div>
             <div class='row form-check'>
-                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option2" @change="selectModeTopspeedRun">
+                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option2" @change="selectMode('topspeedRun')">
                 <label class="form-check-label" for="gridRadios3">topspeed run</label>
             </div>
             <div class='row form-check'>
-                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios4" value="option3" disabled>
+                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios4" value="option3" disabled @change="selectMode('allPossibleGears')">
                 <label class="form-check-label" for="gridRadios4">all possible gears</label>
             </div>
             <div class='row'>
@@ -162,14 +162,9 @@ export default {
 //
 //             }
         },
-        selectModeOneGear(e) {
-          console.log("selected selectOneGear")
-          this.$eventBus.$emit("selectMode", "oneGear")
+        selectMode(e) {
+          this.$eventBus.$emit("selectMode", e)
         },
-        selectModeTopspeedRun(e) {
-          console.log("selected selectTopspeedRun")
-          this.$eventBus.$emit("selectMode", "topspeedRun")
-        }
     }
 }
 </script>
