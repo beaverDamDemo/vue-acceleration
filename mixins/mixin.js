@@ -8,9 +8,6 @@ export default {
 
     },
     methods: {
-        displayMessage: function() {
-            console.log("Now printing from a mixin function ")
-        },
         fillTorqueLookupTable(selectedEngine) {
             const en = store.engines[selectedEngine].torqueData
             const difference = store.engines[selectedEngine].maxRpm / (en.length - 1)

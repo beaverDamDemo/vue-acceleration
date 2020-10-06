@@ -46,6 +46,7 @@ export default {
             myChartShow: true,
             selectedEngine: 0,
             selectedCarPreset: 0,
+            mode: "oneGear",
         }
     },
     created() {
@@ -62,6 +63,9 @@ export default {
             console.log(store)
         },
         startButtonClick(isMaximumSpeedRun) {
+            let tanja = []
+            let love = []
+
             var singleRun = (isMaximumSpeedRun, gearLength) => {
                 var acceleration, brakeforce, pushforce, netforce, power;
                 var value = 0;
@@ -111,15 +115,18 @@ export default {
                 return arrResult
             }
 
-            let tanja = []
-            let love = []
+            console.log("this mode : ", this.mode)
 
-            for (let i = 0; i < this.splits; i++) {
-                let tmp = parseFloat(this.finalGearMin) + i * parseFloat((this.finalGearMax - this.finalGearMin) / (this.splits - 1))
-                tanja.push(singleRun(isMaximumSpeedRun, tmp))
+            if (this.mode == "oneGear") {
+                for (let i = 0; i < this.splits; i++) {
+                    let tmp = parseFloat(this.finalGearMin) + i * parseFloat((this.finalGearMax - this.finalGearMin) / (this.splits - 1))
+                    tanja.push(singleRun(isMaximumSpeedRun, tmp))
+                }
+                store.tanja = tanja
+                store.love = love
+            } else if (this.mode == "topspeedRun") {
+                console.log("this has yet to be done")
             }
-            store.tanja = tanja
-            store.love = love
             // this.$eventBus.$emit('calculationDone')
         },
         drawPowerAndTorqueChart() {
@@ -132,36 +139,36 @@ export default {
             while (ctx.firstChild)
                 ctx.removeChild(ctx.firstChild);
 
-             var myChart = new Chart(ctx, {
-                 type: 'line',
-                 data: {
-                     labels: rpmLookupTable,
-                     datasets: [{
-                         label: 'torque nm',
-                         data: store.engines[this.selectedEngine].torqueLookupTable,
-                         backgroundColor: [
-                             'rgba(54, 162, 235, 0.2)'
-                         ],
-                         borderWidth: 1
-                     }, {
-                         label: 'power kW',
-                         data: store.engines[this.selectedEngine].powerLookupTable,
-                         backgroundColor: [
-                             'rgba(127, 127, 127, 1)'
-                         ],
-                         borderWidth: 1
-                     }]
-                 },
-                 options: {
-                     scales: {
-                         yAxes: [{
-                             ticks: {
-                                 beginAtZero: true
-                             }
-                         }]
-                     }
-                 }
-             });
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: rpmLookupTable,
+                    datasets: [{
+                        label: 'torque nm',
+                        data: store.engines[this.selectedEngine].torqueLookupTable,
+                        backgroundColor: [
+                            'rgba(54, 162, 235, 0.2)'
+                        ],
+                        borderWidth: 1
+                    }, {
+                        label: 'power kW',
+                        data: store.engines[this.selectedEngine].powerLookupTable,
+                        backgroundColor: [
+                            'rgba(127, 127, 127, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
         }
 
     },
@@ -191,6 +198,9 @@ export default {
             this.aeroCx = store.carPresets[e].aeroCx
             this.rollingRes = store.carPresets[e].rollingRes
             this.maximumAccG = store.carPresets[e].maximumAccG
+        })
+        this.$eventBus.$on('selectMode', (e) => {
+            this.mode = e
         })
         this.drawPowerAndTorqueChart()
     }

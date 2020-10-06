@@ -47,7 +47,7 @@
         <div class="form-group">
             <h5>Test settings</h5>
             <div class='row form-check'>
-                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option0" checked>
+                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option0" checked @change="selectModeOneGear">
                 <label class="form-check-label" for="gridRadios1">one gear</label>
             </div>
             <div class='row form-check'>
@@ -55,7 +55,7 @@
                 <label class="form-check-label" for="gridRadios2">fixed multiple gears</label>
             </div>
             <div class='row form-check'>
-                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option2" disabled>
+                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option2" @change="selectModeTopspeedRun">
                 <label class="form-check-label" for="gridRadios3">topspeed run</label>
             </div>
             <div class='row form-check'>
@@ -112,7 +112,7 @@ export default {
 
     },
     created() {
-        this.displayMessage()
+
     },
     mounted() {
         for (let i = 0; i < store.engines.length; i++) {
@@ -158,7 +158,14 @@ export default {
 
             }
         },
-
+        selectModeOneGear(e) {
+          console.log("selected selectOneGear")
+          this.$eventBus.$emit("selectMode", "oneGear")
+        },
+        selectModeTopspeedRun(e) {
+          console.log("selected selectTopspeedRun")
+          this.$eventBus.$emit("selectMode", "topspeedRun")
+        }
     }
 }
 </script>
