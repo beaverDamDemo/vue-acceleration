@@ -62,11 +62,12 @@ export default {
         exportWithSheetJS() {
             console.log(store)
         },
-        startButtonClick(isMaximumSpeedRun) {
+        startButtonClick() {
             let tanja = []
             let love = []
 
-            var singleRun = (isMaximumSpeedRun, gearLength) => {
+            var singleRun = (isMaximumSpeedRun, maxDistance, gearLength) => {
+                console.log(" deautl : '", isMaximumSpeedRun)
                 var acceleration, brakeforce, pushforce, netforce, power;
                 var value = 0;
                 var calculate_interval_ms = 100; //tested 100
@@ -89,8 +90,8 @@ export default {
                     speedGain = this.maxg * 0.9; //wheelspin na začetku pospeševanja, prve 3 desetinke
                 }
                 // while( distance < 1609 && executionTime < 60000 && speedGain > 0.0005)
-                while (distance < 1609 && executionTime < 60000 && speedGain > threshold) {
-                    if ((1578.0 < distance) && (distance < 1709.0) && (interval == false)) //to pazi kako postaviš
+                while (distance < maxDistance && executionTime < 180000 && speedGain > threshold) {
+                    if (( (maxDistance-30) < distance) && (distance < (maxDistance+100)) && (interval == false)) //to pazi kako postaviš
                     {
                         /* this is for slowing down calculation when it approaches 1600m mark */
                         calculate_interval_ms = calculate_interval_ms / 1; //povecaj za povecat natancnost
@@ -120,12 +121,19 @@ export default {
             if (this.mode == "oneGear") {
                 for (let i = 0; i < this.splits; i++) {
                     let tmp = parseFloat(this.finalGearMin) + i * parseFloat((this.finalGearMax - this.finalGearMin) / (this.splits - 1))
-                    tanja.push(singleRun(isMaximumSpeedRun, tmp))
+                    tanja.push(singleRun(false, 1609, tmp))
                 }
                 store.tanja = tanja
                 store.love = love
             } else if (this.mode == "topspeedRun") {
                 console.log("this has yet to be done")
+                console.log("%cTo moramo prakticno ga pognat da tece vec kot 1609 metrov in kadar se neha pridobivanje hitrosti pac vrnit samo zadnjo vrednost", "color: sienna")
+                for (let i = 0; i < this.splits; i++) {
+                    let tmp = parseFloat(this.finalGearMin) + i * parseFloat((this.finalGearMax - this.finalGearMin) / (this.splits - 1))
+                    tanja.push(singleRun(true, Infinity, tmp))
+                }
+                store.tanja = tanja
+                store.love = love
             }
             // this.$eventBus.$emit('calculationDone')
         },
