@@ -51,12 +51,12 @@
                 <label class="form-check-label" for="gridRadios1">one gear</label>
             </div>
             <div class='row form-check'>
-                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option1" @change="selectMode('fixedMultipleGears')">
-                <label class="form-check-label" for="gridRadios2">fixed multiple gears</label>
+                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option1" @change="selectMode('topspeedRun')">
+                <label class="form-check-label" for="gridRadios2">topspeed run</label>
             </div>
             <div class='row form-check'>
-                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option2" @change="selectMode('topspeedRun')">
-                <label class="form-check-label" for="gridRadios3">topspeed run</label>
+                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option2" @change="selectMode('fixedMultipleGears')">
+                <label class="form-check-label" for="gridRadios3">fixed multiple gears</label>
             </div>
             <div class='row form-check'>
                 <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios4" value="option3" disabled @change="selectMode('allPossibleGears')">

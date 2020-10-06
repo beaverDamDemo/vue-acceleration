@@ -22,6 +22,7 @@ import store from './store.js'
 import ourForm from './components/ourForm.vue'
 import ourOutput from './components/ourOutput.vue'
 import Chart from 'chart.js'
+// import fixedMultipleGears from '../mixins/fixedMultipleGears.js'
 
 export default {
     name: 'app',
@@ -29,6 +30,7 @@ export default {
         ourForm,
         ourOutput
     },
+    // mixins: [fixedMultipleGears],
     data() {
         return {
             store: store,
@@ -37,14 +39,14 @@ export default {
             rollingRos: 0.015,
             maximumAccG: 0.95,
             maxgearlength: 290,
-            speed: null,
             divRpm: 50,
+            maxg: 0.8,
             finalGearMin: 200,
             finalGearMax: 400,
             initialSpeed: 100,
             splits: 5,
             results: [],
-            myChartShow: true,
+            myChartShow: false,
             selectedEngine: 0,
             selectedCarPreset: 0,
             mode: "oneGear",
@@ -81,7 +83,6 @@ export default {
                 var currentRpm
                 var threshold
                 isMaximumSpeedRun == true ? threshold = 0.0005 : threshold = -1
-                this.speed = 27.7
                 var currentSpeed = 27.7
                 var arrResult = []
 
@@ -116,6 +117,66 @@ export default {
                 return arrResult
             }
 
+            var fixedMultipleGears = () => {
+                var acceleration, brakeforce, pushforce, netforce, power;
+                var value = 0;
+                var calculate_interval_ms = 100; //tested 100
+                var distance = 0;
+                var executionTime = 0;
+                var speedGain = 1.0;
+                var step_count = 0;
+                var b = false;
+                var c = false;
+                var interval = false;
+                var currentRpm
+                let threshold = -1
+                var currentSpeed = 0
+                var arrResult = []
+                let gearing = [2.66, 1.78, 1.30, 1.00, 0.74, 0.50]
+                let finalDrive = 3.2
+                let gearLength = []
+                for( let i=0; i<gearing.length; i++) {
+                    gearLength.push(700/gearing[i]/finalDrive)
+                }
+                let maxRpm = 6000
+                let currentGearIndex = 0
+                // let gearLength = [66,108,147,187,230,320]
+                console.log("%cContinue work here", "background: red; font-weight: bold;")
+
+                if ((executionTime < 300) && (currentSpeed < 10.0)) //pozor ker currentSpeed je v m/s
+                {
+                    speedGain = this.maxg * 0.9; //wheelspin na začetku pospeševanja, prve 3 desetinke
+                }
+                // while( distance < 1609 && executionTime < 60000 && speedGain > 0.0005)
+                while (distance < 1609 && executionTime < 180000 && speedGain > threshold) {
+                    if (( (1609-30) < distance) && (distance < (1609+100)) && (interval == false)) //to pazi kako postaviš
+                    {
+                        /* this is for slowing down calculation when it approaches 1600m mark */
+                        calculate_interval_ms = calculate_interval_ms / 1; //povecaj za povecat natancnost
+                        interval = true;
+                    }
+                    step_count++;
+                    executionTime = executionTime + calculate_interval_ms;
+                    let cp = calculatePower(currentSpeed, executionTime, this, gearLength[currentGearIndex], this.selectedEngine)
+                    power = cp[0]
+                    currentRpm = cp[1]
+
+                    if( currentRpm > 6000 && ((currentGearIndex+1) < gearLength.length)) currentGearIndex++
+
+                    acceleration = acceleration_calc(currentSpeed, power, this.weightKg, this.aeroCx, this.rollingRos, this.maximumAccG);
+                    speedGain = acceleration * calculate_interval_ms;
+                    currentSpeed += speedGain;
+                    distance = distance + (currentSpeed + speedGain / 2) * calculate_interval_ms / 1000;
+                    // console.warn('currentSpeed: ', Math.round(currentSpeed*3.6), 'km/h distance: ', Math.floor(distance), "m, exetime: ", executionTime/1000+'s')
+                    arrResult.push([Math.round(currentSpeed * 3.6), Math.floor(distance), executionTime / 1000, power, currentRpm])
+                    console.log("depaul", currentRpm, Math.round(currentSpeed*3.6), (currentGearIndex+1))
+                }
+
+                 // love.push([Number(gearLength).toFixed(0), arrResult[arrResult.length - 1][4], Number((currentSpeed * 3.6).toFixed(2)), 'km/h distance: ', Math.floor(distance), "m, exetime: ", executionTime / 1000 + 's'])
+                 console.error('final speed: ', Math.round(currentSpeed*3.6), 'km/h distance: ', Math.floor(distance), "m, exetime: ", executionTime/1000+'s')
+                return arrResult
+            }
+
             console.log("this mode : ", this.mode)
 
             if (this.mode == "oneGear") {
@@ -133,8 +194,13 @@ export default {
                 store.tanja = tanja
                 store.love = love
             } else if (this.mode == "fixedMultipleGears") {
+                tanja.push(fixedMultipleGears())
+                store.tanja = tanja
+                store.love = love
+
                     console.log("fixedMultipleGears")
                     console.log("%cTo moramo dobit gear ratios is form fixed tralala", "color: sienna")
+                    // this.fixedMultipleGearsRun()
             }
             // this.$eventBus.$emit('calculationDone')
         },
