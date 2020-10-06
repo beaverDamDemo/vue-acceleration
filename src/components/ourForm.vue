@@ -180,7 +180,7 @@ export default {
     }
 
     .form-group {
-        width: 400px;
+        width: 600px;
 
         h5 {
             text-align: center;

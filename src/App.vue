@@ -132,16 +132,17 @@ export default {
                 let threshold = -1
                 var currentSpeed = 0
                 var arrResult = []
-                let gearing = [2.66, 1.78, 1.30, 1.00, 0.74, 0.50]
+                let gearing = store.gearRatios
                 let finalDrive = 3.2
                 let gearLength = []
                 for( let i=0; i<gearing.length; i++) {
                     gearLength.push(700/gearing[i]/finalDrive)
                 }
-                let maxRpm = 6000
+                let maxRpm = 5700
+                let lastRpm = 0
                 let currentGearIndex = 0
                 // let gearLength = [66,108,147,187,230,320]
-                console.log("%cContinue work here", "background: red; font-weight: bold;")
+                console.log("%cContinue work here", "background: red; font-weight: bold;", store.gearRatios)
 
                 if ((executionTime < 300) && (currentSpeed < 10.0)) //pozor ker currentSpeed je v m/s
                 {
@@ -160,6 +161,7 @@ export default {
                     let cp = calculatePower(currentSpeed, executionTime, this, gearLength[currentGearIndex], this.selectedEngine)
                     power = cp[0]
                     currentRpm = cp[1]
+                    lastRpm = currentRpm
 
                     if( currentRpm > 6000 && ((currentGearIndex+1) < gearLength.length)) currentGearIndex++
 
@@ -169,11 +171,11 @@ export default {
                     distance = distance + (currentSpeed + speedGain / 2) * calculate_interval_ms / 1000;
                     // console.warn('currentSpeed: ', Math.round(currentSpeed*3.6), 'km/h distance: ', Math.floor(distance), "m, exetime: ", executionTime/1000+'s')
                     arrResult.push([Math.round(currentSpeed * 3.6), Math.floor(distance), executionTime / 1000, power, currentRpm])
-                    console.log("depaul", currentRpm, Math.round(currentSpeed*3.6), (currentGearIndex+1))
+                    // console.log("depaul", currentRpm, Math.round(currentSpeed*3.6), (currentGearIndex+1))
                 }
 
                  // love.push([Number(gearLength).toFixed(0), arrResult[arrResult.length - 1][4], Number((currentSpeed * 3.6).toFixed(2)), 'km/h distance: ', Math.floor(distance), "m, exetime: ", executionTime / 1000 + 's'])
-                 console.error('final speed: ', Math.round(currentSpeed*3.6), 'km/h distance: ', Math.floor(distance), "m, exetime: ", executionTime/1000+'s')
+                 console.error('final speed: ', Math.round(currentSpeed*3.6), 'km/h gear:', (currentGearIndex+1), 'rpm:', lastRpm, ' distance:', Math.floor(distance), "m, exetime: ", executionTime/1000+'s')
                 return arrResult
             }
 

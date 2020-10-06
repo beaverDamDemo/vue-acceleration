@@ -67,6 +67,7 @@ export default {
             powerLookupTable: []
         }
     ],
+    gearRatios: [2.66, 1.78, 1.30, 1.00, 0.74, 0.50],
     carPresets: [{
             label: "Viper fully-upgraded",
             weightKg: 1184,

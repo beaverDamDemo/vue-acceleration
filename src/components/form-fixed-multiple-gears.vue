@@ -38,6 +38,7 @@
 </template>
 
 <script lang="js">
+  import store from '../store.js'
   export default  {
     name: 'form-fixed-multiple-gears',
     props: [],
@@ -49,66 +50,84 @@
             this.isDisabled = false
           }
         })
+
+      this.gear_0 = store.gearRatios[0]
+      this.gear_1 = store.gearRatios[1]
+      this.gear_2= store.gearRatios[2]
+      this.gear_3= store.gearRatios[3]
+      this.gear_4 = store.gearRatios[4]
+      this.gear_5 = store.gearRatios[5]
     },
     data() {
       return {
-        gear_0: 2.66,
-        gear_1: 1.78,
-        gear_2: 1.30,
-        gear_3: 1.00,
-        gear_4: 0.74,
-        gear_5: 0.50,
+        gear_0: undefined,
+        gear_1: undefined,
+        gear_2: undefined,
+        gear_3: undefined,
+        gear_4: undefined,
+        gear_5: undefined,
         isDisabled: true
       }
     },
     methods: {
       g_0_change: function(event) {
-        console.warn(this.gear_1)
         if( this.gear_1 >= this.gear_0) {
           this.gear_0 = this.gear_1 + 0.02
+          store.gearRatios[0] = this.gear_0
         }
+        store.gearRatios[0] = this.gear_0
       },
       g_1_change: function() {
-        console.log(this.gear_0, this.gear_2)
         if( this.gear_2 >= this.gear_1) {
           this.gear_1 = this.gear_2 + 0.02
+          store.gearRatios[1] = this.gear_1
         }
         if( this.gear_0 < this.gear_1) {
           this.gear_0 = this.gear_1 - 0.02
+          store.gearRatios[0] = this.gear_0
         }
+        store.gearRatios[1] = this.gear_1
       },
       g_2_change: function() {
-        console.log(this.gear_1, this.gear_3)
         if( this.gear_3 >= this.gear_2) {
           this.gear_2 = this.gear_3 + 0.02
+          store.gearRatios[2] = this.gear_2
         }
         if( this.gear_1 < this.gear_2) {
           this.gear_1 = this.gear_2 - 0.02
+          store.gearRatios[1] = this.gear_1
         }
+        store.gearRatios[2] = this.gear_2
       },
       g_3_change: function() {
-        console.log(this.gear_2, this.gear_4)
         if( this.gear_4 >= this.gear_3) {
           this.gear_3 = this.gear_4 + 0.02
+          store.gearRatios[3] = this.gear_3
         }
         if( this.gear_2 < this.gear_3) {
           this.gear_2 = this.gear_3 - 0.02
+          store.gearRatios[2] = this.gear_2
         }
+        store.gearRatios[3] = this.gear_3
       },
       g_4_change: function() {
-        console.log(this.gear_3, this.gear_5)
         if( this.gear_5 >= this.gear_4) {
           this.gear_4 = this.gear_5 + 0.02
+          store.gearRatios[4] = this.gear_4
         }
         if( this.gear_3 < this.gear_4) {
           this.gear_3 = this.gear_4 - 0.02
+          store.gearRatios[3] = this.gear_3
         }
+        store.gearRatios[4] = this.gear_4
       },
       g_5_change: function() {
-        console.error(this.gear_4)
         if( this.gear_4 < this.gear_5) {
           this.gear_4 = this.gear_5 - 0.02
+          store.gearRatios[4] = this.gear_4
+          // Vue.set(store.gearRatios, 4, newValue)
         }
+        store.gearRatios[5] = this.gear_5
       },
     },
     computed: {
@@ -121,7 +140,6 @@
   .form-fixed-multiple-gears {
     border: 1px solid magenta;
     .form-group {
-      width: 400px;
       margin-bottom: 0.1rem;
       h5 {
         text-align: center;
@@ -132,7 +150,9 @@
         margin-top: 0.2rem;
       }
       input {
-        width: 200px;
+        width: 66%;
+        margin-left: 10px;
+        margin-right: 10px;
       }
       input:disabled {
         color: darkgray;
