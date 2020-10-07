@@ -93,7 +93,7 @@ export default {
                 }
                 // while( distance < 1609 && executionTime < 60000 && speedGain > 0.0005)
                 while (distance < maxDistance && executionTime < 180000 && speedGain > threshold) {
-                    if (( (maxDistance-30) < distance) && (distance < (maxDistance+100)) && (interval == false)) //to pazi kako postaviš
+                    if (((maxDistance - 30) < distance) && (distance < (maxDistance + 100)) && (interval == false)) //to pazi kako postaviš
                     {
                         /* this is for slowing down calculation when it approaches 1600m mark */
                         calculate_interval_ms = calculate_interval_ms / 1; //povecaj za povecat natancnost
@@ -135,8 +135,8 @@ export default {
                 var arrResult = []
                 let gearing = store.gearRatios
                 let gearLength = []
-                for( let i=0; i<gearing.length; i++) {
-                    gearLength.push(700/gearing[i]/store.gearFinal)
+                for (let i = 0; i < gearing.length; i++) {
+                    gearLength.push(700 / gearing[i] / store.gearFinal)
                 }
                 let maxRpm = 5700
                 let lastRpm = 0
@@ -150,7 +150,7 @@ export default {
                 }
                 // while( distance < 1609 && executionTime < 60000 && speedGain > 0.0005)
                 while (distance < 1609 && executionTime < 180000 && speedGain > threshold) {
-                    if (( (1609-30) < distance) && (distance < (1609+100)) && (interval == false)) //to pazi kako postaviš
+                    if (((1609 - 30) < distance) && (distance < (1609 + 100)) && (interval == false)) //to pazi kako postaviš
                     {
                         /* this is for slowing down calculation when it approaches 1600m mark */
                         calculate_interval_ms = calculate_interval_ms / 1; //povecaj za povecat natancnost
@@ -163,7 +163,7 @@ export default {
                     currentRpm = cp[1]
                     lastRpm = currentRpm
 
-                    if( currentRpm > 6000 && ((currentGearIndex+1) < gearLength.length)) currentGearIndex++
+                    if (currentRpm > 6000 && ((currentGearIndex + 1) < gearLength.length)) currentGearIndex++
 
                     acceleration = acceleration_calc(currentSpeed, power, this.weightKg, this.aeroCx, this.rollingRos, this.maximumAccG);
                     speedGain = acceleration * calculate_interval_ms;
@@ -174,14 +174,14 @@ export default {
                     // console.log("depaul", currentRpm, Math.round(currentSpeed*3.6), (currentGearIndex+1))
                 }
 
-                 // love.push([Number(gearLength).toFixed(0), arrResult[arrResult.length - 1][4], Number((currentSpeed * 3.6).toFixed(2)), 'km/h distance: ', Math.floor(distance), "m, exetime: ", executionTime / 1000 + 's'])
-                 console.error('final speed: ', Math.round(currentSpeed*3.6), 'km/h gear:', (currentGearIndex+1), 'rpm:', lastRpm, ' distance:', Math.floor(distance), "m, exetime: ", executionTime/1000+'s')
-                 var t1 = performance.now()
-                 console.log("Call took " + (t1 - t0) + " milliseconds.")
+                // love.push([Number(gearLength).toFixed(0), arrResult[arrResult.length - 1][4], Number((currentSpeed * 3.6).toFixed(2)), 'km/h distance: ', Math.floor(distance), "m, exetime: ", executionTime / 1000 + 's'])
+                console.error('final speed: ', Math.round(currentSpeed * 3.6), 'km/h gear:', (currentGearIndex + 1), 'rpm:', lastRpm, ' distance:', Math.floor(distance), "m, exetime: ", executionTime / 1000 + 's')
+                var t1 = performance.now()
+                console.log("Call took " + (t1 - t0) + " milliseconds.")
                 return arrResult
             }
 
-            var allPossibleGears = (gearing) => {
+            var allPossibleGears = (gearing, finalGear) => {
                 var acceleration, brakeforce, pushforce, netforce, power;
                 var value = 0;
                 var calculate_interval_ms = 10; //tested 10
@@ -197,14 +197,12 @@ export default {
                 var currentSpeed = 0
                 var arrResult = []
                 let gearLength = []
-                for( let i=0; i<gearing.length; i++) {
-                    gearLength.push(700/gearing[i]/store.gearFinal)
+                for (let i = 0; i < gearing.length; i++) {
+                    gearLength.push(700 / gearing[i] / finalGear)
                 }
                 let maxRpm = 5700
                 let lastRpm = 0
                 let currentGearIndex = 0
-                // let gearLength = [66,108,147,187,230,320]
-                console.log("%cContinue work here", "background: red; font-weight: bold;", store.gearRatios)
 
                 if ((executionTime < 300) && (currentSpeed < 10.0)) //pozor ker currentSpeed je v m/s
                 {
@@ -212,7 +210,7 @@ export default {
                 }
                 // while( distance < 1609 && executionTime < 60000 && speedGain > 0.0005)
                 while (distance < 1609 && executionTime < 180000 && speedGain > threshold) {
-                    if (( (1609-30) < distance) && (distance < (1609+100)) && (interval == false)) //to pazi kako postaviš
+                    if (((1609 - 30) < distance) && (distance < (1609 + 100)) && (interval == false)) //to pazi kako postaviš
                     {
                         /* this is for slowing down calculation when it approaches 1600m mark */
                         calculate_interval_ms = calculate_interval_ms / 1; //povecaj za povecat natancnost
@@ -225,21 +223,16 @@ export default {
                     currentRpm = cp[1]
                     lastRpm = currentRpm
 
-                    if( currentRpm > 6000 && ((currentGearIndex+1) < gearLength.length)) currentGearIndex++
+                    if (currentRpm > 6000 && ((currentGearIndex + 1) < gearLength.length)) currentGearIndex++
 
                     acceleration = acceleration_calc(currentSpeed, power, this.weightKg, this.aeroCx, this.rollingRos, this.maximumAccG);
                     speedGain = acceleration * calculate_interval_ms;
                     currentSpeed += speedGain;
                     distance = distance + (currentSpeed + speedGain / 2) * calculate_interval_ms / 1000;
-                    // console.warn('currentSpeed: ', Math.round(currentSpeed*3.6), 'km/h distance: ', Math.floor(distance), "m, exetime: ", executionTime/1000+'s')
-                    arrResult.push([Math.round(currentSpeed * 3.6), Math.floor(distance), executionTime / 1000, power, currentRpm])
-                    // console.log("depaul", currentRpm, Math.round(currentSpeed*3.6), (currentGearIndex+1))
                 }
 
-                 // love.push([Number(gearLength).toFixed(0), arrResult[arrResult.length - 1][4], Number((currentSpeed * 3.6).toFixed(2)), 'km/h distance: ', Math.floor(distance), "m, exetime: ", executionTime / 1000 + 's'])
-                 console.error('final speed: ', Math.round(currentSpeed*3.6), 'km/h gear:', (currentGearIndex+1), 'rpm:', lastRpm, ' distance:', Math.floor(distance), "m, exetime: ", executionTime/1000+'s')
-                 var t1 = performance.now()
-                 console.log("Call took " + (t1 - t0) + " milliseconds.")
+                 arrResult.push(executionTime / 1000, Number((currentSpeed * 3.6).toFixed(2)), Math.floor(lastRpm), (currentGearIndex+1),
+                  gearing[0],gearing[1],gearing[2],gearing[3],gearing[4],gearing[5])
                 return arrResult
             }
 
@@ -263,19 +256,47 @@ export default {
                 store.tanja = tanja
                 store.love = love
             } else if (this.mode == "allPossibleGears") {
-                let gear_0 = [4, 3.2, 2.5, 2.0]
-                let gear_1 = [3.2, 2.5, 2.0, 1.6, 1.4, 1.2]
-                let gear_2 = [2.4, 2.0, 1.7, 1.5, 1.3, 1.2, 1.1, 1.0]
-                let gear_3 = [1.7, 1.5, 1.3, 1.2, 1.1, 1.0, 0.9, 0.82, 0.76]
-                let gear_4 = [1.3, 1.2, 1.1, 1.0, 0.9, 0.82, 0.76, 0.72, 0.68]
-                let gear_5 = [1.1, 1.0, 0.9, 0.82, 0.76, 0.72, 0.68, 0.66, 0.64, 0.62, 0.6]
+                var t0 = performance.now()
+                let gear_0 = [3.2, 2.5, 2.0]
+                let gear_1 = [2.0, 1.6, 1.4]
+                let gear_2 = [1.7, 1.3]
+                let gear_3 = [1.0, 0.9, 0.82]
+                let gear_4 = [0.82, 0.72, 0.68]
+                let gear_5 = [0.76, 0.70, 0.62, 0.56]
+                let total = 0
 
-                // for (let i = 0; i < 5; i++) {
-                //     let gearing = []
-                //     tanja.push(allPossibleGears(gearing)
-                // }
+                for (let i = 0; i < gear_0.length; i++) {
+                    for (let j = 0; j < gear_1.length; j++) {
+                        for (let k = 0; k < gear_2.length; k++) {
+                            for (let l = 0; l < gear_3.length; l++) {
+                                for (let m = 0; m < gear_4.length; m++) {
+                                    for (let n = 0; n < gear_5.length; n++) {
+                                        if (gear_0[i] > gear_1[j]) {
+                                            if (gear_1[j] > gear_2[k]) {
+                                                if (gear_2[k] > gear_3[l]) {
+                                                    if (gear_3[l] > gear_4[m]) {
+                                                        if (gear_4[m] > gear_5[n]) {
+                                                            total++
+                                                            tanja.push( allPossibleGears([gear_0[i], gear_1[j], gear_2[k], gear_3[l], gear_4[m], gear_5[n]], 2.99))
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
                 store.tanja = tanja
                 store.love = love
+
+                console.table(store.tanja)
+                var t1 = performance.now()
+                console.log("Call took " + (t1 - t0) + " milliseconds. Total of runs made: ", total)
             }
             // this.$eventBus.$emit('calculationDone')
         },
@@ -323,14 +344,12 @@ export default {
 
     },
     mounted() {
-//  let f= [630, 685, 731, 779, 816, 854, 888, 924, 948, 971, 992, 1012, 1018, 1032, 1054, 1038, 1020, 1002, 992, 980, 958, 880, 800, 720]
-//
-//          for(let i=0; i<f.length; i++) {
-//              f[i] = Math.round(f[i]*0.9857)
-//          }
-//  debugger
-
-        console.log("%cNaredi, da se settgingsi razni prikazujejo v odvisnosti od izbranega testa", "background: khaki; color: peru")
+        //  let f= [630, 685, 731, 779, 816, 854, 888, 924, 948, 971, 992, 1012, 1018, 1032, 1054, 1038, 1020, 1002, 992, 980, 958, 880, 800, 720]
+        //
+        //          for(let i=0; i<f.length; i++) {
+        //              f[i] = Math.round(f[i]*0.9857)
+        //          }
+        //  debugger
         this.sendData()
 
         this.$eventBus.$on("finalGearInputChange", (e) => {

@@ -59,7 +59,7 @@
                 <label class="form-check-label" for="gridRadios3">fixed multiple gears</label>
             </div>
             <div class='row form-check'>
-                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios4" value="option3" disabled @change="selectMode('allPossibleGears')">
+                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios4" value="option3" @change="selectMode('allPossibleGears')">
                 <label class="form-check-label" for="gridRadios4">all possible gears</label>
             </div>
         </div>
@@ -141,32 +141,35 @@ export default {
         },
         scpChange(e) {
             this.$eventBus.$emit('scpChange', event.target.value)
-//             switch (event.target.value) {
-//                 case '0':
-//                     this.cskg = 1184
-//                     this.csac = 0.35
-//                     this.csrr = 0.015
-//                     this.csmag = 0.95
-//                     break;
-//                 case '1':
-//                     this.cskg = 1628
-//                     this.csac = 0.35
-//                     this.csrr = 0.012
-//                     this.csmag = 0.825
-//                     break;
-//                 default:
-//
-//             }
+            //             switch (event.target.value) {
+            //                 case '0':
+            //                     this.cskg = 1184
+            //                     this.csac = 0.35
+            //                     this.csrr = 0.015
+            //                     this.csmag = 0.95
+            //                     break;
+            //                 case '1':
+            //                     this.cskg = 1628
+            //                     this.csac = 0.35
+            //                     this.csrr = 0.012
+            //                     this.csmag = 0.825
+            //                     break;
+            //                 default:
+            //
+            //             }
         },
         selectMode(e) {
             if (e == "oneGear" || e == "topspeedRun") {
-                this.myForm_0_isShown= true
-                this.formfixShow= false
+                this.myForm_0_isShown = true
+                this.formfixShow = false
             } else if (e == "fixedMultipleGears") {
-                this.myForm_0_isShown= false
-                this.formfixShow= true
+                this.myForm_0_isShown = false
+                this.formfixShow = true
+            } else {
+                this.myForm_0_isShown = false
+                this.formfixShow = false
             }
-          this.$eventBus.$emit("selectMode", e)
+            this.$eventBus.$emit("selectMode", e)
         },
     }
 }
