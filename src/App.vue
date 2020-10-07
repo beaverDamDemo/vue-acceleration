@@ -63,7 +63,7 @@ export default {
             this.myChartShow = !this.myChartShow
         },
         exportWithSheetJS() {
-            console.log(store)
+            console.log("not done yet")
         },
         startButtonClick() {
             let tanja = []
@@ -181,21 +181,16 @@ export default {
                 return arrResult
             }
 
-            var allPossibleGears = (gearing, finalGear) => {
-                var acceleration, brakeforce, pushforce, netforce, power;
-                var value = 0;
-                var calculate_interval_ms = 10; //tested 10
-                var distance = 0;
-                var executionTime = 0;
-                var speedGain = 1.0;
-                var step_count = 0;
-                var b = false;
-                var c = false;
-                var interval = false;
-                var currentRpm
+            let allPossibleGears = (gearing, finalGear) => {
+                let acceleration, power;
+                let calculate_interval_ms = 10; //tested 10
+                let distance = 0;
+                let executionTime = 0;
+                let speedGain = 1.0;
+                let interval = false;
+                let currentRpm
                 let threshold = -1
-                var currentSpeed = 0
-                var arrResult = []
+                let currentSpeed = 0
                 let gearLength = []
                 for (let i = 0; i < gearing.length; i++) {
                     gearLength.push(700 / gearing[i] / finalGear)
@@ -216,14 +211,13 @@ export default {
                         calculate_interval_ms = calculate_interval_ms / 1; //povecaj za povecat natancnost
                         interval = true;
                     }
-                    step_count++;
                     executionTime = executionTime + calculate_interval_ms;
                     let cp = calculatePower(currentSpeed, executionTime, this, gearLength[currentGearIndex], this.selectedEngine)
                     power = cp[0]
                     currentRpm = cp[1]
                     lastRpm = currentRpm
 
-                    if (currentRpm > 6000 && ((currentGearIndex + 1) < gearLength.length)) currentGearIndex++
+                    if (currentRpm > maxRpm && ((currentGearIndex + 1) < gearLength.length)) currentGearIndex++
 
                     acceleration = acceleration_calc(currentSpeed, power, this.weightKg, this.aeroCx, this.rollingRos, this.maximumAccG);
                     speedGain = acceleration * calculate_interval_ms;
@@ -231,9 +225,8 @@ export default {
                     distance = distance + (currentSpeed + speedGain / 2) * calculate_interval_ms / 1000;
                 }
 
-                 arrResult.push(executionTime / 1000, Number((currentSpeed * 3.6).toFixed(2)), Math.floor(lastRpm), (currentGearIndex+1),
-                  gearing[0],gearing[1],gearing[2],gearing[3],gearing[4],gearing[5])
-                return arrResult
+                return executionTime / 1000, Number((currentSpeed * 3.6).toFixed(2)), Math.floor(lastRpm), (currentGearIndex+1),
+                  gearing[0],gearing[1],gearing[2],gearing[3],gearing[4],gearing[5]
             }
 
             if (this.mode == "oneGear") {
