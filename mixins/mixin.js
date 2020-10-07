@@ -40,7 +40,7 @@ export default {
             }
             store.engines[selectedEngine].torqueLookupTable = torqueLookupTable
             store.engines[selectedEngine].powerLookupTable = tmpPowerLookupTable
-            store.engines[selectedEngine].effectiveMaxKw = '(' + Math.round(maxKw) + "kW@" + maxKwAtRpm + "rpm)"
+            store.engines[selectedEngine].effectiveMaxHp = '(' + Math.round(maxKw) + "hp@" + maxKwAtRpm + "rpm)"
         }
     }
 }

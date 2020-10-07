@@ -4,7 +4,7 @@
             <h5>Select engine</h5>
             <div class="input-group mb-4">
                 <select @change='seChange($event)' class="custom-select">
-                    <option v-for='(e, index) in store.engines' :value='index'>{{e.label}} {{e.effectiveMaxKw}}</option>
+                    <option v-for='(e, index) in store.engines' :value='index'>{{e.label}} {{e.effectiveMaxHp}}</option>
                 </select>
             </div>
             <h5>Select car preset</h5>
@@ -62,6 +62,8 @@
                 <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios4" value="option3" disabled @change="selectMode('allPossibleGears')">
                 <label class="form-check-label" for="gridRadios4">all possible gears</label>
             </div>
+        </div>
+        <div class="form-group" v-if="myForm_0_isShown">
             <div class='row'>
                 <label class='col col-sm-6' for="">Topspeed min</label>
                 <input v-model="finalGearMin" @change='finalGearMinChange' type="number" class="form-control form-control-sm col col-sm-6">
@@ -74,6 +76,8 @@
                 <label class='col col-sm-6' for="">Splits</label>
                 <input v-model="splits" @change='splitsChange' type="number" step='1' class="form-control form-control-sm col col-sm-6">
             </div>
+        </div>
+        <div class="form-group" v-show="formfixShow">
             <formfix v-show='formfixShow' />
         </div>
     </section>
@@ -85,9 +89,6 @@ import formfix from './form-fixed-multiple-gears'
 import mixin from '../../mixins/mixin.js'
 export default {
     name: 'our-form',
-    props: {
-
-    },
     components: {
         formfix
     },
@@ -106,14 +107,9 @@ export default {
             csin: 100,
             divRpm: 50,
             selectedEngine: 0,
-            formfixShow: true
+            myForm_0_isShown: true,
+            formfixShow: false,
         }
-    },
-    computed: {
-
-    },
-    created() {
-
     },
     mounted() {
         for (let i = 0; i < store.engines.length; i++) {
@@ -163,6 +159,13 @@ export default {
 //             }
         },
         selectMode(e) {
+            if (e == "oneGear" || e == "topspeedRun") {
+                this.myForm_0_isShown= true
+                this.formfixShow= false
+            } else if (e == "fixedMultipleGears") {
+                this.myForm_0_isShown= false
+                this.formfixShow= true
+            }
           this.$eventBus.$emit("selectMode", e)
         },
     }
@@ -181,6 +184,7 @@ export default {
 
     .form-group {
         width: 600px;
+        border: 1px solid gold;
 
         h5 {
             text-align: center;

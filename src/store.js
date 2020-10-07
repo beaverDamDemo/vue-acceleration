@@ -3,39 +3,39 @@ export default {
     love: [],
     engines: [{
             label: "Viper \"700hp\"",
-            effectiveMaxKw: "-",
+            effectiveMaxHp: "-",
             maxRpm: 6000,
-            torqueData: [630, 685, 731, 779, 816, 854, 888, 924, 948, 971, 992, 1012, 1018, 1032, 1054, 1038, 1020, 1002, 992, 980, 958, 880, 800, 720],
+            torqueData: [621, 675, 721, 768, 804, 842, 875, 911, 934, 957, 978, 998, 1003, 1017, 1039, 1023, 1005, 988, 978, 966, 944, 867, 789, 710],
+torqueLookupTable: [],
+            powerLookupTable: []
+        },
+        {
+            label: "Fat torque \"675hp\"",
+            effectiveMaxHp: "-",
+            maxRpm: 6000,
+            torqueData: [731, 779, 816, 854, 888, 924, 948, 971, 992, 1012, 1018, 1032, 1054, 1053, 1038, 1020, 1002, 992, 980, 958, 880, 810, 730, 640],
             torqueLookupTable: [],
             powerLookupTable: []
         },
         {
-            label: "Fat torque \"638hp\"",
-            effectiveMaxKw: "-",
-            maxRpm: 6000,
-            torqueData: [685, 731, 779, 816, 854, 888, 924, 948, 971, 992, 1012, 1018, 1032, 1054, 1038, 1002, 992, 980, 969, 819, 785, 733, 695, 675],
-            torqueLookupTable: [],
-            powerLookupTable: []
-        },
-        {
-            label: "Flat torque \"724hp\"",
-            effectiveMaxKw: "-",
+            label: "Flat torque \"734hp\"",
+            effectiveMaxHp: "-",
             maxRpm: 6000,
             torqueData: [860, 860],
             torqueLookupTable: [],
             powerLookupTable: []
         },
         {
-            label: "Peaky torque \"761hp\"",
-            effectiveMaxKw: "-",
+            label: "Peaky torque \"748hp\"",
+            effectiveMaxHp: "-",
             maxRpm: 6000,
-            torqueData: [519, 576, 630, 685, 731, 779, 816, 854, 888, 924, 948, 971, 992, 1012, 1018, 1032, 1054, 1038, 1002, 992, 980, 969, 948, 819],
-            torqueLookupTable: [],
+            torqueData: [503,559,611,664,709,756,792,828,861,896,920,942,962,982,987,1001,1022,1007,972,962,951,940,920,794],
+       torqueLookupTable: [],
             powerLookupTable: []
         },
         {
             label: "Stock GTS from real dyno \"450hp\"",
-            effectiveMaxKw: "-",
+            effectiveMaxHp: "-",
             maxRpm: 5750,
             torqueData: [
                 476,
