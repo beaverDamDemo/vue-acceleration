@@ -133,10 +133,9 @@ export default {
                 var currentSpeed = 0
                 var arrResult = []
                 let gearing = store.gearRatios
-                let finalDrive = 3.2
                 let gearLength = []
                 for( let i=0; i<gearing.length; i++) {
-                    gearLength.push(700/gearing[i]/finalDrive)
+                    gearLength.push(700/gearing[i]/store.gearFinal)
                 }
                 let maxRpm = 5700
                 let lastRpm = 0
