@@ -1,13 +1,13 @@
 <template lang="html">
     <section class="our-form">
         <div class="form-group">
-            <h5>Select engine</h5>
+            <h5>Select Engine</h5>
             <div class="input-group mb-4">
                 <select @change='seChange($event)' class="custom-select">
                     <option v-for='(e, index) in store.engines' :value='index'>{{e.label}} {{e.effectiveMaxHp}}</option>
                 </select>
             </div>
-            <h5>Select car preset</h5>
+            <h5>Select Car Preset</h5>
             <div class="input-group">
                 <select @change='scpChange($event)' class="custom-select">
                     <option selected value="0">Viper fully-upgraded</option>
@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="form-group">
-            <h5>Car settings</h5>
+            <h5>Car Settings</h5>
             <div class='row'>
                 <label class='col col-sm-6' for="">Weight KG</label>
                 <input v-model='cskg' type="number" step=100 class="form-control form-control-sm col col-sm-6" disabled readonly>
@@ -45,7 +45,7 @@
             </div>
         </div>
         <div class="form-group">
-            <h5>Test settings</h5>
+            <h5>Choose Test Settings</h5>
             <div class='row form-check'>
                 <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option0" checked @change="selectMode('oneGear')">
                 <label class="form-check-label" for="gridRadios1">one gear</label>
@@ -64,6 +64,7 @@
             </div>
         </div>
         <div class="form-group" v-if="myForm_0_isShown">
+            <h5>Select Gearing Options For Single Gear</h5>
             <div class='row'>
                 <label class='col col-sm-6' for="">Topspeed min</label>
                 <input v-model="finalGearMin" @change='finalGearMinChange' type="number" class="form-control form-control-sm col col-sm-6">

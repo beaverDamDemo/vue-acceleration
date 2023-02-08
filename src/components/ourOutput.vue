@@ -1,14 +1,18 @@
 <template lang="html">
   <section class="our-output">
-    <h1>our-output Component</h1>
-    <table>
+    <div v-if="store.love.length > 0">
+      <h1>Results</h1>
+      <table>
         <div v-for='l in store.love'>gear length: {{l[0]}} km/h,
         max reached rpm: {{l[1]}} rpm,
         max reached speed: {{l[2]}} km/h,
         covered distance: {{l[4]}} m,
         time needed: {{l[6]}}</div>
     </table>
-
+    </div>
+    <div v-else>
+      <h4><i>Use the <strong>Run</strong> button to populate results.</i></h4>
+    </div>
   </section>
 </template>
 
@@ -196,9 +200,8 @@ export default  {
 </script>
 
 <style scoped lang="scss">
-  .our-output {
-
-  }
+.our-output {
+}
 table {
   border: 1px solid white;
   text-align: left;
@@ -210,7 +213,8 @@ td {
   border-left: 1px dashed #888;
   font-style: italic;
 }
-tr:nth-child(1), td:nth-child(1) {
+tr:nth-child(1),
+td:nth-child(1) {
   background: #444;
   font-style: normal;
   color: #faa;

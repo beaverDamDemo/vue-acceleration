@@ -9,7 +9,7 @@
             </label>
         </div>
         <button @click='startButtonClick' type="button" class="btn btn-success" :class='{sink: myChartShow}'>Run</button>
-        <button @click='exportWithSheetJS' class="btn btn-primary">Export with SheetJS</button>
+        <button @click='exportWithSheetJS' class="btn btn-primary" disabled>Export with SheetJS (WIP)</button>
         <ourOutput :inputData.sync="finalGearMin" />
     </div>
 </template>
