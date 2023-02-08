@@ -1,24 +1,17 @@
 <template>
   <div id="app">
     <ourForm class="ourForm"></ourForm>
-    <div :class="{ active: myChartShow, myChartContainer: true }">
+    <div :class="{ active: false, myChartContainer: true }">
       <canvas id="myChart"></canvas>
-      <label class="switch">
-        <input @change="myCSchange" type="checkbox" />
-        <span class="slider round"></span>
-      </label>
     </div>
-    <button
-      @click="startButtonClick"
-      type="button"
-      class="btn btn-success"
-      :class="{ sink: myChartShow }"
-    >
-      Run
-    </button>
-    <button @click="exportWithSheetJS" class="btn btn-primary" disabled>
-      Export with SheetJS (WIP)
-    </button>
+    <div class="myButContainer">
+      <button @click="startButtonClick" type="button" class="btn btn-success">
+        Run
+      </button>
+      <button @click="exportWithSheetJS" class="btn btn-primary" disabled>
+        Export with SheetJS (WIP)
+      </button>
+    </div>
     <ourOutput :inputData.sync="finalGearMin" />
   </div>
 </template>
@@ -580,21 +573,13 @@ html {
   }
 
   .myButContainer {
-    display: inline-block;
-    margin: 0;
-    padding: 0;
-    height: 30px;
-  }
-
-  .btn.btn-success {
-    padding: 1.25rem 2.75rem;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-top: -80px;
-
-    &.sink {
-      margin-top: 0px;
+    display: flex;
+    margin: 1.25rem;
+    button {
+      padding: 1rem 2.75rem;
+      margin: 0 auto;
+      display: inline-block;
+      min-width: 320px;
     }
   }
 }
@@ -605,20 +590,8 @@ html {
   background-color: #fff;
   border: 1px solid $fg_0;
   border-radius: 9px;
-  position: relative;
-  left: 60px;
-  margin-bottom: 8px;
-  transform: translateX(-100%);
-  transition: all 0.2s;
-  max-height: 44px;
   overflow: hidden;
-
-  &.active {
-    left: 50%;
-    max-height: 100%;
-    transform: translateX(-50%);
-    transition: all 0.2s;
-  }
+  margin: 0 auto;
 
   .switch {
     position: absolute;
