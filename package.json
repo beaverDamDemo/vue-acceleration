@@ -9,8 +9,7 @@
   },
   "dependencies": {
     "chart.js": "^2.9.1",
-    "core-js": "^3.27.2",
-    "sass-loader": "^13.2.0",
+    "core-js": "^2.6.12",
     "vue": "^2.6.10",
     "vue-gh-pages": "^1.19.0"
   },

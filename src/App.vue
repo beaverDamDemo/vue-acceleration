@@ -33,7 +33,7 @@ export default {
     ourOutput,
   },
   // mixins: [fixedMultipleGears],
-  data() {
+  data () {
     return {
       store: store,
       weightKg: 1184,
@@ -54,20 +54,20 @@ export default {
       mode: "oneGear",
     };
   },
-  created() {
+  created () {
     window.dispatchEvent(new Event("myPreloderEvent"));
   },
   methods: {
-    sendData() {
+    sendData () {
       this.$eventBus.$emit("send-data", this.setup);
     },
-    myCSchange(e) {
+    myCSchange (e) {
       this.myChartShow = !this.myChartShow;
     },
-    exportWithSheetJS() {
+    exportWithSheetJS () {
       console.log("not done yet");
     },
-    startButtonClick() {
+    startButtonClick () {
       let tanja = [];
       let love = [];
       var t0 = performance.now();
@@ -351,9 +351,9 @@ export default {
           let tmp =
             parseFloat(this.finalGearMin) +
             i *
-              parseFloat(
-                (this.finalGearMax - this.finalGearMin) / (this.splits - 1)
-              );
+            parseFloat(
+              (this.finalGearMax - this.finalGearMin) / (this.splits - 1)
+            );
           tanja.push(singleRun(false, 1609, tmp));
         }
         store.tanja = tanja;
@@ -363,9 +363,9 @@ export default {
           let tmp =
             parseFloat(this.finalGearMin) +
             i *
-              parseFloat(
-                (this.finalGearMax - this.finalGearMin) / (this.splits - 1)
-              );
+            parseFloat(
+              (this.finalGearMax - this.finalGearMin) / (this.splits - 1)
+            );
           tanja.push(singleRun(true, Infinity, tmp));
         }
         store.tanja = tanja;
@@ -433,7 +433,7 @@ export default {
       }
       // this.$eventBus.$emit('calculationDone')
     },
-    drawPowerAndTorqueChart() {
+    drawPowerAndTorqueChart () {
       var rpmLookupTable = [];
       for (
         var currentRpm = 0;
@@ -479,7 +479,7 @@ export default {
       });
     },
   },
-  mounted() {
+  mounted () {
     //  let f= [630, 685, 731, 779, 816, 854, 888, 924, 948, 971, 992, 1012, 1018, 1032, 1054, 1038, 1020, 1002, 992, 980, 958, 880, 800, 720]
     //
     //          for(let i=0; i<f.length; i++) {
@@ -541,7 +541,7 @@ const calculatePower = (
     /* HARDCODED */
     var res =
       store.engines[selectedEngine].powerLookupTable[
-        Math.floor(currentRpm / _that.divRpm)
+      Math.floor(currentRpm / _that.divRpm)
       ];
     IDs[0] = res;
     IDs[1] = Math.round(currentRpm / 50) * 50;
@@ -554,117 +554,115 @@ const calculatePower = (
   }
 };
 </script>
-<style lang="scss">
-$bgr_0: rgb(109, 161, 174);
-$fg_0: rgb(184, 35, 126);
-
+<style>
 html {
   min-width: 440px;
 }
 
 #app {
-  background: $bgr_0;
-  color: $fg_0;
+  background: rgb(109, 161, 174);
+  color: rgb(184, 35, 126);
   font-family: Museo;
   padding: 10px;
+}
 
-  .ourForm {
-    margin: 0.875rem;
-  }
+#app .ourForm {
+  margin: 0.875rem;
+}
 
-  .myButContainer {
-    display: flex;
-    margin: 1.25rem;
-    button {
-      padding: 1rem 2.75rem;
-      margin: 0 auto;
-      display: inline-block;
-      min-width: 320px;
-    }
-  }
+#app .myButContainer {
+  display: flex;
+  margin: 1.25rem;
+}
+
+#app .myButContainer button {
+  padding: 1rem 2.75rem;
+  margin: 0 auto;
+  display: inline-block;
+  min-width: 320px;
 }
 
 .myChartContainer {
   max-width: 750px;
   max-height: 500px;
   background-color: #fff;
-  border: 1px solid $fg_0;
+  border: 1px solid rgb(184, 35, 126);
   border-radius: 9px;
   overflow: hidden;
   margin: 0 auto;
-
-  .switch {
-    position: absolute;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
-    right: 4px;
-    top: 4px;
-  }
-
   /* Hide default HTML checkbox */
-  .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-
   /* The slider */
-  .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
-  }
-
-  .slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
-  }
-
-  input + .slider {
-    background-color: #ccc;
-  }
-
-  input + .slider:before {
-    -webkit-transform: translateX(0px);
-    -ms-transform: translateX(0px);
-    transform: translateX(0px);
-  }
-
-  input:checked + .slider {
-    background-color: $fg_0;
-  }
-
-  input:focus + .slider {
-    box-shadow: 0 0 1px #ccc;
-  }
-
-  input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
-  }
-
   /* Rounded sliders */
-  .slider.round {
-    border-radius: 34px;
-  }
+}
 
-  .slider.round:before {
-    border-radius: 50%;
-  }
+.myChartContainer .switch {
+  position: absolute;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  right: 4px;
+  top: 4px;
+}
+
+.myChartContainer .switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.myChartContainer .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.myChartContainer .slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.myChartContainer input + .slider {
+  background-color: #ccc;
+}
+
+.myChartContainer input + .slider:before {
+  -webkit-transform: translateX(0px);
+  -ms-transform: translateX(0px);
+  transform: translateX(0px);
+}
+
+.myChartContainer input:checked + .slider {
+  background-color: rgb(184, 35, 126);
+}
+
+.myChartContainer input:focus + .slider {
+  box-shadow: 0 0 1px #ccc;
+}
+
+.myChartContainer input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.myChartContainer .slider.round {
+  border-radius: 34px;
+}
+
+.myChartContainer .slider.round:before {
+  border-radius: 50%;
 }
 </style>

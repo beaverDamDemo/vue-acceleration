@@ -3,12 +3,12 @@
     <div v-if="store.love.length > 0">
       <h1>Results</h1>
       <table>
-        <div v-for='l in store.love'>gear length: {{l[0]}} km/h,
-        max reached rpm: {{l[1]}} rpm,
-        max reached speed: {{l[2]}} km/h,
-        covered distance: {{l[4]}} m,
-        time needed: {{l[6]}}</div>
-    </table>
+        <div v-for='l in store.love'>gear length: {{ l[0]}} km/h,
+          max reached rpm: {{ l[1]}} rpm,
+          max reached speed: {{ l[2]}} km/h,
+          covered distance: {{ l[4]}} m,
+          time needed: {{ l[6] }}</div>
+      </table>
     </div>
     <div v-else>
       <h4><i>Use the <strong>Run</strong> button to populate results.</i></h4>
@@ -19,17 +19,17 @@
 <script lang="js">
 import store from '../store.js'
 
-export default  {
+export default {
   name: 'our-output',
   props: {
 
   },
-  data() {
+  data () {
     return {
-        store: store
+      store: store
     }
   },
-  mounted() {
+  mounted () {
     // this.$eventBus.$on("calculationDone", (e)=>{
 
     // })
@@ -199,13 +199,12 @@ export default  {
 }
 </script>
 
-<style scoped lang="scss">
-.our-output {
-}
+<style scoped>
 table {
   border: 1px solid white;
   text-align: left;
 }
+
 td {
   height: 50px;
   width: 100px;
@@ -213,6 +212,7 @@ td {
   border-left: 1px dashed #888;
   font-style: italic;
 }
+
 tr:nth-child(1),
 td:nth-child(1) {
   background: #444;
