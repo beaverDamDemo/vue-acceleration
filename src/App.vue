@@ -1,7 +1,11 @@
 <template>
   <div id="app">
     <ourForm class="ourForm"></ourForm>
-    <div :class="{ active: false, myChartContainer: true }">
+    <div>
+      <input type="checkbox" name="showMyChart" v-model="showMyChart">
+      <label for="showMyChart">show dyno</label>
+    </div>
+    <div :class="{ active: false, myChartContainer: true }" v-show="showMyChart">
       <canvas id="myChart"></canvas>
     </div>
     <div class="myButContainer">
@@ -52,6 +56,7 @@ export default {
       selectedEngine: 0,
       selectedCarPreset: 0,
       mode: "oneGear",
+      showMyChart: false
     };
   },
   created () {
