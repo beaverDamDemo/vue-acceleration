@@ -1,9 +1,9 @@
-<template lang="html">
+<template>
   <section class="our-output">
     <div v-if="store.love.length > 0">
       <h1>Results</h1>
       <table>
-        <div v-for='l in store.love'>gear length: {{ l[0]}} km/h,
+        <div v-for='(l, index) in store.love' :key="`store-love-${index}`">gear length: {{ l[0]}} km/h,
           max reached rpm: {{ l[1]}} rpm,
           max reached speed: {{ l[2]}} km/h,
           covered distance: {{ l[4]}} m,

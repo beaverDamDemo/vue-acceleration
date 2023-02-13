@@ -1,10 +1,12 @@
-<template lang="">
+<template>
     <section class="our-form">
         <div class="form-group">
             <h5>Select Engine</h5>
             <div class="input-group mb-4">
                 <select @change='seChange($event)' class="custom-select">
-                    <option v-for='(e, index) in store.engines' :value='index'>{{ e.label }} {{ e.effectiveMaxHp }}
+                    <option v-for='(e, index) in store.engines' :value='index' :key="'option-engine-' + index">{{
+                        e.label
+                    }} {{ e.effectiveMaxHp }}
                     </option>
                 </select>
             </div>
