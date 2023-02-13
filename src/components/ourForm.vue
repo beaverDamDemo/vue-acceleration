@@ -50,7 +50,7 @@
         <div class="form-group">
             <h5>Choose Test Settings</h5>
             <div class='row form-check'>
-                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option0"
+                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option0" checked
                     @change="selectMode('oneGear')">
                 <label class="form-check-label" for="gridRadios1">one gear</label>
             </div>
@@ -60,7 +60,7 @@
                 <label class="form-check-label" for="gridRadios2">topspeed run</label>
             </div>
             <div class='row form-check'>
-                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option2" checked
+                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option2"
                     @change="selectMode('fixedMultipleGears')">
                 <label class="form-check-label" for="gridRadios3">fixed multiple gears</label>
             </div>
@@ -132,11 +132,6 @@ export default {
             this.fillTorqueLookupTable(i)
         }
         console.log("⚛ ~ Vue.version", Vue.version);
-
-        console.log("Temporary")
-        this.myForm_0_isShown = false
-        this.formfixShow = true
-        this.$eventBus.$emit("selectMode", "fixedMultipleGears")
     },
 
     methods: {

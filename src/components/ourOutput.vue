@@ -44,12 +44,14 @@ export default {
   data () {
     return {
       store: store,
-      myTable: ''
     }
   },
   created () {
-    this.$eventBus.$on('calculationDone', () => {
+    this.$eventBus.$on('calculationDone', (mode) => {
+      console.log("⚛ ~ mode", mode);
+
       // this.populateTable()
+
     })
   },
   filters: {

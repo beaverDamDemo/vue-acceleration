@@ -442,7 +442,7 @@ export default {
         );
         this.runPerformed += 1
       }
-      this.$eventBus.$emit('calculationDone')
+      this.$eventBus.$emit('calculationDone', this.mode)
     },
     drawPowerAndTorqueChart () {
       var rpmLookupTable = [];
