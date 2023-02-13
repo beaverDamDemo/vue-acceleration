@@ -122,14 +122,7 @@ export default {
             }
         })
 
-        this.gear_0 = store.gearRatios[0]
-        this.gear_1 = store.gearRatios[1]
-        this.gear_2 = store.gearRatios[2]
-        this.gear_3 = store.gearRatios[3]
-        this.gear_4 = store.gearRatios[4]
-        this.gear_5 = store.gearRatios[5]
         this.gear_final = store.gearFinal
-        console.log("%cAdd gear presets here", "color: dodgerblue; background: yellow; font-weight: 600")
     },
     data () {
         return {
