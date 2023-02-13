@@ -207,7 +207,6 @@ export default {
 
 .our-form .form-group {
     width: 600px;
-    border: 1px solid gold;
 }
 
 .our-form .form-group h5 {

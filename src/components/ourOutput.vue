@@ -3,11 +3,11 @@
     <div v-if="store.love.length > 0">
       <h1>Results</h1>
       <table>
-        <div v-for='(l, index) in store.love' :key="`store-love-${index}`">gear length: {{ l[0]}} km/h,
+        <div v-for='(l, index) in store.love' :key="`store-love-${index}`">&nbsp;gear length: {{ l[0]}} km/h,
           max reached rpm: {{ l[1]}} rpm,
           max reached speed: {{ l[2]}} km/h,
           covered distance: {{ l[4]}} m,
-          time needed: {{ l[6] }}</div>
+          time needed: {{ l[6] }}&nbsp;</div>
       </table>
     </div>
     <div v-else>
@@ -201,7 +201,6 @@ export default {
 
 <style scoped>
 table {
-  border: 1px solid white;
   text-align: left;
 }
 
@@ -219,4 +218,5 @@ td:nth-child(1) {
   font-style: normal;
   color: #faa;
 }
+
 </style>
