@@ -29,12 +29,8 @@
         </div>
       </div>
     </div>
-    <div v-else-if="store.tanja.length > 0" style="background-color: rgb(197, 190, 170); color: rgb(179, 43, 72);">
+    <div v-else-if="store.tanja.length > 0">
       <h1>Results for multiple gears</h1>
-
-
-
-
       <div class="detailedText detailedText-multiple-gears header">
         <span>speed</span>
         <span>dist.</span>
@@ -55,8 +51,6 @@
         </span>
       </div>
     </div>
-
-
     <div v-else>
       <h4><i>Use the <strong>Run</strong> button to populate results.</i></h4>
     </div>
