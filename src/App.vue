@@ -163,6 +163,9 @@ export default {
       };
 
       var fixedMultipleGears = () => {
+
+        console.log("starting fixedMultipleGears")
+
         var acceleration, brakeforce, pushforce, netforce, power;
         var value = 0;
         var calculate_interval_ms = 10; //tested 10
@@ -240,7 +243,7 @@ export default {
           distance =
             distance +
             ((currentSpeed + speedGain / 2) * calculate_interval_ms) / 1000;
-          // console.warn('currentSpeed: ', Math.round(currentSpeed*3.6), 'km/h distance: ', Math.floor(distance), "m, exetime: ", executionTime/1000+'s')
+          console.warn('currentSpeed: ', Math.round(currentSpeed * 3.6), 'km/h distance: ', Math.floor(distance), "m, exetime: ", executionTime / 1000 + 's')
           arrResult.push([
             Math.round(currentSpeed * 3.6),
             Math.floor(distance),
@@ -248,7 +251,9 @@ export default {
             power,
             currentRpm,
           ]);
-          // console.log("depaul", currentRpm, Math.round(currentSpeed*3.6), (currentGearIndex+1))
+          console.log("depaul", currentRpm, Math.round(currentSpeed * 3.6), (currentGearIndex + 1))
+
+          console.log("Pushed fixed multiple gears to nevemkam")
         }
 
         // love.push([Number(gearLength).toFixed(0), arrResult[arrResult.length - 1][4], Number((currentSpeed * 3.6).toFixed(2)), 'km/h distance: ', Math.floor(distance), "m, exetime: ", executionTime / 1000 + 's'])

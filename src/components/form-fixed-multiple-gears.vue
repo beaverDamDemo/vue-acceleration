@@ -85,7 +85,6 @@ export default {
     name: 'form-fixed-multiple-gears',
     props: [],
     mounted () {
-        console.log(store)
         this.$eventBus.$on('selectMode', (e) => {
             if (e == "oneGear" || e == "topspeedRun") {
                 this.isDisabled = true
