@@ -430,8 +430,9 @@ export default {
           "Call took " + (t1 - t0) + " milliseconds. Total of runs made: ",
           total
         );
+        this.runPerformed += 1
       }
-      // this.$eventBus.$emit('calculationDone')
+      this.$eventBus.$emit('calculationDone')
     },
     drawPowerAndTorqueChart () {
       var rpmLookupTable = [];
