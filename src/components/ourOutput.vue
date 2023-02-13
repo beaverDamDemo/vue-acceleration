@@ -1,7 +1,7 @@
 <template>
   <section class="our-output">
     <div v-if="store.love.length > 0">
-      <h1>Results</h1>
+      <h1>Results for single gear</h1>
       <div v-for='(l, index) in store.love' :key="`store-love-${index}`">&nbsp;gear length: {{ l[0]}} km/h,
         max reached rpm: {{ l[1]}} rpm,
         max reached speed: {{ l[2]}} km/h,
@@ -29,6 +29,34 @@
         </div>
       </div>
     </div>
+    <div v-else-if="store.tanja.length > 0" style="background-color: rgb(197, 190, 170); color: rgb(179, 43, 72);">
+      <h1>Results for multiple gears</h1>
+
+
+
+
+      <div class="detailedText detailedText-multiple-gears header">
+        <span>speed</span>
+        <span>dist.</span>
+        <span>time</span>
+        <span>dist. inc.</span>
+        <span>rpm</span>
+        <span>gear</span>
+      </div>
+      <div v-for="(entry, index) of store.tanja[0]" :key="`singleRun-tanja-${index}`"
+        class="detailedText detailedText-multiple-gears main">
+        <span v-for="(span, innerMostIndex) of entry" :key="`span-tanja-${innerMostIndex}`">
+          <span v-if="innerMostIndex == 3">
+            {{ span | decimalsShortenFilter}}
+          </span>
+          <span v-else>
+            {{ span }}
+          </span>
+        </span>
+      </div>
+    </div>
+
+
     <div v-else>
       <h4><i>Use the <strong>Run</strong> button to populate results.</i></h4>
     </div>
@@ -49,39 +77,14 @@ export default {
   created () {
     this.$eventBus.$on('calculationDone', (mode) => {
       console.log("⚛ ~ mode", mode);
-
+      console.log("⚛ ~ store.tanja", store.tanja);
       // this.populateTable()
-
     })
-  },
-  filters: {
-
   },
   methods: {
     populateTable () {
       nextTick(() => {
         let i = 0;
-        // document.querySelector('table').insertAdjacentHTML("beforeend", "<tr id='tab-" + i + "'></tr>");
-
-        // document.querySelector('table tr#tab-' + i).insertAdjacentHTML("beforeend", "<td>" + i + "</td>")
-        // for (let j = 1; j < 11; j++) {
-        //   document.querySelector('table tr#tab-' + i).insertAdjacentHTML("beforeend", "<td>" + j + "</td>")
-        // }
-        // for (let i = 1; i < 11; i++) {
-        //   document.querySelector('table').insertAdjacentHTML("beforeend", "<tr id='tab-" + i + "'></tr>");
-        //   document.querySelector('table tr#tab-' + i).insertAdjacentHTML("beforeend", "<td>" + i + "</td>")
-        //   for (let j = 1; j < 11; j++) {
-        //     document.querySelector('table tr#tab-' + i).insertAdjacentHTML("beforeend", "<td class='td-" + j + "'>0</td>")
-        //   }
-        // }
-
-        let results = [[]];
-        for (let a = 0; a < 10; a++) {
-          results[a].push([]);
-          for (let b = 0; b < 10; b++) {
-            results[a].push([]);
-          }
-        }
 
         tanja(30, 5, 0);
 
@@ -282,6 +285,62 @@ h1 {
 .detailedText > span:nth-child(5) {
   background-color: rgb(1, 83, 151);
   color: rgb(253, 67, 68);
+  width: 3em;
+}
+
+.detailedText > div > span:nth-child(6),
+.detailedText > span:nth-child(6) {
+  background-color: rgb(242, 90, 16);
+  color: rgb(102, 20, 200);
+  width: 3em;
+}
+
+.detailedText.detailedText-multiple-gears.header span,
+.detailedText.detailedText-multiple-gears.main span {
+  display: inline-block;
+  text-align: right;
+  padding: 0 2px;
+}
+
+.detailedText.detailedText-multiple-gears.header > span:nth-child(1),
+.detailedText.detailedText-multiple-gears.main > span:nth-child(1) {
+  background-color: rgb(1, 83, 151);
+  color: rgb(253, 67, 68);
+  width: 4em;
+}
+
+.detailedText.detailedText-multiple-gears.header > span:nth-child(2),
+.detailedText.detailedText-multiple-gears.main > span:nth-child(2) {
+  background-color: rgb(242, 90, 16);
+  color: rgb(102, 20, 200);
+  width: 3em;
+}
+
+.detailedText.detailedText-multiple-gears.header > span:nth-child(3),
+.detailedText.detailedText-multiple-gears.main > span:nth-child(3) {
+  background-color: rgb(1, 83, 151);
+  color: rgb(253, 67, 68);
+  width: 3em;
+}
+
+.detailedText.detailedText-multiple-gears.header > span:nth-child(4),
+.detailedText.detailedText-multiple-gears.main > span:nth-child(4) {
+  background-color: rgb(242, 90, 16);
+  color: rgb(102, 20, 200);
+  width: 12em;
+}
+
+.detailedText.detailedText-multiple-gears.header > span:nth-child(5),
+.detailedText.detailedText-multiple-gears.main > span:nth-child(5) {
+  background-color: rgb(1, 83, 151);
+  color: rgb(253, 67, 68);
+  width: 3em;
+}
+
+.detailedText.detailedText-multiple-gears.header > span:nth-child(6),
+.detailedText.detailedText-multiple-gears.main > span:nth-child(6) {
+  background-color: rgb(242, 90, 16);
+  color: rgb(102, 20, 200);
   width: 3em;
 }
 </style>
