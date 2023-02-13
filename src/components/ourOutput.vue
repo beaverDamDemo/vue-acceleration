@@ -2,9 +2,22 @@
   <section class="our-output">
     <div v-if="store.love.length > 0">
       <h1>Results</h1>
-      <table id="table">
-
-      </table>
+      <div class="detailedText">
+        <div>
+          <span>speed</span>
+          <span>dist.</span>
+          <span>time</span>
+          <span>dist. inc.</span>
+          <span>rpm</span>
+        </div>
+      </div>
+      <div v-for="(singleRun, index) of store.tanja" :key="`tanja-${index}`" class="detailedText">
+        <div v-for="(entry, innerIndex) of singleRun" :key="`singleRun-${innerIndex}`">
+          <span v-for="(span, innerMostIndex) of entry" :key="`span-${innerMostIndex}`">
+            {{ span }}
+          </span>
+        </div>
+      </div>
       <div v-for='(l, index) in store.love' :key="`store-love-${index}`">&nbsp;gear length: {{ l[0]}} km/h,
         max reached rpm: {{ l[1]}} rpm,
         max reached speed: {{ l[2]}} km/h,
@@ -33,25 +46,26 @@ export default {
     this.$eventBus.$on('calculationDone', () => {
       console.log("⚛ ~ table is not completed");
       // this.populateTable()
+      console.log(store.tanja)
     })
   },
   methods: {
     populateTable () {
       nextTick(() => {
         let i = 0;
-        document.querySelector('table').insertAdjacentHTML("beforeend", "<tr id='tab-" + i + "'></tr>");
+        // document.querySelector('table').insertAdjacentHTML("beforeend", "<tr id='tab-" + i + "'></tr>");
 
-        document.querySelector('table tr#tab-' + i).insertAdjacentHTML("beforeend", "<td>" + i + "</td>")
-        for (let j = 1; j < 11; j++) {
-          document.querySelector('table tr#tab-' + i).insertAdjacentHTML("beforeend", "<td>" + j + "</td>")
-        }
-        for (let i = 1; i < 11; i++) {
-          document.querySelector('table').insertAdjacentHTML("beforeend", "<tr id='tab-" + i + "'></tr>");
-          document.querySelector('table tr#tab-' + i).insertAdjacentHTML("beforeend", "<td>" + i + "</td>")
-          for (let j = 1; j < 11; j++) {
-            document.querySelector('table tr#tab-' + i).insertAdjacentHTML("beforeend", "<td class='td-" + j + "'>0</td>")
-          }
-        }
+        // document.querySelector('table tr#tab-' + i).insertAdjacentHTML("beforeend", "<td>" + i + "</td>")
+        // for (let j = 1; j < 11; j++) {
+        //   document.querySelector('table tr#tab-' + i).insertAdjacentHTML("beforeend", "<td>" + j + "</td>")
+        // }
+        // for (let i = 1; i < 11; i++) {
+        //   document.querySelector('table').insertAdjacentHTML("beforeend", "<tr id='tab-" + i + "'></tr>");
+        //   document.querySelector('table tr#tab-' + i).insertAdjacentHTML("beforeend", "<td>" + i + "</td>")
+        //   for (let j = 1; j < 11; j++) {
+        //     document.querySelector('table tr#tab-' + i).insertAdjacentHTML("beforeend", "<td class='td-" + j + "'>0</td>")
+        //   }
+        // }
 
         let results = [[]];
         for (let a = 0; a < 10; a++) {
@@ -203,23 +217,46 @@ export default {
 </script>
 
 <style scoped>
-table {
-  text-align: left;
+.detailedText {
+  max-height: 800px;
+  overflow-y: scroll;
 }
 
-td {
-  height: 50px;
-  width: 100px;
-  border-top: 1px dashed #888;
-  border-left: 1px dashed #888;
-  font-style: italic;
-  color: mediumaquamarine;
+.detailedText > div {}
+
+.detailedText > div > span {
+  display: inline-block;
+  text-align: right;
+  padding: 0 2px;
 }
 
-tr:nth-child(1),
-td:nth-child(1) {
-  background: #444;
-  font-style: normal;
-  color: #faa;
+.detailedText > div > span:nth-child(1) {
+  background-color: rgb(1, 83, 151);
+  color: rgb(253, 67, 68);
+  width: 3em;
+}
+
+.detailedText > div > span:nth-child(2) {
+  background-color: rgb(242, 90, 16);
+  color: rgb(102, 20, 200);
+  width: 3em;
+}
+
+.detailedText > div > span:nth-child(3) {
+  background-color: rgb(1, 83, 151);
+  color: rgb(253, 67, 68);
+  width: 3em;
+}
+
+.detailedText > div > span:nth-child(4) {
+  background-color: rgb(242, 90, 16);
+  color: rgb(102, 20, 200);
+  width: 12em;
+}
+
+.detailedText > div > span:nth-child(5) {
+  background-color: rgb(1, 83, 151);
+  color: rgb(253, 67, 68);
+  width: 3em;
 }
 </style>
