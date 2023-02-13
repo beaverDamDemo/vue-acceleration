@@ -133,8 +133,10 @@ export default {
         }
         console.log("⚛ ~ Vue.version", Vue.version);
 
+        console.log("Temporary")
         this.myForm_0_isShown = false
         this.formfixShow = true
+        this.$eventBus.$emit("selectMode", "fixedMultipleGears")
     },
 
     methods: {
