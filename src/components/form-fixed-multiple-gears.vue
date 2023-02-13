@@ -1,13 +1,12 @@
-<template lang="html">
+<template>
     <section class="form-fixed-multiple-gears">
-        <div class="preset-container">
-            <div class="preset">Default</div>
-            <div class="preset">Close-ratio</div>
-            <div class="preset">Ibiza 1.6 75hp</div>
-            <div class="preset">Rover 200vi</div>
-            <div class="preset">Ibiza Cupra</div>
-        </div>
         <h5>Gear ratios</h5>
+        <div class="preset-container">
+            <button class="preset" v-for="preset of store.gearingPresets" :key="`preset-${preset.name}`"
+                @click="onSelectGearingPreset(preset)">
+                {{ preset.name }}
+            </button>
+        </div>
         <div class='form-group'>
             <label for="customRange_0">1st gear</label>
             <div class="arrow arrow-left" :class='{ disabled: gear_0_left_isDisabled }'
@@ -78,7 +77,6 @@
                 @click="arrowClick(['customRange_final', 'right'])"></div>
             <span v-text="gear_final"></span>
         </div>
-        </div>
     </section>
 </template>
 <script lang="js">
@@ -87,6 +85,7 @@ export default {
     name: 'form-fixed-multiple-gears',
     props: [],
     mounted () {
+        console.log(store)
         this.$eventBus.$on('selectMode', (e) => {
             if (e == "oneGear" || e == "topspeedRun") {
                 this.isDisabled = true
@@ -155,7 +154,8 @@ export default {
             gear_final: undefined,
             gear_final_left_isDisabled: true,
             gear_final_right_isDisabled: true,
-            isDisabled: true
+            isDisabled: true,
+            store: store
         }
     },
     watch: {
@@ -325,18 +325,19 @@ export default {
                 default:
                     console.log("Unexpected value")
             }
+        },
+        onSelectGearingPreset (preset) {
+            this.gear_0 = preset.gearRatios[0]
+            this.gear_1 = preset.gearRatios[1]
+            this.gear_2 = preset.gearRatios[2]
+            this.gear_3 = preset.gearRatios[3]
+            this.gear_4 = preset.gearRatios[4]
+            this.gear_5 = preset.gearRatios[5]
         }
     },
-    computed: {
-
-    }
 }
 </script>
 <style scoped>
-.form-fixed-multiple-gears {
-    border: 1px solid magenta;
-}
-
 .form-fixed-multiple-gears .preset-container {
     display: flex;
     flex-direction: row;
@@ -415,5 +416,9 @@ export default {
 
 .form-fixed-multiple-gears .form-group .arrow-left.disabled {
     border-right: 14px solid #aaa;
+}
+
+.preset-container {
+    margin: 0.75rem 0;
 }
 </style>

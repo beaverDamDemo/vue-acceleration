@@ -73,4 +73,41 @@ export default {
       maximumAccG: 0.775,
     },
   ],
+  gearingPresets: [
+    {
+      name: "Default",
+      gearRatios: [2.66, 1.78, 1.3, 1.0, 0.74, 0.5],
+      finalDrive: 4,
+    },
+    {
+      name: "Close-ratio",
+      gearRatios: [2.66, 1.78, 1.3, 1.05, 0.85, 0.75],
+      finalDrive: 4,
+    },
+    {
+      name: "Ibiza 1.6 75hp",
+      gearRatios: [3.455, 1.955, 1.25, 0.891, 0.74, 0.5],
+      finalDrive: 4,
+    },
+    {
+      name: "Rover 200vi",
+      gearRatios: [3.167, 1.842, 1.308, 1.033, 0.765, 0.5],
+      finalDrive: 4.2,
+    },
+    {
+      name: "Opel Astra 1.6",
+      gearRatios: [3.4, 1.9, 1.2, 0.89, 0.7, 0.5],
+      finalDrive: 3.74,
+    },
+    {
+      name: "Ibiza Cupra",
+      gearRatios: [3.3, 1.944, 1.308, 1.029, 0.837],
+      finalDrive: 4,
+    },
+    {
+      name: "Fiat Croma jtd",
+      gearRatios: [2.66, 1.78, 1.3, 1.0, 0.61, 0.5],
+      finalDrive: 3.65,
+    },
+  ],
 };
