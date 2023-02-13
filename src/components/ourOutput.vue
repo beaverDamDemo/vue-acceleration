@@ -2,20 +2,20 @@
   <section class="our-output">
     <div v-if="store.love.length > 0">
       <h1>Results</h1>
-      <div class="detailedText">
-        <div>
-          <span>speed</span>
-          <span>dist.</span>
-          <span>time</span>
-          <span>dist. inc.</span>
-          <span>rpm</span>
-        </div>
-      </div>
-      <div v-for="(singleRun, index) of store.tanja" :key="`tanja-${index}`" class="detailedText">
-        <div v-for="(entry, innerIndex) of singleRun" :key="`singleRun-${innerIndex}`">
-          <span v-for="(span, innerMostIndex) of entry" :key="`span-${innerMostIndex}`">
-            {{ span }}
-          </span>
+      <div class="detailedTextContainer">
+        <div v-for="(singleRun, index) of store.tanja" :key="`tanja-${index}`" class="detailedText">
+          <div class="detailedText">
+            <span>speed</span>
+            <span>dist.</span>
+            <span>time</span>
+            <span>dist. inc.</span>
+            <span>rpm</span>
+          </div>
+          <div v-for="(entry, innerIndex) of singleRun" :key="`singleRun-${innerIndex}`">
+            <span v-for="(span, innerMostIndex) of entry" :key="`span-${innerMostIndex}`">
+              {{ span }}
+            </span>
+          </div>
         </div>
       </div>
       <div v-for='(l, index) in store.love' :key="`store-love-${index}`">&nbsp;gear length: {{ l[0]}} km/h,
@@ -44,9 +44,7 @@ export default {
   },
   created () {
     this.$eventBus.$on('calculationDone', () => {
-      console.log("⚛ ~ table is not completed");
       // this.populateTable()
-      console.log(store.tanja)
     })
   },
   methods: {
@@ -217,8 +215,17 @@ export default {
 </script>
 
 <style scoped>
+.detailedTextContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.detailedTextContainer > div {
+  margin: 0 1rem 1rem 1rem;
+}
+
 .detailedText {
-  max-height: 800px;
+  max-height: 650px;
   overflow-y: scroll;
 }
 
@@ -230,31 +237,36 @@ export default {
   padding: 0 2px;
 }
 
-.detailedText > div > span:nth-child(1) {
+.detailedText > div > span:nth-child(1),
+.detailedText > span:nth-child(1) {
   background-color: rgb(1, 83, 151);
   color: rgb(253, 67, 68);
-  width: 3em;
+  width: 4em;
 }
 
-.detailedText > div > span:nth-child(2) {
+.detailedText > div > span:nth-child(2),
+.detailedText > span:nth-child(2) {
   background-color: rgb(242, 90, 16);
   color: rgb(102, 20, 200);
   width: 3em;
 }
 
-.detailedText > div > span:nth-child(3) {
+.detailedText > div > span:nth-child(3),
+.detailedText > span:nth-child(3) {
   background-color: rgb(1, 83, 151);
   color: rgb(253, 67, 68);
   width: 3em;
 }
 
-.detailedText > div > span:nth-child(4) {
+.detailedText > div > span:nth-child(4),
+.detailedText > span:nth-child(4) {
   background-color: rgb(242, 90, 16);
   color: rgb(102, 20, 200);
   width: 12em;
 }
 
-.detailedText > div > span:nth-child(5) {
+.detailedText > div > span:nth-child(5),
+.detailedText > span:nth-child(5) {
   background-color: rgb(1, 83, 151);
   color: rgb(253, 67, 68);
   width: 3em;
