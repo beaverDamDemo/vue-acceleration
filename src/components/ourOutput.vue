@@ -13,7 +13,12 @@
           </div>
           <div v-for="(entry, innerIndex) of singleRun" :key="`singleRun-${innerIndex}`">
             <span v-for="(span, innerMostIndex) of entry" :key="`span-${innerMostIndex}`">
-              {{ span }}
+              <span v-if="innerMostIndex == 3">
+                {{ span | decimalsShortenFilter}}
+              </span>
+              <span v-else>
+                {{ span }}
+              </span>
             </span>
           </div>
         </div>
@@ -46,6 +51,9 @@ export default {
     this.$eventBus.$on('calculationDone', () => {
       // this.populateTable()
     })
+  },
+  filters: {
+
   },
   methods: {
     populateTable () {
@@ -220,6 +228,11 @@ export default {
   flex-direction: row;
   flex-wrap: wrap;
 }
+
+h1 {
+  margin: 0 1rem 0rem 1rem;
+}
+
 .detailedTextContainer > div {
   margin: 0 1rem 1rem 1rem;
 }
