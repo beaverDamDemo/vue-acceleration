@@ -2,6 +2,11 @@
   <section class="our-output">
     <div v-if="store.love.length > 0">
       <h1>Results</h1>
+      <div v-for='(l, index) in store.love' :key="`store-love-${index}`">&nbsp;gear length: {{ l[0]}} km/h,
+        max reached rpm: {{ l[1]}} rpm,
+        max reached speed: {{ l[2]}} km/h,
+        covered distance: {{ l[4]}} m,
+        time needed: {{ l[6] }}&nbsp;</div>
       <div class="detailedTextContainer">
         <div v-for="(singleRun, index) of store.tanja" :key="`tanja-${index}`" class="detailedText">
           <div class="detailedText">
@@ -23,11 +28,6 @@
           </div>
         </div>
       </div>
-      <div v-for='(l, index) in store.love' :key="`store-love-${index}`">&nbsp;gear length: {{ l[0]}} km/h,
-        max reached rpm: {{ l[1]}} rpm,
-        max reached speed: {{ l[2]}} km/h,
-        covered distance: {{ l[4]}} m,
-        time needed: {{ l[6] }}&nbsp;</div>
     </div>
     <div v-else>
       <h4><i>Use the <strong>Run</strong> button to populate results.</i></h4>

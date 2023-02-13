@@ -15,8 +15,6 @@
                 <select @change='scpChange($event)' class="custom-select">
                     <option selected value="0">Viper fully-upgraded</option>
                     <option value="1">Viper base</option>
-                    <option value="2" disabled>Unavailable</option>
-                    <option value="3" disabled>Unavailable</option>
                 </select>
             </div>
         </div>
@@ -24,33 +22,29 @@
             <h5>Car Settings</h5>
             <div class='row'>
                 <label class='col col-sm-6' for="">Weight KG</label>
-                <input v-model='cskg' type="number" step=100 class="form-control form-control-sm col col-sm-6" disabled
-                    readonly>
+                <input v-model='cskg' type="number" step=100 class="form-control form-control-sm col col-sm-6">
             </div>
             <div class='row'>
                 <label class='col col-sm-6' for="">Aero Cx</label>
-                <input v-model='csac' type="number" step=0.005 class="form-control form-control-sm col col-sm-6"
-                    disabled readonly>
+                <input v-model='csac' type="number" step=0.005 class="form-control form-control-sm col col-sm-6">
             </div>
             <div class='row'>
                 <label class='col col-sm-6' for="">Rolling Res</label>
-                <input v-model='csrr' type="number" step=0.001 class="form-control form-control-sm col col-sm-6"
-                    disabled readonly>
+                <input v-model='csrr' type="number" step=0.001 class="form-control form-control-sm col col-sm-6">
             </div>
             <div class='row'>
                 <label class='col col-sm-6' for="">Maximum acc G</label>
-                <input v-model='csmag' type="number" step=0.025 class="form-control form-control-sm col col-sm-6"
-                    disabled readonly>
+                <input v-model='csmag' type="number" step=0.025 class="form-control form-control-sm col col-sm-6">
             </div>
-            <div class='row'>
+            <!-- <div class='row'>
                 <label class='col col-sm-6' for="finalGearInput">Final gear km/h</label>
                 <input v-model='finalGear' @change='finalGearInputChange' id='finalGearInput' type="number" step=5
-                    class="form-control form-control-sm col col-sm-6" disabled readonly>
-            </div>
+                    class="form-control form-control-sm col col-sm-6">
+            </div> -->
             <div class='row'>
                 <label class='col col-sm-6' for="">Initial speed km/h</label>
                 <input v-model="csin" @change="initialSpeedInputChange" type="number"
-                    class="form-control form-control-sm col col-sm-6" disabled readonly>
+                    class="form-control form-control-sm col col-sm-6">
             </div>
         </div>
         <div class="form-group">
@@ -113,7 +107,7 @@ export default {
     data () {
         return {
             store: store,
-            finalGear: 290,
+            // finalGear: 290,
             finalGearMin: 200,
             finalGearMax: 400,
             splits: 5,
@@ -136,9 +130,9 @@ export default {
     },
 
     methods: {
-        finalGearInputChange (e) {
-            this.$eventBus.$emit("finalGearInputChange", this.finalGear)
-        },
+        // finalGearInputChange (e) {
+        //     this.$eventBus.$emit("finalGearInputChange", this.finalGear)
+        // },
         initialSpeedInputChange (e) {
             this.$eventBus.$emit("initialSpeedInputChange", this.csin)
         },
@@ -160,22 +154,22 @@ export default {
         },
         scpChange (e) {
             this.$eventBus.$emit('scpChange', event.target.value)
-            //             switch (event.target.value) {
-            //                 case '0':
-            //                     this.cskg = 1184
-            //                     this.csac = 0.35
-            //                     this.csrr = 0.015
-            //                     this.csmag = 0.95
-            //                     break;
-            //                 case '1':
-            //                     this.cskg = 1628
-            //                     this.csac = 0.35
-            //                     this.csrr = 0.012
-            //                     this.csmag = 0.825
-            //                     break;
-            //                 default:
-            //
-            //             }
+            switch (event.target.value) {
+                case '0':
+                    this.cskg = 1184
+                    this.csac = 0.35
+                    this.csrr = 0.015
+                    this.csmag = 0.95
+                    break;
+                case '1':
+                    this.cskg = 1628
+                    this.csac = 0.35
+                    this.csrr = 0.012
+                    this.csmag = 0.825
+                    break;
+                default:
+                    ;
+            }
         },
         selectMode (e) {
             if (e == "oneGear" || e == "topspeedRun") {
