@@ -22,7 +22,7 @@
             <h5>Car Settings</h5>
             <div class='row'>
                 <label class='col col-sm-6' for="">Weight KG</label>
-                <input v-model='cskg' type="number" step=100 class="form-control form-control-sm col col-sm-6">
+                <input v-model='cskg' type="number" step=1 class="form-control form-control-sm col col-sm-6">
             </div>
             <div class='row'>
                 <label class='col col-sm-6' for="">Aero Cx</label>
@@ -41,11 +41,11 @@
                 <input v-model='finalGear' @change='finalGearInputChange' id='finalGearInput' type="number" step=5
                     class="form-control form-control-sm col col-sm-6">
             </div> -->
-            <div class='row'>
+            <!-- <div class='row'>
                 <label class='col col-sm-6' for="">Initial speed km/h</label>
                 <input v-model="csin" @change="initialSpeedInputChange" type="number"
                     class="form-control form-control-sm col col-sm-6">
-            </div>
+            </div> -->
         </div>
         <div class="form-group">
             <h5>Choose Test Settings</h5>
@@ -68,6 +68,11 @@
                 <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios4" value="option3"
                     @change="selectMode('allPossibleGears')">
                 <label class="form-check-label" for="gridRadios4">all possible gears</label>
+            </div>
+            <div class='form-check form-initial-speed'>
+                <span for="">Initial speed km/h: </span>
+                <input v-model="csin" @change="initialSpeedInputChange" type="number"
+                    class="form-control form-control-sm">
             </div>
         </div>
         <div class="form-group" v-if="myForm_0_isShown">
@@ -229,12 +234,13 @@ export default {
     margin-bottom: 8px;
 }
 
-details {
-    height: 320px;
-    width: 460px;
-    position: absolute;
-    right: 0;
-    top: 0;
-    pointer-events: none;
+.form-initial-speed {
+    display: flex;
+    flex-direction: row;
+}
+
+.form-initial-speed input {
+    margin-left: 5px;
+    width: 160px;
 }
 </style>
