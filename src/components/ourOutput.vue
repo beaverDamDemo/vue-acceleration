@@ -242,8 +242,6 @@ h1 {
   overflow-y: scroll;
 }
 
-.detailedText > div {}
-
 .detailedText > div > span {
   display: inline-block;
   text-align: right;
