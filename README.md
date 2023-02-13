@@ -1,8 +1,7 @@
-# vue-lesson-03
-
-## Project setup
+# old lesson name is vue-lesson-03
+# if it doesn't work, try running 
 ```
-npm install
+nvm use v14
 ```
 
 ### Compiles and hot-reloads for development
@@ -10,20 +9,7 @@ npm install
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Also compiles and hot-reloads for development
 ```
-npm run build
+vue serve
 ```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

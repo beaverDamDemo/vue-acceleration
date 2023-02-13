@@ -1,4 +1,4 @@
-<template lang="html">
+<template lang="">
     <section class="our-form">
         <div class="form-group">
             <h5>Select Engine</h5>
@@ -99,9 +99,9 @@
 </template>
 <script lang="js">
 import store from '../store.js'
-import vue from 'vue';
 import formfix from './form-fixed-multiple-gears'
 import mixin from '../../mixins/mixin.js'
+import Vue from 'vue'
 export default {
     name: 'our-form',
     components: {
@@ -130,7 +130,9 @@ export default {
         for (let i = 0; i < store.engines.length; i++) {
             this.fillTorqueLookupTable(i)
         }
+        console.log("⚛ ~ Vue.version", Vue.version);
     },
+
     methods: {
         finalGearInputChange (e) {
             this.$eventBus.$emit("finalGearInputChange", this.finalGear)
