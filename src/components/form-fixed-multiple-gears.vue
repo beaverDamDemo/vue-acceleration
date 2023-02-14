@@ -35,6 +35,7 @@
         @click="arrowClick(['customRange_0', 'right'])"
       ></div>
       <span v-text="gear_0"></span>
+      <span class="computedSpeed">❓ km/h</span>
     </div>
     <div class="form-group">
       <label for="customRange_1">2nd gear</label>
@@ -60,6 +61,7 @@
         @click="arrowClick(['customRange_1', 'right'])"
       ></div>
       <span v-text="gear_1"></span>
+      <span class="computedSpeed">❓ km/h</span>
     </div>
     <div class="form-group">
       <label for="customRange_2">3th gear</label>
@@ -85,6 +87,7 @@
         @click="arrowClick(['customRange_2', 'right'])"
       ></div>
       <span v-text="gear_2"></span>
+      <span class="computedSpeed">❓ km/h</span>
     </div>
     <div class="form-group">
       <label for="customRange_3">4th gear</label>
@@ -110,6 +113,7 @@
         @click="arrowClick(['customRange_3', 'right'])"
       ></div>
       <span v-text="gear_3"></span>
+      <span class="computedSpeed">❓ km/h</span>
     </div>
     <div class="form-group">
       <label for="customRange_4">5th gear</label>
@@ -135,6 +139,7 @@
         @click="arrowClick(['customRange_4', 'right'])"
       ></div>
       <span v-text="gear_4"></span>
+      <span class="computedSpeed">❓ km/h</span>
     </div>
     <div class="form-group">
       <label for="customRange_5">6th gear</label>
@@ -160,6 +165,7 @@
         @click="arrowClick(['customRange_5', 'right'])"
       ></div>
       <span v-text="gear_5"></span>
+      <span class="computedSpeed">❓ km/h</span>
     </div>
     <div class="form-group">
       <label for="customRange_final">final drive</label>
@@ -185,6 +191,7 @@
         @click="arrowClick(['customRange_final', 'right'])"
       ></div>
       <span v-text="gear_final"></span>
+      <span class="computedSpeed"></span>
     </div>
   </section>
 </template>
@@ -445,6 +452,9 @@ export default {
 }
 </script>
 <style scoped>
+.preset-container {
+  margin: 0.75rem 0;
+}
 .form-fixed-multiple-gears .preset-container {
   display: flex;
   flex-direction: row;
@@ -469,6 +479,15 @@ export default {
 .form-fixed-multiple-gears .form-group {
   margin-bottom: 0.1rem;
   display: flex;
+}
+.form-fixed-multiple-gears .form-group span {
+  background: lawngreen;
+  min-width: 3rem;
+}
+.form-fixed-multiple-gears .form-group span.computedSpeed {
+  background: darkorange;
+  text-align: right;
+  min-width: 7rem;
 }
 
 .form-fixed-multiple-gears .form-group h5 {
@@ -523,9 +542,5 @@ export default {
 
 .form-fixed-multiple-gears .form-group .arrow-left.disabled {
   border-right: 14px solid #aaa;
-}
-
-.preset-container {
-  margin: 0.75rem 0;
 }
 </style>
