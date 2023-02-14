@@ -439,6 +439,9 @@ export default {
                 default:
                     console.log("Unexpected value")
             }
+            for(let i=0; i<store.gearRatios.length; i++) {
+              eval("this.gear_" + i + "_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[i] / store.gearFinal))
+            }
         },
         onSelectGearingPreset (preset) {
             this.gear_0_ratio = preset.gearRatios[0]
@@ -456,7 +459,7 @@ export default {
             this.gear_final = preset.finalDrive
 
             for(let i=0; i<preset.gearRatios.length; i++) {
-              eval("this.gear_" + i + "_computedSpeed = " + Math.round(700 / preset.gearRatios[i] / store.gearFinal))
+              eval("this.gear_" + i + "_computedSpeed = " + Math.round(store.transmissionConstant / preset.gearRatios[i] / store.gearFinal))
             }
         }
     },

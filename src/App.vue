@@ -185,13 +185,15 @@ export default {
 
         console.log("take care that the follwoing part works fikne");
         console.log(
-          "zakaj je tisti 700 hardcodiran? A uposteva tudi obseg kolesa?"
+          "zakaj je tisti store transmisison hardcodiran? A uposteva tudi obseg kolesa?"
         );
         let gearing = store.gearRatios;
         let currentGearing = [];
         let gearLength = [];
         for (let i = 0; i < gearing.length; i++) {
-          gearLength.push(700 / gearing[i] / store.gearFinal);
+          gearLength.push(
+            store.transmissionConstant / gearing[i] / store.gearFinal
+          );
           currentGearing.push(store.gearRatios[i]);
         }
         let maxRpm = 5700;
@@ -306,7 +308,7 @@ export default {
         let currentSpeed = 0;
         let gearLength = [];
         for (let i = 0; i < gearing.length; i++) {
-          gearLength.push(700 / gearing[i] / finalGear);
+          gearLength.push(store.transmissionConstant / gearing[i] / finalGear);
         }
         let maxRpm = 5700;
         let lastRpm = 0;
