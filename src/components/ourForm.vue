@@ -181,14 +181,13 @@ export default {
     data () {
         return {
             store: store,
-            // finalGear: 290,
             finalGearMin: 200,
             finalGearMax: 400,
             splits: 5,
-            cskg: 1184,
-            csac: 0.35,
-            csrr: 0.015,
-            csmag: 0.95,
+            cskg: undefined,
+            csac: undefined,
+            csrr: undefined,
+            csmag: undefined,
             csin: 100,
             divRpm: 50,
             selectedEngine: 0,
@@ -201,6 +200,9 @@ export default {
             this.fillTorqueLookupTable(i)
         }
         console.log("⚛ ~ Vue.version", Vue.version);
+
+        console.log("setting default to zero ")
+        this.scpChange(0)
     },
 
     methods: {
@@ -224,8 +226,8 @@ export default {
             this.$eventBus.$emit('seChange', event.target.value)
         },
         scpChange (e) {
-          console.log(" to bi vejretno morali pognat ze v starut, da se nastavijo vrednosti")
-            this.$eventBus.$emit('scpChange', event.target.value)
+          if( typeof(e) == "object") {
+            this.$eventBus.$emit('scpChange', e.target.value)
             this.cskg = store.carPresets[e.target.value].weightKg
             this.csac = store.carPresets[e.target.value].aeroCx
             this.csrr = store.carPresets[e.target.value].rollingRes
@@ -234,6 +236,17 @@ export default {
             this.store.aeroCx = this.csac
             this.store.rollingRes = this.csrr
             this.store.maximumAccG = this.csmag
+          } else if( typeof(e) == "number") {
+            this.$eventBus.$emit('scpChange', 0)
+            this.cskg = store.carPresets[0].weightKg
+            this.csac = store.carPresets[0].aeroCx
+            this.csrr = store.carPresets[0].rollingRes
+            this.csmag = store.carPresets[0].maximumAccG
+            this.store.weightKg = this.cskg
+            this.store.aeroCx = this.csac
+            this.store.rollingRes = this.csrr
+            this.store.maximumAccG = this.csmag
+          }
         },
 
         selectMode (e) {
@@ -252,20 +265,16 @@ export default {
     },
     watch: {
       cskg: function (val) {
-        console.log("⛳ ~ val", val)
         this.store.weightKg = val
       },
       csac: function (val) {
-        console.log("⛳ ~ val", val)
         this.store.aeroCx = val
       },
       csrr: function (val) {
-        console.log("⛳ ~ val", val)
         this.store.rollingRes = val
       },
       csmag: function (val) {
         this.store.maximumAccG = val
-        console.log("⛳ ~ val", val)
       },
     }
 }

@@ -52,7 +52,7 @@ export default {
       results: [],
       myChartShow: false,
       selectedEngine: 0,
-      selectedCarPreset: 0,
+      selectedCarPreset: undefined,
       mode: "oneGear",
       showMyChart: false,
     };
