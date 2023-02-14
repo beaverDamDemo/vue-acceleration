@@ -237,7 +237,12 @@ export default {
             this.csac = store.carPresets[e.target.value].aeroCx
             this.csrr = store.carPresets[e.target.value].rollingRes
             this.csmag = store.carPresets[e.target.value].maximumAccG
+            this.store.weightKg = this.cskg
+            this.store.aeroCx = this.csac
+            this.store.rollingRes = this.csrr
+            this.store.maximumAccG = this.csmag
         },
+
         selectMode (e) {
             if (e == "oneGear" || e == "topspeedRun") {
                 this.myForm_0_isShown = true
@@ -255,14 +260,18 @@ export default {
     watch: {
       cskg: function (val) {
         console.log("⛳ ~ val", val)
+        this.store.weightKg = val
       },
       csac: function (val) {
         console.log("⛳ ~ val", val)
+        this.store.aeroCx = val
       },
       csrr: function (val) {
         console.log("⛳ ~ val", val)
+        this.store.rollingRes = val
       },
       csmag: function (val) {
+        this.store.maximumAccG = val
         console.log("⛳ ~ val", val)
       },
     }

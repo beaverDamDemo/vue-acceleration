@@ -480,6 +480,8 @@ export default {
             for(let i=0; i<preset.gearRatios.length; i++) {
               eval("this.gear_" + i + "_computedSpeed = " + Math.round(store.transmissionConstant / preset.gearRatios[i] / preset.finalDrive))
             }
+
+            
         }
     },
 }

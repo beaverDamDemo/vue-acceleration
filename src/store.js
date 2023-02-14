@@ -146,6 +146,10 @@ export default {
   ],
   gearRatios: [],
   gearFinal: 3.74,
+  weightKg: undefined,
+  aeroCx: undefined,
+  rollingRes: undefined,
+  maximumAccG: undefined,
   carPresets: [
     {
       label: "Viper fully-upgraded",

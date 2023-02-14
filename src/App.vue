@@ -43,10 +43,6 @@ export default {
   data() {
     return {
       store: store,
-      weightKg: 1184,
-      aeroCx: 0.35,
-      rollingRos: 0.015,
-      maximumAccG: 0.95,
       maxgearlength: 290,
       divRpm: 50,
       maxg: 0.8,
@@ -131,10 +127,10 @@ export default {
           acceleration = acceleration_calc(
             currentSpeed,
             power,
-            this.weightKg,
-            this.aeroCx,
-            this.rollingRos,
-            this.maximumAccG
+            this.store.weightKg,
+            this.store.aeroCx,
+            this.store.rollingRes,
+            this.store.maximumAccG
           );
           speedGain = acceleration * calculate_interval_ms;
 
@@ -167,6 +163,13 @@ export default {
 
       var fixedMultipleGears = () => {
         console.log("starting fixedMultipleGears");
+
+            console.log("this.store.weightKg,: ", this.store.weightKg)
+            console.log("this.store.aeroCx,: ", this.store.aeroCx)
+            console.log("this.store.rollingRes,: ", this.store.rollingRes)
+            console.log("this.store.maximumAccG: ", this.store.maximumAccG)
+
+
 
         var acceleration, brakeforce, pushforce, netforce, power;
         var value = 0;
@@ -244,10 +247,10 @@ export default {
           acceleration = acceleration_calc(
             currentSpeed,
             power,
-            this.weightKg,
-            this.aeroCx,
-            this.rollingRos,
-            this.maximumAccG
+            this.store.weightKg,
+            this.store.aeroCx,
+            this.store.rollingRes,
+            this.store.maximumAccG
           );
           speedGain = acceleration * calculate_interval_ms;
           currentSpeed += speedGain;
@@ -282,6 +285,11 @@ export default {
         var t1 = performance.now();
         console.log("Call took " + (t1 - t0) + " milliseconds.");
 
+        let currentWeightKg = this.store.weightKg;
+        let currentAeroCx = this.store.aeroCx;
+        let currentRollingRes = this.store.rollingRes;
+        let currentMaximumAccG = this.store.maximumAccG;
+
         store.resultsFixedMultipleGears.push({
           "final speed": Math.round(currentSpeed * 3.6) + " km/h",
           gear: currentGearIndex + 1,
@@ -291,6 +299,10 @@ export default {
           currentGearing: currentGearing,
           finalDrive: store.gearFinal,
           computedGearLength: gearLength,
+          currentWeightKg: currentWeightKg,
+          currentAeroCx: currentAeroCx,
+          currentRollingRes: currentRollingRes,
+          currentMaximumAccG: currentMaximumAccG,
         });
 
         return arrResult;
@@ -352,10 +364,10 @@ export default {
           acceleration = acceleration_calc(
             currentSpeed,
             power,
-            this.weightKg,
-            this.aeroCx,
-            this.rollingRos,
-            this.maximumAccG
+            this.store.weightKg,
+            this.store.aeroCx,
+            this.store.rollingRes,
+            this.store.maximumAccG
           );
           speedGain = acceleration * calculate_interval_ms;
           currentSpeed += speedGain;
@@ -543,10 +555,10 @@ export default {
     });
     this.$eventBus.$on("scpChange", (e) => {
       this.selectedCarPreset = e;
-      this.weightKg = store.carPresets[e].weightKg;
-      this.aeroCx = store.carPresets[e].aeroCx;
-      this.rollingRes = store.carPresets[e].rollingRes;
-      this.maximumAccG = store.carPresets[e].maximumAccG;
+      this.store.weightKg = store.carPresets[e].weightKg;
+      this.store.aeroCx = store.carPresets[e].aeroCx;
+      this.store.rollingRes = store.carPresets[e].rollingRes;
+      this.store.maximumAccG = store.carPresets[e].maximumAccG;
     });
     this.$eventBus.$on("selectMode", (e) => {
       this.mode = e;
