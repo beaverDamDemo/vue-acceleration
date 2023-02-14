@@ -8,7 +8,7 @@ Vue.config.productionTip = false
 Vue.prototype.$eventBus = new Vue()
 
 Vue.filter('decimalsShortenFilter', function (number) {
-  return Math.round(number * 10) / 10;
+  return Math.round(number * 1000) / 1000;
 })
 
 new Vue({

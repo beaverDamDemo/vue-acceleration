@@ -71,7 +71,6 @@
           </div>
         </div>
       </div>
-
       <div class="detailedText detailedText-multiple-gears header">
         <span>speed</span>
         <span>dist.</span>
