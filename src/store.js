@@ -55,7 +55,7 @@ export default {
       powerLookupTable: [],
     },
   ],
-  gearRatios: [2.66, 1.78, 1.3, 1.0, 0.74, 0.5],
+  gearRatios: [],
   gearFinal: 3.74,
   carPresets: [
     {
@@ -101,7 +101,7 @@ export default {
     },
     {
       name: "Ibiza Cupra",
-      gearRatios: [3.3, 1.944, 1.308, 1.029, 0.837],
+      gearRatios: [3.3, 1.944, 1.308, 1.029, 0.837, 0.5],
       finalDrive: 4,
     },
     {
