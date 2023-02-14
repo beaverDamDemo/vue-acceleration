@@ -390,5 +390,11 @@ h1 {
 .shortText {
   background: lightblue;
   padding: 0.75rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.shortText > div {
+  margin: 0.5rem 1.5rem;
 }
 </style>

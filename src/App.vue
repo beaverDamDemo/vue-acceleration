@@ -183,8 +183,7 @@ export default {
         var currentSpeed = 0;
         var arrResult = [];
 
-
-        console.log("take care that the follwoing part works fikne")
+        console.log("take care that the follwoing part works fikne");
         let gearing = store.gearRatios;
 
         let gearLength = [];
@@ -277,11 +276,11 @@ export default {
         var t1 = performance.now();
         console.log("Call took " + (t1 - t0) + " milliseconds.");
         store.resultsFixedMultipleGears.push({
-          "final speed": Math.round(currentSpeed * 3.6),
-          "gear": currentGearIndex + 1,
-          "rpm": lastRpm,
-          "distance": Math.floor(distance),
-          "exetime ": executionTime / 1000,
+          "final speed": Math.round(currentSpeed * 3.6) + " km/h",
+          gear: currentGearIndex + 1,
+          rpm: lastRpm + " rpm",
+          distance: Math.floor(distance) + " m",
+          "exetime ": executionTime / 1000 + " s",
           gearing: gearing,
           finalDrive: store.gearFinal,
           computedGearLength: gearLength,
