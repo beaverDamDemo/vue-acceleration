@@ -43,7 +43,6 @@ export default {
   data() {
     return {
       store: store,
-      maxgearlength: 290,
       divRpm: 50,
       maxg: 0.8,
       finalGearMin: 200,
@@ -164,12 +163,10 @@ export default {
       var fixedMultipleGears = () => {
         console.log("starting fixedMultipleGears");
 
-            console.log("this.store.weightKg,: ", this.store.weightKg)
-            console.log("this.store.aeroCx,: ", this.store.aeroCx)
-            console.log("this.store.rollingRes,: ", this.store.rollingRes)
-            console.log("this.store.maximumAccG: ", this.store.maximumAccG)
-
-
+        console.log("this.store.weightKg,: ", this.store.weightKg);
+        console.log("this.store.aeroCx,: ", this.store.aeroCx);
+        console.log("this.store.rollingRes,: ", this.store.rollingRes);
+        console.log("this.store.maximumAccG: ", this.store.maximumAccG);
 
         var acceleration, brakeforce, pushforce, netforce, power;
         var value = 0;
@@ -376,7 +373,6 @@ export default {
             ((currentSpeed + speedGain / 2) * calculate_interval_ms) / 1000;
         }
 
-        //     this.$eventBus.$emit("finalGearInputChange", this.finalGear)
         return (
           executionTime / 1000,
           Number((currentSpeed * 3.6).toFixed(2)),
@@ -533,10 +529,6 @@ export default {
     //          }
     //  debugger
     this.sendData();
-
-    this.$eventBus.$on("finalGearInputChange", (e) => {
-      this.maxgearlength = e;
-    });
     this.$eventBus.$on("initialSpeedInputChange", (e) => {
       this.initialSpeed = e;
     });

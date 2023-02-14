@@ -65,11 +65,6 @@
         />
       </div>
       <!-- <div class='row'>
-                <label class='col col-sm-6' for="finalGearInput">Final gear km/h</label>
-                <input v-model='finalGear' @change='finalGearInputChange' id='finalGearInput' type="number" step=5
-                    class="form-control form-control-sm col col-sm-6">
-            </div> -->
-      <!-- <div class='row'>
                 <label class='col col-sm-6' for="">Initial speed km/h</label>
                 <input v-model="csin" @change="initialSpeedInputChange" type="number"
                     class="form-control form-control-sm col col-sm-6">
@@ -209,9 +204,6 @@ export default {
     },
 
     methods: {
-        // finalGearInputChange (e) {
-        //     this.$eventBus.$emit("finalGearInputChange", this.finalGear)
-        // },
         initialSpeedInputChange (e) {
             this.$eventBus.$emit("initialSpeedInputChange", this.csin)
         },
