@@ -315,6 +315,12 @@ export default {
                 store.gearRatios[0] = this.gear_0_ratio
             }
             store.gearRatios[0] = this.gear_0_ratio
+            eval("this.gear_0_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[0] / store.gearFinal))
+            eval("this.gear_1_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[1] / store.gearFinal))
+            eval("this.gear_2_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[2] / store.gearFinal))
+            eval("this.gear_3_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[3] / store.gearFinal))
+            eval("this.gear_4_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[4] / store.gearFinal))
+            eval("this.gear_5_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[5] / store.gearFinal))
         },
         g_1_change: function () {
             if (this.gear_2_ratio >= this.gear_1_ratio) {
@@ -326,6 +332,12 @@ export default {
                 store.gearRatios[0] = this.gear_0_ratio
             }
             store.gearRatios[1] = this.gear_1_ratio
+            eval("this.gear_0_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[0] / store.gearFinal))
+            eval("this.gear_1_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[1] / store.gearFinal))
+            eval("this.gear_2_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[2] / store.gearFinal))
+            eval("this.gear_3_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[3] / store.gearFinal))
+            eval("this.gear_4_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[4] / store.gearFinal))
+            eval("this.gear_5_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[5] / store.gearFinal))
         },
         g_2_change: function () {
             if (this.gear_3_ratio >= this.gear_2_ratio) {
@@ -337,6 +349,12 @@ export default {
                 store.gearRatios[1] = this.gear_1_ratio
             }
             store.gearRatios[2] = this.gear_2_ratio
+            eval("this.gear_0_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[0] / store.gearFinal))
+            eval("this.gear_1_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[1] / store.gearFinal))
+            eval("this.gear_2_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[2] / store.gearFinal))
+            eval("this.gear_3_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[3] / store.gearFinal))
+            eval("this.gear_4_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[4] / store.gearFinal))
+            eval("this.gear_5_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[5] / store.gearFinal))
         },
         g_3_change: function () {
             if (this.gear_4_ratio >= this.gear_3_ratio) {
@@ -348,6 +366,12 @@ export default {
                 store.gearRatios[2] = this.gear_2_ratio
             }
             store.gearRatios[3] = this.gear_3_ratio
+            eval("this.gear_0_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[0] / store.gearFinal))
+            eval("this.gear_1_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[1] / store.gearFinal))
+            eval("this.gear_2_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[2] / store.gearFinal))
+            eval("this.gear_3_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[3] / store.gearFinal))
+            eval("this.gear_4_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[4] / store.gearFinal))
+            eval("this.gear_5_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[5] / store.gearFinal))
         },
         g_4_change: function () {
             if (this.gear_5_ratio >= this.gear_4_ratio) {
@@ -359,6 +383,12 @@ export default {
                 store.gearRatios[3] = this.gear_3_ratio
             }
             store.gearRatios[4] = this.gear_4_ratio
+            eval("this.gear_0_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[0] / store.gearFinal))
+            eval("this.gear_1_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[1] / store.gearFinal))
+            eval("this.gear_2_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[2] / store.gearFinal))
+            eval("this.gear_3_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[3] / store.gearFinal))
+            eval("this.gear_4_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[4] / store.gearFinal))
+            eval("this.gear_5_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[5] / store.gearFinal))
         },
         g_5_change: function () {
             if (this.gear_4_ratio < this.gear_5_ratio) {
@@ -367,9 +397,21 @@ export default {
                 // Vue.set(store.gearRatios, 4, newValue)
             }
             store.gearRatios[5] = this.gear_5_ratio
+            eval("this.gear_0_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[0] / store.gearFinal))
+            eval("this.gear_1_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[1] / store.gearFinal))
+            eval("this.gear_2_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[2] / store.gearFinal))
+            eval("this.gear_3_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[3] / store.gearFinal))
+            eval("this.gear_4_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[4] / store.gearFinal))
+            eval("this.gear_5_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[5] / store.gearFinal))
         },
         g_final_change: function () {
             store.gearFinal = this.gear_final
+            eval("this.gear_0_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[0] / store.gearFinal))
+            eval("this.gear_1_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[1] / store.gearFinal))
+            eval("this.gear_2_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[2] / store.gearFinal))
+            eval("this.gear_3_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[3] / store.gearFinal))
+            eval("this.gear_4_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[4] / store.gearFinal))
+            eval("this.gear_5_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[5] / store.gearFinal))
         },
         arrowClick: function (e) {
             switch (e[0].split('_')[1]) {
