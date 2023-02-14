@@ -16,9 +16,13 @@
       <h5>Select Car Preset</h5>
       <div class="input-group">
         <select @change="scpChange($event)" class="custom-select">
-          <option selected value="0">Viper fully-upgraded</option>
-          <option value="1">Viper base</option>
-          <option value="2">Fiat OM 50</option>
+          <option
+            v-for="(p, index) in store.carPresets"
+            :value="index"
+            :key="`option-car-preset-${index}`"
+          >
+            {{ p.label }}
+          </option>
         </select>
       </div>
     </div>
