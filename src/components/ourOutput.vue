@@ -393,8 +393,6 @@ h1 {
 }
 
 .shortText {
-  background: lightblue;
-  padding: 0.75rem;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -404,30 +402,21 @@ h1 {
 }
 .shortText > div {
   margin: 0.5rem 1.5rem;
-  background: plum;
+  padding: 0.25rem;
+  background: lightsteelblue;
 }
 
 .shortText > div > div {
-  background: gold;
-  padding: 2px;
   display: flex;
 }
 .shortText > div > div > span:nth-child(1) {
   text-align: right;
   display: inline-block;
   min-width: 170px;
-  background: mediumseagreen;
 }
 .shortText > div > div > span:nth-child(2) {
   text-align: right;
   display: inline-block;
   min-width: 90px;
-  background: slategray;
-}
-.shortText > div > div > span:nth-child(1) div {
-  background: olive;
-}
-.shortText > div > div > span:nth-child(2) div {
-  background: darksalmon;
 }
 </style>
