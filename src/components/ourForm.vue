@@ -232,6 +232,7 @@ export default {
             this.$eventBus.$emit('seChange', event.target.value)
         },
         scpChange (e) {
+          console.log(" to bi vejretno morali pognat ze v starut, da se nastavijo vrednosti")
             this.$eventBus.$emit('scpChange', event.target.value)
             this.cskg = store.carPresets[e.target.value].weightKg
             this.csac = store.carPresets[e.target.value].aeroCx
