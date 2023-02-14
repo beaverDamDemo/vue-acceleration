@@ -2,13 +2,17 @@
   <section class="our-output">
     <div v-if="store.love.length > 0">
       <h1>Results for single gear</h1>
-      <div v-for='(l, index) in store.love' :key="`store-love-${index}`">&nbsp;gear length: {{ l[0]}} km/h,
-        max reached rpm: {{ l[1]}} rpm,
-        max reached speed: {{ l[2]}} km/h,
-        covered distance: {{ l[4]}} m,
-        time needed: {{ l[6] }}&nbsp;</div>
+      <div v-for="(l, index) in store.love" :key="`store-love-${index}`">
+        &nbsp;gear length: {{ l[0] }} km/h, max reached rpm: {{ l[1] }} rpm, max
+        reached speed: {{ l[2] }} km/h, covered distance: {{ l[4] }} m, time
+        needed: {{ l[6] }}&nbsp;
+      </div>
       <div class="detailedTextContainer">
-        <div v-for="(singleRun, index) of store.tanja" :key="`tanja-${index}`" class="detailedText">
+        <div
+          v-for="(singleRun, index) of store.tanja"
+          :key="`tanja-${index}`"
+          class="detailedText"
+        >
           <div class="detailedText">
             <span>speed</span>
             <span>dist.</span>
@@ -16,10 +20,16 @@
             <span>dist. inc.</span>
             <span>rpm</span>
           </div>
-          <div v-for="(entry, innerIndex) of singleRun" :key="`singleRun-${innerIndex}`">
-            <span v-for="(span, innerMostIndex) of entry" :key="`span-${innerMostIndex}`">
+          <div
+            v-for="(entry, innerIndex) of singleRun"
+            :key="`singleRun-${innerIndex}`"
+          >
+            <span
+              v-for="(span, innerMostIndex) of entry"
+              :key="`span-${innerMostIndex}`"
+            >
               <span v-if="innerMostIndex == 3">
-                {{ span | decimalsShortenFilter}}
+                {{ span | decimalsShortenFilter }}
               </span>
               <span v-else>
                 {{ span }}
@@ -31,6 +41,37 @@
     </div>
     <div v-else-if="store.tanja.length > 0">
       <h1>Results for multiple gears</h1>
+      <div class="shortText">
+        <div
+          v-for="(entry, index) of store.resultsFixedMultipleGears"
+          :key="`resultsFixedMultipleGears-${index}`"
+        >
+          <h6>Result n. {{ index }}</h6>
+          <div
+            v-for="(o, innerIndex) in Object.entries(entry)"
+            :key="`object-${innerIndex}`"
+          >
+            <span
+              style="text-align: right; display: inline-block; min-width: 170px"
+              >{{ o[0] }}:
+            </span>
+            <span
+              style="text-align: right; display: inline-block; min-width: 90px"
+            >
+              <span v-if="Array.isArray(o[1])">
+                <div
+                  v-for="(a, innerMostIndex) of o[1]"
+                  :key="`div-array-${innerMostIndex}`"
+                >
+                  {{ a | decimalsShortenFilter }}
+                </div>
+              </span>
+              <span v-else>{{ o[1] }}</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
       <div class="detailedText detailedText-multiple-gears header">
         <span>speed</span>
         <span>dist.</span>
@@ -39,11 +80,17 @@
         <span>rpm</span>
         <span>gear</span>
       </div>
-      <div v-for="(entry, index) of store.tanja[0]" :key="`singleRun-tanja-${index}`"
-        class="detailedText detailedText-multiple-gears main">
-        <span v-for="(span, innerMostIndex) of entry" :key="`span-tanja-${innerMostIndex}`">
+      <div
+        v-for="(entry, index) of store.tanja[0]"
+        :key="`singleRun-tanja-${index}`"
+        class="detailedText detailedText-multiple-gears main"
+      >
+        <span
+          v-for="(span, innerMostIndex) of entry"
+          :key="`span-tanja-${innerMostIndex}`"
+        >
           <span v-if="innerMostIndex == 3">
-            {{ span | decimalsShortenFilter}}
+            {{ span | decimalsShortenFilter }}
           </span>
           <span v-else>
             {{ span }}
@@ -52,7 +99,9 @@
       </div>
     </div>
     <div v-else>
-      <h4><i>Use the <strong>Run</strong> button to populate results.</i></h4>
+      <h4>
+        <i>Use the <strong>Run</strong> button to populate results.</i>
+      </h4>
     </div>
   </section>
 </template>
@@ -336,5 +385,10 @@ h1 {
   background-color: rgb(242, 90, 16);
   color: rgb(102, 20, 200);
   width: 3em;
+}
+
+.shortText {
+  background: lightblue;
+  padding: 0.75rem;
 }
 </style>

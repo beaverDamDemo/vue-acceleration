@@ -2,10 +2,13 @@
   <div id="app">
     <ourForm class="ourForm"></ourForm>
     <div>
-      <input type="checkbox" name="showMyChart" v-model="showMyChart">
+      <input type="checkbox" name="showMyChart" v-model="showMyChart" />
       <label for="showMyChart">show dyno</label>
     </div>
-    <div :class="{ active: false, myChartContainer: true }" v-show="showMyChart">
+    <div
+      :class="{ active: false, myChartContainer: true }"
+      v-show="showMyChart"
+    >
       <canvas id="myChart"></canvas>
     </div>
     <div class="myButContainer">
@@ -37,7 +40,7 @@ export default {
     ourOutput,
   },
   // mixins: [fixedMultipleGears],
-  data () {
+  data() {
     return {
       store: store,
       weightKg: 1184,
@@ -56,23 +59,23 @@ export default {
       selectedEngine: 0,
       selectedCarPreset: 0,
       mode: "oneGear",
-      showMyChart: false
+      showMyChart: false,
     };
   },
-  created () {
+  created() {
     window.dispatchEvent(new Event("myPreloderEvent"));
   },
   methods: {
-    sendData () {
+    sendData() {
       this.$eventBus.$emit("send-data", this.setup);
     },
-    myCSchange (e) {
+    myCSchange(e) {
       this.myChartShow = !this.myChartShow;
     },
-    exportWithSheetJS () {
+    exportWithSheetJS() {
       console.log("not done yet");
     },
-    startButtonClick () {
+    startButtonClick() {
       let tanja = [];
       let love = [];
       var t0 = performance.now();
@@ -163,8 +166,7 @@ export default {
       };
 
       var fixedMultipleGears = () => {
-
-        console.log("starting fixedMultipleGears")
+        console.log("starting fixedMultipleGears");
 
         var acceleration, brakeforce, pushforce, netforce, power;
         var value = 0;
@@ -182,13 +184,9 @@ export default {
         var arrResult = [];
 
 
-
-
+        console.log("take care that the follwoing part works fikne")
         let gearing = store.gearRatios;
 
-
-
-        
         let gearLength = [];
         for (let i = 0; i < gearing.length; i++) {
           gearLength.push(700 / gearing[i] / store.gearFinal);
@@ -260,7 +258,6 @@ export default {
             currentRpm,
           ]);
           // console.log("depaul", currentRpm, Math.round(currentSpeed * 3.6), (currentGearIndex + 1))
-
           // console.log("Pushed fixed multiple gears to nevemkam")
         }
 
@@ -279,6 +276,16 @@ export default {
         );
         var t1 = performance.now();
         console.log("Call took " + (t1 - t0) + " milliseconds.");
+        store.resultsFixedMultipleGears.push({
+          "final speed": Math.round(currentSpeed * 3.6),
+          "gear": currentGearIndex + 1,
+          "rpm": lastRpm,
+          "distance": Math.floor(distance),
+          "exetime ": executionTime / 1000,
+          gearing: gearing,
+          finalDrive: store.gearFinal,
+          computedGearLength: gearLength,
+        });
         return arrResult;
       };
 
@@ -369,9 +376,9 @@ export default {
           let tmp =
             parseFloat(this.finalGearMin) +
             i *
-            parseFloat(
-              (this.finalGearMax - this.finalGearMin) / (this.splits - 1)
-            );
+              parseFloat(
+                (this.finalGearMax - this.finalGearMin) / (this.splits - 1)
+              );
           tanja.push(singleRun(false, 1609, tmp));
         }
         store.tanja = tanja;
@@ -381,9 +388,9 @@ export default {
           let tmp =
             parseFloat(this.finalGearMin) +
             i *
-            parseFloat(
-              (this.finalGearMax - this.finalGearMin) / (this.splits - 1)
-            );
+              parseFloat(
+                (this.finalGearMax - this.finalGearMin) / (this.splits - 1)
+              );
           tanja.push(singleRun(true, Infinity, tmp));
         }
         store.tanja = tanja;
@@ -448,11 +455,11 @@ export default {
           "Call took " + (t1 - t0) + " milliseconds. Total of runs made: ",
           total
         );
-        this.runPerformed += 1
+        this.runPerformed += 1;
       }
-      this.$eventBus.$emit('calculationDone', this.mode)
+      this.$eventBus.$emit("calculationDone", this.mode);
     },
-    drawPowerAndTorqueChart () {
+    drawPowerAndTorqueChart() {
       var rpmLookupTable = [];
       for (
         var currentRpm = 0;
@@ -498,7 +505,7 @@ export default {
       });
     },
   },
-  mounted () {
+  mounted() {
     //  let f= [630, 685, 731, 779, 816, 854, 888, 924, 948, 971, 992, 1012, 1018, 1032, 1054, 1038, 1020, 1002, 992, 980, 958, 880, 800, 720]
     //
     //          for(let i=0; i<f.length; i++) {
@@ -560,7 +567,7 @@ const calculatePower = (
     /* HARDCODED */
     var res =
       store.engines[selectedEngine].powerLookupTable[
-      Math.floor(currentRpm / _that.divRpm)
+        Math.floor(currentRpm / _that.divRpm)
       ];
     IDs[0] = res;
     IDs[1] = Math.round(currentRpm / 50) * 50;

@@ -1,6 +1,7 @@
 export default {
   tanja: [],
   love: [],
+  resultsFixedMultipleGears: [],
   engines: [
     {
       label: 'Viper "700hp"',
