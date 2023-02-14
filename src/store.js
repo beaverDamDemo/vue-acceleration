@@ -111,7 +111,7 @@ export default {
       powerLookupTable: [],
     },
     {
-      label: 'Stock GTS from real-world dyno "450hp"',
+      label: 'Stock GTS from real-world dyno "450hp" (not working if maxRpm not 6000)',
       effectiveMaxHp: "-",
       maxRpm: 5750,
       torqueData: [
