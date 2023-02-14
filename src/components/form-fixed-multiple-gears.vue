@@ -26,7 +26,7 @@
         max="4"
         step="0.02"
         id="customRange_0"
-        v-model="gear_0"
+        v-model="gear_0_ratio"
         :disabled="isDisabled"
       />
       <div
@@ -34,7 +34,7 @@
         :class="{ disabled: gear_0_right_isDisabled }"
         @click="arrowClick(['customRange_0', 'right'])"
       ></div>
-      <span v-text="gear_0"></span>
+      <span v-text="gear_0_ratio"></span>
       <span class="computedSpeed">❓ km/h</span>
     </div>
     <div class="form-group">
@@ -52,7 +52,7 @@
         max="4"
         step="0.02"
         id="customRange_1"
-        v-model="gear_1"
+        v-model="gear_1_ratio"
         :disabled="isDisabled"
       />
       <div
@@ -60,7 +60,7 @@
         :class="{ disabled: gear_1_right_isDisabled }"
         @click="arrowClick(['customRange_1', 'right'])"
       ></div>
-      <span v-text="gear_1"></span>
+      <span v-text="gear_1_ratio"></span>
       <span class="computedSpeed">❓ km/h</span>
     </div>
     <div class="form-group">
@@ -78,7 +78,7 @@
         max="4"
         step="0.02"
         id="customRange_2"
-        v-model="gear_2"
+        v-model="gear_2_ratio"
         :disabled="isDisabled"
       />
       <div
@@ -86,7 +86,7 @@
         :class="{ disabled: gear_2_right_isDisabled }"
         @click="arrowClick(['customRange_2', 'right'])"
       ></div>
-      <span v-text="gear_2"></span>
+      <span v-text="gear_2_ratio"></span>
       <span class="computedSpeed">❓ km/h</span>
     </div>
     <div class="form-group">
@@ -104,7 +104,7 @@
         max="4"
         step="0.02"
         id="customRange_3"
-        v-model="gear_3"
+        v-model="gear_3_ratio"
         :disabled="isDisabled"
       />
       <div
@@ -112,7 +112,7 @@
         :class="{ disabled: gear_3_right_isDisabled }"
         @click="arrowClick(['customRange_3', 'right'])"
       ></div>
-      <span v-text="gear_3"></span>
+      <span v-text="gear_3_ratio"></span>
       <span class="computedSpeed">❓ km/h</span>
     </div>
     <div class="form-group">
@@ -130,7 +130,7 @@
         max="4"
         step="0.02"
         id="customRange_4"
-        v-model="gear_4"
+        v-model="gear_4_ratio"
         :disabled="isDisabled"
       />
       <div
@@ -138,7 +138,7 @@
         :class="{ disabled: gear_4_right_isDisabled }"
         @click="arrowClick(['customRange_4', 'right'])"
       ></div>
-      <span v-text="gear_4"></span>
+      <span v-text="gear_4_ratio"></span>
       <span class="computedSpeed">❓ km/h</span>
     </div>
     <div class="form-group">
@@ -156,7 +156,7 @@
         max="4"
         step="0.02"
         id="customRange_5"
-        v-model="gear_5"
+        v-model="gear_5_ratio"
         :disabled="isDisabled"
       />
       <div
@@ -164,7 +164,7 @@
         :class="{ disabled: gear_5_right_isDisabled }"
         @click="arrowClick(['customRange_5', 'right'])"
       ></div>
-      <span v-text="gear_5"></span>
+      <span v-text="gear_5_ratio"></span>
       <span class="computedSpeed">❓ km/h</span>
     </div>
     <div class="form-group">
@@ -241,22 +241,22 @@ export default {
     },
     data () {
         return {
-            gear_0: undefined,
+            gear_0_ratio: undefined,
             gear_0_left_isDisabled: true,
             gear_0_right_isDisabled: true,
-            gear_1: undefined,
+            gear_1_ratio: undefined,
             gear_1_left_isDisabled: true,
             gear_1_right_isDisabled: true,
-            gear_2: undefined,
+            gear_2_ratio: undefined,
             gear_2_left_isDisabled: true,
             gear_2_right_isDisabled: true,
-            gear_3: undefined,
+            gear_3_ratio: undefined,
             gear_3_left_isDisabled: true,
             gear_3_right_isDisabled: true,
-            gear_4: undefined,
+            gear_4_ratio: undefined,
             gear_4_left_isDisabled: true,
             gear_4_right_isDisabled: true,
-            gear_5: undefined,
+            gear_5_ratio: undefined,
             gear_5_left_isDisabled: true,
             gear_5_right_isDisabled: true,
             gear_final: undefined,
@@ -267,7 +267,7 @@ export default {
         }
     },
     watch: {
-        gear_0: function (val) {
+        gear_0_ratio: function (val) {
             if (val >= 4) {
                 this.gear_0_right_isDisabled = true
             } else if (val <= 0.10) {
@@ -277,23 +277,23 @@ export default {
                 this.gear_0_right_isDisabled = false
             }
         },
-        gear_1: function (val) {
+        gear_1_ratio: function (val) {
             if (val >= 3.98) this.gear_1_isDisabled = true
             else if (val <= 0.10) this.gear_1_isDisabled = true
         },
-        gear_2: function (val) {
+        gear_2_ratio: function (val) {
             if (val >= 3.96) this.gear_2_isDisabled = true
             else if (val <= 0.08) this.gear_2_isDisabled = true
         },
-        gear_3: function (val) {
+        gear_3_ratio: function (val) {
             if (val >= 3.94) this.gear_3_isDisabled = true
             else if (val <= 0.06) this.gear_3_isDisabled = true
         },
-        gear_4: function (val) {
+        gear_4_ratio: function (val) {
             if (val >= 3.92) this.gear_4_isDisabled = true
             else if (val <= 0.04) this.gear_4_isDisabled = true
         },
-        gear_5: function (val) {
+        gear_5_ratio: function (val) {
             if (val >= 3.9) this.gear_5_isDisabled = true
             else if (val <= 0.02) this.gear_5_isDisabled = true
         },
@@ -304,63 +304,63 @@ export default {
     },
     methods: {
         g_0_change: function (event) {
-            if (this.gear_1 >= this.gear_0) {
-                this.gear_0 = this.gear_1 + 0.02
-                store.gearRatios[0] = this.gear_0
+            if (this.gear_1_ratio >= this.gear_0_ratio) {
+                this.gear_0_ratio = this.gear_1_ratio + 0.02
+                store.gearRatios[0] = this.gear_0_ratio
             }
-            store.gearRatios[0] = this.gear_0
+            store.gearRatios[0] = this.gear_0_ratio
         },
         g_1_change: function () {
-            if (this.gear_2 >= this.gear_1) {
-                this.gear_1 = this.gear_2 + 0.02
-                store.gearRatios[1] = this.gear_1
+            if (this.gear_2_ratio >= this.gear_1_ratio) {
+                this.gear_1_ratio = this.gear_2_ratio + 0.02
+                store.gearRatios[1] = this.gear_1_ratio
             }
-            if (this.gear_0 < this.gear_1) {
-                this.gear_0 = this.gear_1 - 0.02
-                store.gearRatios[0] = this.gear_0
+            if (this.gear_0_ratio < this.gear_1_ratio) {
+                this.gear_0_ratio = this.gear_1_ratio - 0.02
+                store.gearRatios[0] = this.gear_0_ratio
             }
-            store.gearRatios[1] = this.gear_1
+            store.gearRatios[1] = this.gear_1_ratio
         },
         g_2_change: function () {
-            if (this.gear_3 >= this.gear_2) {
-                this.gear_2 = this.gear_3 + 0.02
-                store.gearRatios[2] = this.gear_2
+            if (this.gear_3_ratio >= this.gear_2_ratio) {
+                this.gear_2_ratio = this.gear_3_ratio + 0.02
+                store.gearRatios[2] = this.gear_2_ratio
             }
-            if (this.gear_1 < this.gear_2) {
-                this.gear_1 = this.gear_2 - 0.02
-                store.gearRatios[1] = this.gear_1
+            if (this.gear_1_ratio < this.gear_2_ratio) {
+                this.gear_1_ratio = this.gear_2_ratio - 0.02
+                store.gearRatios[1] = this.gear_1_ratio
             }
-            store.gearRatios[2] = this.gear_2
+            store.gearRatios[2] = this.gear_2_ratio
         },
         g_3_change: function () {
-            if (this.gear_4 >= this.gear_3) {
-                this.gear_3 = this.gear_4 + 0.02
-                store.gearRatios[3] = this.gear_3
+            if (this.gear_4_ratio >= this.gear_3_ratio) {
+                this.gear_3_ratio = this.gear_4_ratio + 0.02
+                store.gearRatios[3] = this.gear_3_ratio
             }
-            if (this.gear_2 < this.gear_3) {
-                this.gear_2 = this.gear_3 - 0.02
-                store.gearRatios[2] = this.gear_2
+            if (this.gear_2_ratio < this.gear_3_ratio) {
+                this.gear_2_ratio = this.gear_3_ratio - 0.02
+                store.gearRatios[2] = this.gear_2_ratio
             }
-            store.gearRatios[3] = this.gear_3
+            store.gearRatios[3] = this.gear_3_ratio
         },
         g_4_change: function () {
-            if (this.gear_5 >= this.gear_4) {
-                this.gear_4 = this.gear_5 + 0.02
-                store.gearRatios[4] = this.gear_4
+            if (this.gear_5_ratio >= this.gear_4_ratio) {
+                this.gear_4_ratio = this.gear_5_ratio + 0.02
+                store.gearRatios[4] = this.gear_4_ratio
             }
-            if (this.gear_3 < this.gear_4) {
-                this.gear_3 = this.gear_4 - 0.02
-                store.gearRatios[3] = this.gear_3
+            if (this.gear_3_ratio < this.gear_4_ratio) {
+                this.gear_3_ratio = this.gear_4_ratio - 0.02
+                store.gearRatios[3] = this.gear_3_ratio
             }
-            store.gearRatios[4] = this.gear_4
+            store.gearRatios[4] = this.gear_4_ratio
         },
         g_5_change: function () {
-            if (this.gear_4 < this.gear_5) {
-                this.gear_4 = this.gear_5 - 0.02
-                store.gearRatios[4] = this.gear_4
+            if (this.gear_4_ratio < this.gear_5_ratio) {
+                this.gear_4_ratio = this.gear_5_ratio - 0.02
+                store.gearRatios[4] = this.gear_4_ratio
                 // Vue.set(store.gearRatios, 4, newValue)
             }
-            store.gearRatios[5] = this.gear_5
+            store.gearRatios[5] = this.gear_5_ratio
         },
         g_final_change: function () {
             store.gearFinal = this.gear_final
@@ -369,56 +369,56 @@ export default {
             switch (e[0].split('_')[1]) {
                 case "0":
                     if (e[1] == "left") {
-                        this.gear_0 = parseInt(Math.round(100 * this.gear_0) - 2) / 100
-                        store.gearRatios[0] = this.gear_0
+                        this.gear_0_ratio = parseInt(Math.round(100 * this.gear_0_ratio) - 2) / 100
+                        store.gearRatios[0] = this.gear_0_ratio
                     } else {
-                        this.gear_0 = parseInt(Math.round(100 * this.gear_0) + 2) / 100
-                        store.gearRatios[0] = this.gear_0
+                        this.gear_0_ratio = parseInt(Math.round(100 * this.gear_0_ratio) + 2) / 100
+                        store.gearRatios[0] = this.gear_0_ratio
                     }
                     break;
                 case "1":
                     if (e[1] == "left") {
-                        this.gear_1 = parseInt(Math.round(100 * this.gear_1) - 2) / 100
-                        store.gearRatios[1] = this.gear_1
+                        this.gear_1_ratio = parseInt(Math.round(100 * this.gear_1_ratio) - 2) / 100
+                        store.gearRatios[1] = this.gear_1_ratio
                     } else {
-                        this.gear_1 = parseInt(Math.round(100 * this.gear_1) + 2) / 100
-                        store.gearRatios[1] = this.gear_1
+                        this.gear_1_ratio = parseInt(Math.round(100 * this.gear_1_ratio) + 2) / 100
+                        store.gearRatios[1] = this.gear_1_ratio
                     }
                     break;
                 case "2":
                     if (e[1] == "left") {
-                        this.gear_2 = parseInt(Math.round(100 * this.gear_2) - 2) / 100
-                        store.gearRatios[2] = this.gear_2
+                        this.gear_2_ratio = parseInt(Math.round(100 * this.gear_2_ratio) - 2) / 100
+                        store.gearRatios[2] = this.gear_2_ratio
                     } else {
-                        this.gear_2 = parseInt(Math.round(100 * this.gear_2) + 2) / 100
-                        store.gearRatios[2] = this.gear_2
+                        this.gear_2_ratio = parseInt(Math.round(100 * this.gear_2_ratio) + 2) / 100
+                        store.gearRatios[2] = this.gear_2_ratio
                     }
                     break;
                 case "3":
                     if (e[1] == "left") {
-                        this.gear_3 = parseInt(Math.round(100 * this.gear_3) - 2) / 100
-                        store.gearRatios[3] = this.gear_3
+                        this.gear_3_ratio = parseInt(Math.round(100 * this.gear_3_ratio) - 2) / 100
+                        store.gearRatios[3] = this.gear_3_ratio
                     } else {
-                        this.gear_3 = parseInt(Math.round(100 * this.gear_3) + 2) / 100
-                        store.gearRatios[3] = this.gear_3
+                        this.gear_3_ratio = parseInt(Math.round(100 * this.gear_3_ratio) + 2) / 100
+                        store.gearRatios[3] = this.gear_3_ratio
                     }
                     break;
                 case "4":
                     if (e[1] == "left") {
-                        this.gear_4 = parseInt(Math.round(100 * this.gear_4) - 2) / 100
-                        store.gearRatios[4] = this.gear_4
+                        this.gear_4_ratio = parseInt(Math.round(100 * this.gear_4_ratio) - 2) / 100
+                        store.gearRatios[4] = this.gear_4_ratio
                     } else {
-                        this.gear_4 = parseInt(Math.round(100 * this.gear_4) + 2) / 100
-                        store.gearRatios[4] = this.gear_4
+                        this.gear_4_ratio = parseInt(Math.round(100 * this.gear_4_ratio) + 2) / 100
+                        store.gearRatios[4] = this.gear_4_ratio
                     }
                     break;
                 case "5":
                     if (e[1] == "left") {
-                        this.gear_5 = parseInt(Math.round(100 * this.gear_5) - 2) / 100
-                        store.gearRatios[5] = this.gear_5
+                        this.gear_5_ratio = parseInt(Math.round(100 * this.gear_5_ratio) - 2) / 100
+                        store.gearRatios[5] = this.gear_5_ratio
                     } else {
-                        this.gear_5 = parseInt(Math.round(100 * this.gear_5) + 2) / 100
-                        store.gearRatios[5] = this.gear_5
+                        this.gear_5_ratio = parseInt(Math.round(100 * this.gear_5_ratio) + 2) / 100
+                        store.gearRatios[5] = this.gear_5_ratio
                     }
                     break;
                 case "final":
@@ -435,18 +435,18 @@ export default {
             }
         },
         onSelectGearingPreset (preset) {
-            this.gear_0 = preset.gearRatios[0]
-            store.gearRatios[0] = this.gear_0
-            this.gear_1 = preset.gearRatios[1]
-            store.gearRatios[1] = this.gear_1
-            this.gear_2 = preset.gearRatios[2]
-            store.gearRatios[2] = this.gear_2
-            this.gear_3 = preset.gearRatios[3]
-            store.gearRatios[3] = this.gear_3
-            this.gear_4 = preset.gearRatios[4]
-            store.gearRatios[4] = this.gear_4
-            this.gear_5 = preset.gearRatios[5]
-            store.gearRatios[5] = this.gear_5
+            this.gear_0_ratio = preset.gearRatios[0]
+            store.gearRatios[0] = this.gear_0_ratio
+            this.gear_1_ratio = preset.gearRatios[1]
+            store.gearRatios[1] = this.gear_1_ratio
+            this.gear_2_ratio = preset.gearRatios[2]
+            store.gearRatios[2] = this.gear_2_ratio
+            this.gear_3_ratio = preset.gearRatios[3]
+            store.gearRatios[3] = this.gear_3_ratio
+            this.gear_4_ratio = preset.gearRatios[4]
+            store.gearRatios[4] = this.gear_4_ratio
+            this.gear_5_ratio = preset.gearRatios[5]
+            store.gearRatios[5] = this.gear_5_ratio
         }
     },
 }
