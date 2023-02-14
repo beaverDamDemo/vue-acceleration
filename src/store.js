@@ -204,5 +204,5 @@ export default {
       finalDrive: 3.65,
     },
   ],
-  transmissionConstant: 918,
+  transmissionConstant: 755,
 };
