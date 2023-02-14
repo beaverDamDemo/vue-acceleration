@@ -35,7 +35,7 @@
         @click="arrowClick(['customRange_0', 'right'])"
       ></div>
       <span v-text="gear_0_ratio"></span>
-      <span class="computedSpeed">❓ km/h</span>
+      <span v-text="gear_0_computedSpeed" class="computedSpeed"></span>
     </div>
     <div class="form-group">
       <label for="customRange_1">2nd gear</label>
@@ -61,7 +61,7 @@
         @click="arrowClick(['customRange_1', 'right'])"
       ></div>
       <span v-text="gear_1_ratio"></span>
-      <span class="computedSpeed">❓ km/h</span>
+      <span v-text="gear_1_computedSpeed" class="computedSpeed"></span>
     </div>
     <div class="form-group">
       <label for="customRange_2">3th gear</label>
@@ -87,7 +87,7 @@
         @click="arrowClick(['customRange_2', 'right'])"
       ></div>
       <span v-text="gear_2_ratio"></span>
-      <span class="computedSpeed">❓ km/h</span>
+      <span v-text="gear_2_computedSpeed" class="computedSpeed"></span>
     </div>
     <div class="form-group">
       <label for="customRange_3">4th gear</label>
@@ -113,7 +113,7 @@
         @click="arrowClick(['customRange_3', 'right'])"
       ></div>
       <span v-text="gear_3_ratio"></span>
-      <span class="computedSpeed">❓ km/h</span>
+      <span v-text="gear_3_computedSpeed" class="computedSpeed"></span>
     </div>
     <div class="form-group">
       <label for="customRange_4">5th gear</label>
@@ -139,7 +139,7 @@
         @click="arrowClick(['customRange_4', 'right'])"
       ></div>
       <span v-text="gear_4_ratio"></span>
-      <span class="computedSpeed">❓ km/h</span>
+      <span v-text="gear_4_computedSpeed" class="computedSpeed"></span>
     </div>
     <div class="form-group">
       <label for="customRange_5">6th gear</label>
@@ -165,7 +165,7 @@
         @click="arrowClick(['customRange_5', 'right'])"
       ></div>
       <span v-text="gear_5_ratio"></span>
-      <span class="computedSpeed">❓ km/h</span>
+      <span v-text="gear_5_computedSpeed" class="computedSpeed"></span>
     </div>
     <div class="form-group">
       <label for="customRange_final">final drive</label>
@@ -242,21 +242,27 @@ export default {
     data () {
         return {
             gear_0_ratio: undefined,
+            gear_0_computedSpeed: undefined,
             gear_0_left_isDisabled: true,
             gear_0_right_isDisabled: true,
             gear_1_ratio: undefined,
+            gear_1_computedSpeed: undefined,
             gear_1_left_isDisabled: true,
             gear_1_right_isDisabled: true,
             gear_2_ratio: undefined,
+            gear_2_computedSpeed: undefined,
             gear_2_left_isDisabled: true,
             gear_2_right_isDisabled: true,
             gear_3_ratio: undefined,
+            gear_3_computedSpeed: undefined,
             gear_3_left_isDisabled: true,
             gear_3_right_isDisabled: true,
             gear_4_ratio: undefined,
+            gear_4_computedSpeed: undefined,
             gear_4_left_isDisabled: true,
             gear_4_right_isDisabled: true,
             gear_5_ratio: undefined,
+            gear_5_computedSpeed: undefined,
             gear_5_left_isDisabled: true,
             gear_5_right_isDisabled: true,
             gear_final: undefined,
@@ -447,6 +453,7 @@ export default {
             store.gearRatios[4] = this.gear_4_ratio
             this.gear_5_ratio = preset.gearRatios[5]
             store.gearRatios[5] = this.gear_5_ratio
+            this.gear_final = preset.finalDrive
         }
     },
 }

@@ -184,12 +184,15 @@ export default {
         var arrResult = [];
 
         console.log("take care that the follwoing part works fikne");
+        console.log(
+          "zakaj je tisti 700 hardcodiran? A uposteva tudi obseg kolesa?"
+        );
         let gearing = store.gearRatios;
-        let currentGearing = []
+        let currentGearing = [];
         let gearLength = [];
         for (let i = 0; i < gearing.length; i++) {
           gearLength.push(700 / gearing[i] / store.gearFinal);
-          currentGearing.push(store.gearRatios[i])
+          currentGearing.push(store.gearRatios[i]);
         }
         let maxRpm = 5700;
         let lastRpm = 0;
@@ -276,6 +279,7 @@ export default {
         );
         var t1 = performance.now();
         console.log("Call took " + (t1 - t0) + " milliseconds.");
+
         store.resultsFixedMultipleGears.push({
           "final speed": Math.round(currentSpeed * 3.6) + " km/h",
           gear: currentGearIndex + 1,
@@ -286,6 +290,7 @@ export default {
           finalDrive: store.gearFinal,
           computedGearLength: gearLength,
         });
+
         return arrResult;
       };
 
