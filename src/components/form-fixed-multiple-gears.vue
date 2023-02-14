@@ -3,7 +3,8 @@
     <h5>Gear ratios</h5>
     <div class="preset-container">
       <button
-        class="preset"
+        class="preset btn btn-secondary"
+        type="button"
         v-for="preset of store.gearingPresets"
         :key="`preset-${preset.name}`"
         @click="onSelectGearingPreset(preset)"
@@ -496,15 +497,12 @@ export default {
 .form-fixed-multiple-gears .preset-container .preset {
   padding: 2px 4px;
   width: 110px;
-  border: 1px solid rgb(184, 35, 126);
   border-radius: 6px;
   font-size: 0.75em;
   margin: 0 3px;
-  background: #e0e0e0;
 }
 
 .form-fixed-multiple-gears .preset-container .preset:hover {
-  background: #fff;
   cursor: pointer;
 }
 
@@ -513,13 +511,19 @@ export default {
   display: flex;
 }
 .form-fixed-multiple-gears .form-group span {
-  background: lawngreen;
   min-width: 3rem;
 }
 .form-fixed-multiple-gears .form-group span.computedSpeed {
-  background: darkorange;
   text-align: right;
   min-width: 7rem;
+}
+.form-fixed-multiple-gears .form-group span.computedSpeed::after {
+  content: " km/h";
+}
+.form-fixed-multiple-gears
+  .form-group:nth-of-type(8)
+  span.computedSpeed::after {
+  content: "";
 }
 
 .form-fixed-multiple-gears .form-group h5 {

@@ -161,6 +161,13 @@ export default {
       rollingRes: 0.0125,
       maximumAccG: 0.775,
     },
+    {
+      label: "Fiat OM 50",
+      weightKg: 4900,
+      aeroCx: 1.5,
+      rollingRes: 0.03,
+      maximumAccG: 0.6,
+    },
   ],
   gearingPresets: [
     {

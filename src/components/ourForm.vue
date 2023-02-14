@@ -18,6 +18,7 @@
         <select @change="scpChange($event)" class="custom-select">
           <option selected value="0">Viper fully-upgraded</option>
           <option value="1">Viper base</option>
+          <option value="2">Fiat OM 50</option>
         </select>
       </div>
     </div>
