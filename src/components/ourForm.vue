@@ -29,7 +29,7 @@
     <div class="form-group">
       <h5>Car Settings</h5>
       <div class="row">
-        <label class="col col-sm-6" for="">Weight KG</label>
+        <label class="col col-sm-6" for="">Weight KG (WIP)</label>
         <input
           v-model="cskg"
           type="number"
@@ -38,7 +38,7 @@
         />
       </div>
       <div class="row">
-        <label class="col col-sm-6" for="">Aero Cx</label>
+        <label class="col col-sm-6" for="">Aero Cx (WIP)</label>
         <input
           v-model="csac"
           type="number"
@@ -47,7 +47,7 @@
         />
       </div>
       <div class="row">
-        <label class="col col-sm-6" for="">Rolling Res</label>
+        <label class="col col-sm-6" for="">Rolling Res (WIP)</label>
         <input
           v-model="csrr"
           type="number"
@@ -56,7 +56,7 @@
         />
       </div>
       <div class="row">
-        <label class="col col-sm-6" for="">Maximum acc G</label>
+        <label class="col col-sm-6" for="">Maximum acc G (WIP)</label>
         <input
           v-model="csmag"
           type="number"
