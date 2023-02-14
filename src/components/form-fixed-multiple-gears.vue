@@ -454,6 +454,10 @@ export default {
             this.gear_5_ratio = preset.gearRatios[5]
             store.gearRatios[5] = this.gear_5_ratio
             this.gear_final = preset.finalDrive
+
+            for(let i=0; i<preset.gearRatios.length; i++) {
+              eval("this.gear_" + i + "_computedSpeed = " + Math.round(700 / preset.gearRatios[i] / store.gearFinal))
+            }
         }
     },
 }
