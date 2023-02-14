@@ -281,7 +281,7 @@ export default {
           gear: currentGearIndex + 1,
           rpm: lastRpm + " rpm",
           distance: Math.floor(distance) + " m",
-          "exetime ": executionTime / 1000 + " s",
+          exetime: executionTime / 1000 + " s",
           currentGearing: currentGearing,
           finalDrive: store.gearFinal,
           computedGearLength: gearLength,

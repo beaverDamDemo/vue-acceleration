@@ -59,13 +59,8 @@
             v-for="(o, innerIndex) in Object.entries(entry)"
             :key="`object-${innerIndex}`"
           >
-            <span
-              style="text-align: right; display: inline-block; min-width: 170px"
-              >{{ o[0] }}:
-            </span>
-            <span
-              style="text-align: right; display: inline-block; min-width: 90px"
-            >
+            <span>{{ o[0] }}: </span>
+            <span>
               <span v-if="Array.isArray(o[1])">
                 <div
                   v-for="(a, innerMostIndex) of o[1]"
@@ -409,5 +404,30 @@ h1 {
 }
 .shortText > div {
   margin: 0.5rem 1.5rem;
+  background: plum;
+}
+
+.shortText > div > div {
+  background: gold;
+  padding: 2px;
+  display: flex;
+}
+.shortText > div > div > span:nth-child(1) {
+  text-align: right;
+  display: inline-block;
+  min-width: 170px;
+  background: mediumseagreen;
+}
+.shortText > div > div > span:nth-child(2) {
+  text-align: right;
+  display: inline-block;
+  min-width: 90px;
+  background: slategray;
+}
+.shortText > div > div > span:nth-child(1) div {
+  background: olive;
+}
+.shortText > div > div > span:nth-child(2) div {
+  background: darksalmon;
 }
 </style>
