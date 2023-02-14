@@ -46,7 +46,15 @@
           v-for="(entry, index) of store.resultsFixedMultipleGears"
           :key="`resultsFixedMultipleGears-${index}`"
         >
-          <h5>Result n. {{ index }}</h5>
+          <h5 style="display: flex">
+            <span>Result n. {{ index }}</span>
+            <span style="flex-grow: 1"></span>
+            <span
+              style="font-size: 0.625em; text-align: right; cursor: pointer"
+            >
+              <button @click="deleteResult(index)">❌</button>
+            </span>
+          </h5>
           <div
             v-for="(o, innerIndex) in Object.entries(entry)"
             :key="`object-${innerIndex}`"
@@ -264,6 +272,9 @@ export default {
           results[tanjaLevel][n] += 1;
         }
       })
+    },
+    deleteResult(index) {
+      this.store.resultsFixedMultipleGears.splice(index, 1)
     }
   }
 }
