@@ -166,7 +166,7 @@ export default {
     {
       name: "Default",
       gearRatios: [2.66, 1.78, 1.3, 1.0, 0.74, 0.5],
-      finalDrive: 4,
+      finalDrive: 3.07,
     },
     {
       name: "VR 700 Dayton",
@@ -174,9 +174,9 @@ export default {
       finalDrive: 2.64,
     },
     {
-      name: "VR 700 Castlegreen",
-      gearRatios: [1.8, 1.3, 1.0, 0.82, 0.74, 0.68],
-      finalDrive: 4.2,
+      name: "VR 700 Sunset Mesa",
+      gearRatios: [1.88, 1.4, 1.1, 0.96, 0.86, 0.78],
+      finalDrive: 3.1,
     },
     {
       name: "Ibiza 1.6 75hp",
@@ -204,5 +204,5 @@ export default {
       finalDrive: 3.65,
     },
   ],
-  transmissionConstant: 850,
+  transmissionConstant: 918,
 };
