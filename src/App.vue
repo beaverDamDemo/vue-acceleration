@@ -185,10 +185,11 @@ export default {
 
         console.log("take care that the follwoing part works fikne");
         let gearing = store.gearRatios;
-
+        let currentGearing = []
         let gearLength = [];
         for (let i = 0; i < gearing.length; i++) {
           gearLength.push(700 / gearing[i] / store.gearFinal);
+          currentGearing.push(store.gearRatios[i])
         }
         let maxRpm = 5700;
         let lastRpm = 0;
@@ -281,7 +282,7 @@ export default {
           rpm: lastRpm + " rpm",
           distance: Math.floor(distance) + " m",
           "exetime ": executionTime / 1000 + " s",
-          gearing: gearing,
+          currentGearing: currentGearing,
           finalDrive: store.gearFinal,
           computedGearLength: gearLength,
         });

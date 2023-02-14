@@ -46,7 +46,7 @@
           v-for="(entry, index) of store.resultsFixedMultipleGears"
           :key="`resultsFixedMultipleGears-${index}`"
         >
-          <h6>Result n. {{ index }}</h6>
+          <h5>Result n. {{ index }}</h5>
           <div
             v-for="(o, innerIndex) in Object.entries(entry)"
             :key="`object-${innerIndex}`"
@@ -392,6 +392,9 @@ h1 {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+}
+.shortText h5 {
+  text-align: center;
 }
 .shortText > div {
   margin: 0.5rem 1.5rem;
