@@ -229,22 +229,10 @@ export default {
         },
         scpChange (e) {
             this.$eventBus.$emit('scpChange', event.target.value)
-            switch (event.target.value) {
-                case '0':
-                    this.cskg = 1184
-                    this.csac = 0.35
-                    this.csrr = 0.015
-                    this.csmag = 0.95
-                    break;
-                case '1':
-                    this.cskg = 1628
-                    this.csac = 0.35
-                    this.csrr = 0.012
-                    this.csmag = 0.825
-                    break;
-                default:
-                    ;
-            }
+            this.cskg = store.carPresets[e.target.value].weightKg
+            this.csac = store.carPresets[e.target.value].aeroCx
+            this.csrr = store.carPresets[e.target.value].rollingRes
+            this.csmag = store.carPresets[e.target.value].maximumAccG
         },
         selectMode (e) {
             if (e == "oneGear" || e == "topspeedRun") {
