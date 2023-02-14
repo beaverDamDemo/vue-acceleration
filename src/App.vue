@@ -364,6 +364,7 @@ export default {
             ((currentSpeed + speedGain / 2) * calculate_interval_ms) / 1000;
         }
 
+        //     this.$eventBus.$emit("finalGearInputChange", this.finalGear)
         return (
           executionTime / 1000,
           Number((currentSpeed * 3.6).toFixed(2)),

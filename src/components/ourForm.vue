@@ -251,6 +251,20 @@ export default {
             }
             this.$eventBus.$emit("selectMode", e)
         },
+    },
+    watch: {
+      cskg: function (val) {
+        console.log("⛳ ~ val", val)
+      },
+      csac: function (val) {
+        console.log("⛳ ~ val", val)
+      },
+      csrr: function (val) {
+        console.log("⛳ ~ val", val)
+      },
+      csmag: function (val) {
+        console.log("⛳ ~ val", val)
+      },
     }
 }
 </script>
