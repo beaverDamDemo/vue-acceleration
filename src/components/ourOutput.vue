@@ -82,25 +82,26 @@
         <span>rpm</span>
         <span>gear</span>
       </div>
-      <div
-        v-for="(entry, index) of store.tanja[0]"
-        :key="`singleRun-tanja-${index}`"
-        class="detailedText detailedText-multiple-gears main"
-      >
-        <span
-          v-for="(span, innerMostIndex) of entry"
-          :key="`span-tanja-${innerMostIndex}`"
+      <div class="detailedText detailedText-multiple-gears main">
+        <div
+          v-for="(entry, index) of store.tanja[0]"
+          :key="`singleRun-tanja-${index}`"
         >
-          <span v-if="innerMostIndex == 3">
-            {{ span | decimalsShortenFilter }}
+          <span
+            v-for="(span, innerMostIndex) of entry"
+            :key="`span-tanja-${innerMostIndex}`"
+          >
+            <span v-if="innerMostIndex == 3">
+              {{ span | decimalsShortenFilter }}
+            </span>
+            <span v-else-if="innerMostIndex == 5">
+              {{ span + 1 }}
+            </span>
+            <span v-else>
+              {{ span }}
+            </span>
           </span>
-          <span v-else-if="innerMostIndex == 5">
-            {{ span + 1 }}
-          </span>
-          <span v-else>
-            {{ span }}
-          </span>
-        </span>
+        </div>
       </div>
     </div>
     <div v-else>
