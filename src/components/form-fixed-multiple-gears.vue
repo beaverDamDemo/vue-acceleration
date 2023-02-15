@@ -176,14 +176,13 @@
         @click="arrowClick(['customRange_final', 'left'])"
       ></div>
       <input
-        @input="g_final_change($event)"
+        @input="onInputGearFinal($event)"
         type="range"
         class="custom-range"
         min="2.54"
         max="4.74"
         step="0.1"
         id="customRange_final"
-        v-model="gearFinal"
         :disabled="isDisabled"
       />
       <div
@@ -191,7 +190,7 @@
         :class="{ disabled: gearFinalRightArrowIsDisabled }"
         @click="arrowClick(['customRange_final', 'right'])"
       ></div>
-      <span v-text="gearFinal"></span>
+      <span v-text="store.gearFinal"></span>
       <span class="computedSpeed"></span>
     </div>
   </section>
@@ -219,7 +218,7 @@ console.log("setting default gear preset 0")
       store.gearRatios[4] = this.gear_4_ratio
       this.gear_5_ratio = store.gearingPresets[0].gearRatios[5]
       store.gearRatios[5] = this.gear_5_ratio
-      this.gearFinal = store.gearingPresets[0].finalDrive
+      // this.gearFinal = store.gearingPresets[0].finalDrive
       store.gearFinal = store.gearingPresets[0].finalDrive
 
       this.$eventBus.$on('selectMode', (e) => {
@@ -258,7 +257,6 @@ console.log("setting default gear preset 0")
             }
         })
       this.$eventBus.$on('selectEngineChange', (e) => {
-          console.log("this.sele cted engine " , store.engines[store.selectedEngine].maxRpm)
             // for(let i=0; i<preset.gearRatios.length; i++) {
             //   eval("this.gear_" + i + "_computedSpeed = " + Math.round(store.transmissionConstant / preset.gearRatios[i] / preset.finalDrive))
             // }
@@ -268,13 +266,6 @@ console.log("setting default gear preset 0")
             eval("this.gear_3_computedSpeed = " + Math.round(store.transmissionConstant * store.engines[store.selectedEngine].maxRpm / store.gearRatios[3] / store.gearFinal))
             eval("this.gear_4_computedSpeed = " + Math.round(store.transmissionConstant * store.engines[store.selectedEngine].maxRpm / store.gearRatios[4] / store.gearFinal))
             eval("this.gear_5_computedSpeed = " + Math.round(store.transmissionConstant * store.engines[store.selectedEngine].maxRpm / store.gearRatios[5] / store.gearFinal))
-
-
-            // this.gear_1_computedSpeed = Math.round(store.transmissionConstant * store.engines[store.selectedEngine].maxRpm / store.gearRatios[0] / store.gearFinal)
-            console.log("⛳ ~ store.gearFinal", store.gearFinal)
-            console.log("⛳ ~ store.gearRatios[0]", store.gearRatios[0])
-            console.log("⛳ ~ store.engines[store.selectedEngine].maxRpm", store.engines[store.selectedEngine].maxRpm)
-            console.log("⛳ ~ store.transmissionConstant", store.transmissionConstant)
         })
     },
 
@@ -304,7 +295,7 @@ console.log("setting default gear preset 0")
             gear_5_computedSpeed: undefined,
             gear_5_left_isDisabled: true,
             gear_5_right_isDisabled: true,
-            gearFinal: undefined,
+            // gearFinal: undefined,
             gearFinalLeftArrowIsDisabled: true,
             gearFinalRightArrowIsDisabled: true,
             isDisabled: true,
@@ -341,10 +332,6 @@ console.log("setting default gear preset 0")
         gear_5_ratio: function (val) {
             if (val >= 3.9) this.gear_5_isDisabled = true
             else if (val <= 0.02) this.gear_5_isDisabled = true
-        },
-        gearFinal: function (val) {
-            if (val >= 4) this.gear_final_isDisabled = true
-            else if (val <= 2.54) this.gear_final_isDisabled = true
         },
     },
     methods: {
@@ -418,14 +405,14 @@ console.log("setting default gear preset 0")
             eval("this.gear_4_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[4] / store.gearFinal))
             eval("this.gear_5_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[5] / store.gearFinal))
         },
-        g_final_change: function () {
-            store.gearFinal = this.gearFinal
-            eval("this.gear_0_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[0] / store.gearFinal))
-            eval("this.gear_1_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[1] / store.gearFinal))
-            eval("this.gear_2_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[2] / store.gearFinal))
-            eval("this.gear_3_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[3] / store.gearFinal))
-            eval("this.gear_4_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[4] / store.gearFinal))
-            eval("this.gear_5_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[5] / store.gearFinal))
+        onInputGearFinal: function (e) {
+          store.gearFinal = e.target.value
+          eval("this.gear_0_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[0] / store.gearFinal))
+          eval("this.gear_1_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[1] / store.gearFinal))
+          eval("this.gear_2_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[2] / store.gearFinal))
+          eval("this.gear_3_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[3] / store.gearFinal))
+          eval("this.gear_4_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[4] / store.gearFinal))
+          eval("this.gear_5_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[5] / store.gearFinal))
         },
         arrowClick: function (e) {
             switch (e[0].split('_')[1]) {
@@ -485,11 +472,9 @@ console.log("setting default gear preset 0")
                     break;
                 case "final":
                     if (e[1] == "left") {
-                        this.gearFinal = parseInt(Math.round(100 * this.gearFinal) - 10) / 100
-                        store.gearFinal = this.gearFinal
+                      store.gearFinal = parseInt(Math.round(100 * store.gearFinal) - 10) / 100
                     } else {
-                        this.gearFinal = parseInt(Math.round(100 * this.gearFinal) + 10) / 100
-                        store.gearFinal = this.gearFinal
+                      store.gearFinal = parseInt(Math.round(100 *store.gearFinal) + 10) / 100
                     }
                     break;
                 default:
