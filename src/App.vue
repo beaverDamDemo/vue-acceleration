@@ -187,6 +187,7 @@ export default {
         let threshold = -1;
         var currentSpeed = 0;
         var arrResult = [];
+        var step_count = 0;
 
         console.log("take care that the follwoing part works fikne");
         console.log(
@@ -556,12 +557,13 @@ export default {
       this.splits = e;
     });
     this.$eventBus.$on("selectEngineChange", (e) => {
+      console.log("⛳ ~ e", e);
       this.selectedEngine = e;
       this.drawPowerAndTorqueChart();
     });
     this.$eventBus.$on("selectCarPresetChange", (e) => {
       this.selectedCarPreset = e;
-      this.store.selectedCarPreset = e
+      this.store.selectedCarPreset = e;
       this.store.weightKg = store.carPresets[e].weightKg;
       this.store.aeroCx = store.carPresets[e].aeroCx;
       this.store.rollingRes = store.carPresets[e].rollingRes;
