@@ -75,9 +75,6 @@
         </div>
       </div>
       <div class="detailedText detailedText-multiple-gears header">
-        <h4>rendering this is kinda slow ⚠️</h4>
-      </div>
-      <div class="detailedText detailedText-multiple-gears header">
         <span>speed</span>
         <span>dist.</span>
         <span>time</span>
@@ -96,6 +93,9 @@
         >
           <span v-if="innerMostIndex == 3">
             {{ span | decimalsShortenFilter }}
+          </span>
+          <span v-else-if="innerMostIndex == 5">
+            {{ span + 1 }}
           </span>
           <span v-else>
             {{ span }}
