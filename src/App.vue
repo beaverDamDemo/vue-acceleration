@@ -23,7 +23,10 @@
         @click="startButtonClick"
         type="button"
         class="btn btn-success"
-        :disabled="!store.selectedEngine || !store.selectedCarPreset"
+        :disabled="
+          store.selectedEngine == undefined ||
+          store.selectedCarPreset == undefined
+        "
       >
         Run
       </button>
@@ -63,8 +66,6 @@ export default {
       splits: 5,
       results: [],
       myChartShow: false,
-      selectedEngine: 0,
-      selectedCarPreset: undefined,
       mode: "oneGear",
       showMyChart: false,
     };
@@ -136,7 +137,7 @@ export default {
             executionTime,
             this,
             gearLength,
-            this.selectedEngine
+            store.selectedEngine
           );
           power = cp[0];
           currentRpm = cp[1];
@@ -254,7 +255,7 @@ export default {
             executionTime,
             this,
             gearLength[currentGearIndex],
-            this.selectedEngine
+            store.selectedEngine
           );
           power = cp[0];
           currentRpm = cp[1];
@@ -376,7 +377,7 @@ export default {
             executionTime,
             this,
             gearLength[currentGearIndex],
-            this.selectedEngine
+            store.selectedEngine
           );
           power = cp[0];
           currentRpm = cp[1];
@@ -506,7 +507,7 @@ export default {
       var rpmLookupTable = [];
       for (
         var currentRpm = 0;
-        currentRpm <= store.engines[this.selectedEngine].maxRpm;
+        currentRpm <= store.engines[store.selectedEngine].maxRpm;
         currentRpm += this.divRpm
       ) {
         rpmLookupTable.push(currentRpm);
@@ -522,13 +523,13 @@ export default {
           datasets: [
             {
               label: "torque nm",
-              data: store.engines[this.selectedEngine].torqueLookupTable,
+              data: store.engines[store.selectedEngine].torqueLookupTable,
               backgroundColor: ["rgba(54, 162, 235, 0.2)"],
               borderWidth: 1,
             },
             {
               label: "power hp",
-              data: store.engines[this.selectedEngine].powerLookupTable,
+              data: store.engines[store.selectedEngine].powerLookupTable,
               backgroundColor: ["rgba(127, 127, 127, 1)"],
               borderWidth: 1,
             },
@@ -549,13 +550,8 @@ export default {
     },
   },
   mounted() {
-
-    console.log("⛳ ~ store.selectedEngine", store.selectedEngine)
-    console.log("⛳ ~ store.store.selectedCarPreset", store.selectedCarPreset)
-
-
-
-
+    store.selectedEngine = 0;
+    store.selectedCarPreset = 0;
     //  let f= [630, 685, 731, 779, 816, 854, 888, 924, 948, 971, 992, 1012, 1018, 1032, 1054, 1038, 1020, 1002, 992, 980, 958, 880, 800, 720]
     //
     //          for(let i=0; i<f.length; i++) {
@@ -577,16 +573,15 @@ export default {
     });
     this.$eventBus.$on("selectEngineChange", (e) => {
       console.log("⛳ ~ e", e);
-      this.selectedEngine = e;
+      store.selectedEngine = e;
       this.drawPowerAndTorqueChart();
     });
     this.$eventBus.$on("selectCarPresetChange", (e) => {
-      this.selectedCarPreset = e;
-      this.store.selectedCarPreset = e;
-      this.store.weightKg = store.carPresets[e].weightKg;
-      this.store.aeroCx = store.carPresets[e].aeroCx;
-      this.store.rollingRes = store.carPresets[e].rollingRes;
-      this.store.maximumAccG = store.carPresets[e].maximumAccG;
+      store.selectedCarPreset = e;
+      store.weightKg = store.carPresets[e].weightKg;
+      store.aeroCx = store.carPresets[e].aeroCx;
+      store.rollingRes = store.carPresets[e].rollingRes;
+      store.maximumAccG = store.carPresets[e].maximumAccG;
     });
     this.$eventBus.$on("selectMode", (e) => {
       this.mode = e;
