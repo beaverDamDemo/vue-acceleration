@@ -239,6 +239,27 @@ export default {
         })
 
         this.gear_final = store.gearFinal
+
+
+        this.$eventBus.$on('selectEngineChange', (e) => {
+          console.log("this.sele cted engine " , store.engines[store.selectedEngine].maxRpm)
+            // for(let i=0; i<preset.gearRatios.length; i++) {
+            //   eval("this.gear_" + i + "_computedSpeed = " + Math.round(store.transmissionConstant / preset.gearRatios[i] / preset.finalDrive))
+            // }
+            eval("this.gear_0_computedSpeed = " + Math.round(store.transmissionConstant * store.engines[store.selectedEngine].maxRpm / store.gearRatios[0] / store.gearFinal))
+            eval("this.gear_1_computedSpeed = " + Math.round(store.transmissionConstant * store.engines[store.selectedEngine].maxRpm / store.gearRatios[1] / store.gearFinal))
+            eval("this.gear_2_computedSpeed = " + Math.round(store.transmissionConstant * store.engines[store.selectedEngine].maxRpm / store.gearRatios[2] / store.gearFinal))
+            eval("this.gear_3_computedSpeed = " + Math.round(store.transmissionConstant * store.engines[store.selectedEngine].maxRpm / store.gearRatios[3] / store.gearFinal))
+            eval("this.gear_4_computedSpeed = " + Math.round(store.transmissionConstant * store.engines[store.selectedEngine].maxRpm / store.gearRatios[4] / store.gearFinal))
+            eval("this.gear_5_computedSpeed = " + Math.round(store.transmissionConstant * store.engines[store.selectedEngine].maxRpm / store.gearRatios[5] / store.gearFinal))
+
+
+            // this.gear_1_computedSpeed = Math.round(store.transmissionConstant * store.engines[store.selectedEngine].maxRpm / store.gearRatios[0] / store.gearFinal)
+            console.log("⛳ ~ store.gearFinal", store.gearFinal)
+            console.log("⛳ ~ store.gearRatios[0]", store.gearRatios[0])
+            console.log("⛳ ~ store.engines[store.selectedEngine].maxRpm", store.engines[store.selectedEngine].maxRpm)
+            console.log("⛳ ~ store.transmissionConstant", store.transmissionConstant)
+        })
     },
     data () {
         return {
@@ -477,11 +498,11 @@ export default {
             this.gear_final = preset.finalDrive
             store.gearFinal = preset.finalDrive
 
-            for(let i=0; i<preset.gearRatios.length; i++) {
-              eval("this.gear_" + i + "_computedSpeed = " + Math.round(store.transmissionConstant / preset.gearRatios[i] / preset.finalDrive))
-            }
+            // for(let i=0; i<preset.gearRatios.length; i++) {
+            //   eval("this.gear_" + i + "_computedSpeed = " + Math.round(store.transmissionConstant / preset.gearRatios[i] / preset.finalDrive))
+            // }
+            this.$eventBus.$emit('selectEngineChange')
 
-            
         }
     },
 }

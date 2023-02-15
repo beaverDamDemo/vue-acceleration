@@ -12,7 +12,12 @@
       <canvas id="myChart"></canvas>
     </div>
     <div class="myButContainer">
-      <button @click="startButtonClick" type="button" class="btn btn-success">
+      <button
+        @click="startButtonClick"
+        type="button"
+        class="btn btn-success"
+        :disabled="!store.selectedEngine"
+      >
         Run
       </button>
       <button @click="exportWithSheetJS" class="btn btn-primary" disabled>
@@ -162,21 +167,21 @@ export default {
 
       var fixedMultipleGears = () => {
         console.log("starting fixedMultipleGears");
-
         console.log("this.store.weightKg,: ", this.store.weightKg);
         console.log("this.store.aeroCx,: ", this.store.aeroCx);
         console.log("this.store.rollingRes,: ", this.store.rollingRes);
         console.log("this.store.maximumAccG: ", this.store.maximumAccG);
 
+        console.log(
+          "this. sotre selected engine: ",
+          this.store.engines[this.store.selectedEngine].shiftRpm
+        );
+
         var acceleration, brakeforce, pushforce, netforce, power;
-        var value = 0;
         var calculate_interval_ms = 10; //tested 10
         var distance = 0;
         var executionTime = 0;
         var speedGain = 1.0;
-        var step_count = 0;
-        var b = false;
-        var c = false;
         var interval = false;
         var currentRpm;
         let threshold = -1;
@@ -190,18 +195,22 @@ export default {
         let gearing = store.gearRatios;
         let currentGearing = [];
         let gearLength = [];
+
         for (let i = 0; i < gearing.length; i++) {
           gearLength.push(
-            store.transmissionConstant / gearing[i] / store.gearFinal
+            (store.transmissionConstant *
+              this.store.engines[this.store.selectedEngine].maxRpm) /
+              gearing[i] /
+              store.gearFinal
           );
           currentGearing.push(store.gearRatios[i]);
         }
-        let maxRpm = 5700;
+
         let lastRpm = 0;
         let currentGearIndex = 0;
-        // let gearLength = [66,108,147,187,230,320]
+
         console.log(
-          "%cContinue work here, gear changes are not seamless",
+          "%cContinue work here, gear changes are not very good",
           "background: sienna; font-weight: bold;"
         );
 
@@ -238,7 +247,11 @@ export default {
           currentRpm = cp[1];
           lastRpm = currentRpm;
 
-          if (currentRpm > 6000 && currentGearIndex + 1 < gearLength.length)
+          if (
+            currentRpm >
+              this.store.engines[this.store.selectedEngine].shiftRpm &&
+            currentGearIndex + 1 < gearLength.length
+          )
             currentGearIndex++;
 
           acceleration = acceleration_calc(
@@ -261,6 +274,7 @@ export default {
             executionTime / 1000,
             power,
             currentRpm,
+            currentGearIndex,
           ]);
           // console.log("depaul", currentRpm, Math.round(currentSpeed * 3.6), (currentGearIndex + 1))
           // console.log("Pushed fixed multiple gears to nevemkam")
@@ -541,11 +555,11 @@ export default {
     this.$eventBus.$on("splitsChange", (e) => {
       this.splits = e;
     });
-    this.$eventBus.$on("seChange", (e) => {
+    this.$eventBus.$on("selectEngineChange", (e) => {
       this.selectedEngine = e;
       this.drawPowerAndTorqueChart();
     });
-    this.$eventBus.$on("scpChange", (e) => {
+    this.$eventBus.$on("selectCarPresetChange", (e) => {
       this.selectedCarPreset = e;
       this.store.weightKg = store.carPresets[e].weightKg;
       this.store.aeroCx = store.carPresets[e].aeroCx;
@@ -598,8 +612,8 @@ html {
 }
 
 #app {
-  background: rgb(109, 161, 174);
-  color: rgb(184, 35, 126);
+  background-color: rgb(30, 59, 52);
+  color: rgb(255, 140, 139);
   font-family: Museo;
   padding: 10px;
 }

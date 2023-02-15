@@ -7,6 +7,7 @@ export default {
       label: 'Viper "700hp"',
       effectiveMaxHp: "-",
       maxRpm: 6000,
+      shiftRpm: 5700,
       torqueData: [
         621,
         675,
@@ -40,6 +41,7 @@ export default {
       label: 'Fat torque "675hp"',
       effectiveMaxHp: "-",
       maxRpm: 6000,
+      shiftRpm: 5450,
       torqueData: [
         731,
         779,
@@ -73,6 +75,7 @@ export default {
       label: 'Flat torque "734hp"',
       effectiveMaxHp: "-",
       maxRpm: 6000,
+      shiftRpm: 6000,
       torqueData: [860, 860],
       torqueLookupTable: [],
       powerLookupTable: [],
@@ -81,6 +84,7 @@ export default {
       label: 'Peaky torque "748hp"',
       effectiveMaxHp: "-",
       maxRpm: 6000,
+      shiftRpm: 6000,
       torqueData: [
         503,
         559,
@@ -114,6 +118,7 @@ export default {
       label: 'Stock GTS from real-world dyno "450hp" (not working if maxRpm not 6000)',
       effectiveMaxHp: "-",
       maxRpm: 5750,
+      shiftRpm: 5600,
       torqueData: [
         476,
         476,
@@ -150,6 +155,7 @@ export default {
   aeroCx: undefined,
   rollingRes: undefined,
   maximumAccG: undefined,
+  selectedEngine: undefined,
   carPresets: [
     {
       label: "Viper fully-upgraded",
@@ -215,5 +221,5 @@ export default {
       finalDrive: 3.65,
     },
   ],
-  transmissionConstant: 755,
+  transmissionConstant: 0.1258,
 };

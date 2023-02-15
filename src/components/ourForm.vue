@@ -3,7 +3,7 @@
     <div class="form-group">
       <h5>Select Engine</h5>
       <div class="input-group mb-4">
-        <select @change="seChange($event)" class="custom-select">
+        <select @change="selectEngineChange($event)" class="custom-select">
           <option
             v-for="(e, index) in store.engines"
             :value="index"
@@ -15,7 +15,7 @@
       </div>
       <h5>Select Car Preset</h5>
       <div class="input-group">
-        <select @change="scpChange($event)" class="custom-select">
+        <select @change="selectCarPresetChange($event)" class="custom-select">
           <option
             v-for="(p, index) in store.carPresets"
             :value="index"
@@ -202,7 +202,8 @@ export default {
         console.log("⚛ ~ Vue.version", Vue.version);
 
         console.log("setting default to zero ")
-        this.scpChange(0)
+        this.selectCarPresetChange(0)
+        this.selectEngineChange(0)
     },
 
     methods: {
@@ -218,16 +219,26 @@ export default {
         splitsChange (e) {
             this.$eventBus.$emit("splitsChange", this.splits)
         },
-        seChange (e) {
-            this.selectedEngine = event.target.value
+        selectEngineChange (e) {
+          if( typeof(e) == "object") {
+            this.selectedEngine = e.target.value
+            this.store.selectedEngine = e.target.value
             if (store.engines[this.selectedEngine].powerLookupTable.length == 0) {
                 this.fillTorqueLookupTable(this.selectedEngine)
             }
-            this.$eventBus.$emit('seChange', event.target.value)
+            this.$eventBus.$emit('selectEngineChange', e.target.value)
+          } else if( typeof(e) == "number") {
+            this.selectedEngine = e
+            this.store.selectedEngine = e
+            if (store.engines[this.selectedEngine].powerLookupTable.length == 0) {
+                this.fillTorqueLookupTable(this.selectedEngine)
+            }
+            this.$eventBus.$emit('selectEngineChange', e)
+          }
         },
-        scpChange (e) {
+        selectCarPresetChange (e) {
           if( typeof(e) == "object") {
-            this.$eventBus.$emit('scpChange', e.target.value)
+            this.$eventBus.$emit('selectCarPresetChange', e.target.value)
             this.cskg = store.carPresets[e.target.value].weightKg
             this.csac = store.carPresets[e.target.value].aeroCx
             this.csrr = store.carPresets[e.target.value].rollingRes
@@ -237,7 +248,7 @@ export default {
             this.store.rollingRes = this.csrr
             this.store.maximumAccG = this.csmag
           } else if( typeof(e) == "number") {
-            this.$eventBus.$emit('scpChange', 0)
+            this.$eventBus.$emit('selectCarPresetChange', 0)
             this.cskg = store.carPresets[0].weightKg
             this.csac = store.carPresets[0].aeroCx
             this.csrr = store.carPresets[0].rollingRes
