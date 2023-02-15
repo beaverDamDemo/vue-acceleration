@@ -83,7 +83,7 @@
         <span>gear</span>
       </div>
       <div class="detailedText detailedText-multiple-gears main">
-        <div
+        <!-- <div
           v-for="(entry, index) of store.tanja[0]"
           :key="`singleRun-tanja-${index}`"
         >
@@ -101,7 +101,7 @@
               {{ span }}
             </span>
           </span>
-        </div>
+        </div> -->
       </div>
     </div>
     <div v-else>
