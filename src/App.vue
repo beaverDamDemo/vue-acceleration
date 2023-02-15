@@ -16,7 +16,7 @@
         @click="startButtonClick"
         type="button"
         class="btn btn-success"
-        :disabled="!store.selectedEngine"
+        :disabled="!store.selectedEngine || !store.selectedCarPreset"
       >
         Run
       </button>
@@ -561,6 +561,7 @@ export default {
     });
     this.$eventBus.$on("selectCarPresetChange", (e) => {
       this.selectedCarPreset = e;
+      this.store.selectedCarPreset = e
       this.store.weightKg = store.carPresets[e].weightKg;
       this.store.aeroCx = store.carPresets[e].aeroCx;
       this.store.rollingRes = store.carPresets[e].rollingRes;

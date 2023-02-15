@@ -156,6 +156,7 @@ export default {
   rollingRes: undefined,
   maximumAccG: undefined,
   selectedEngine: undefined,
+  selectedCarPreset: undefined,
   carPresets: [
     {
       label: "Viper fully-upgraded",
