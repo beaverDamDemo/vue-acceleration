@@ -37,6 +37,7 @@
       ></div>
       <span v-text="gear_0_ratio"></span>
       <span v-text="gear_0_computedSpeed" class="computedSpeed"></span>
+      <span>(WIP)</span>
     </div>
     <div class="form-group">
       <label for="customRange_1">2nd gear</label>
