@@ -75,6 +75,9 @@
         </div>
       </div>
       <div class="detailedText detailedText-multiple-gears header">
+        <h4>rendering this is kinda slow ⚠️</h4>
+      </div>
+      <div class="detailedText detailedText-multiple-gears header">
         <span>speed</span>
         <span>dist.</span>
         <span>time</span>
