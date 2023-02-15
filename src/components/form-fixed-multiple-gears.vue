@@ -172,7 +172,7 @@
       <label for="customRange_final">final drive</label>
       <div
         class="arrow arrow-left"
-        :class="{ disabled: gear_final_left_isDisabled }"
+        :class="{ disabled: gearFinalLeftArrowIsDisabled }"
         @click="arrowClick(['customRange_final', 'left'])"
       ></div>
       <input
@@ -183,15 +183,15 @@
         max="4.74"
         step="0.1"
         id="customRange_final"
-        v-model="gear_final"
+        v-model="gearFinal"
         :disabled="isDisabled"
       />
       <div
         class="arrow arrow-right"
-        :class="{ disabled: gear_final_right_isDisabled }"
+        :class="{ disabled: gearFinalRightArrowIsDisabled }"
         @click="arrowClick(['customRange_final', 'right'])"
       ></div>
-      <span v-text="gear_final"></span>
+      <span v-text="gearFinal"></span>
       <span class="computedSpeed"></span>
     </div>
   </section>
@@ -219,7 +219,7 @@ console.log("setting default gear preset 0")
       store.gearRatios[4] = this.gear_4_ratio
       this.gear_5_ratio = store.gearingPresets[0].gearRatios[5]
       store.gearRatios[5] = this.gear_5_ratio
-      this.gear_final = store.gearingPresets[0].finalDrive
+      this.gearFinal = store.gearingPresets[0].finalDrive
       store.gearFinal = store.gearingPresets[0].finalDrive
 
       this.$eventBus.$on('selectMode', (e) => {
@@ -237,8 +237,8 @@ console.log("setting default gear preset 0")
                 this.gear_4_right_isDisabled = true
                 this.gear_5_left_isDisabled = true
                 this.gear_5_right_isDisabled = true
-                this.gear_final_left_isDisabled = true
-                this.gear_final_right_isDisabled = true
+                this.gearFinalLeftArrowIsDisabled = true
+                this.gearFinalRightArrowIsDisabled = true
             } else {
                 this.isDisabled = false
                 this.gear_0_left_isDisabled = false
@@ -253,8 +253,8 @@ console.log("setting default gear preset 0")
                 this.gear_4_right_isDisabled = false
                 this.gear_5_left_isDisabled = false
                 this.gear_5_right_isDisabled = false
-                this.gear_final_left_isDisabled = false
-                this.gear_final_right_isDisabled = false
+                this.gearFinalLeftArrowIsDisabled = false
+                this.gearFinalRightArrowIsDisabled = false
             }
         })
       this.$eventBus.$on('selectEngineChange', (e) => {
@@ -304,9 +304,9 @@ console.log("setting default gear preset 0")
             gear_5_computedSpeed: undefined,
             gear_5_left_isDisabled: true,
             gear_5_right_isDisabled: true,
-            gear_final: undefined,
-            gear_final_left_isDisabled: true,
-            gear_final_right_isDisabled: true,
+            gearFinal: undefined,
+            gearFinalLeftArrowIsDisabled: true,
+            gearFinalRightArrowIsDisabled: true,
             isDisabled: true,
             store: store
         }
@@ -342,7 +342,7 @@ console.log("setting default gear preset 0")
             if (val >= 3.9) this.gear_5_isDisabled = true
             else if (val <= 0.02) this.gear_5_isDisabled = true
         },
-        gear_final: function (val) {
+        gearFinal: function (val) {
             if (val >= 4) this.gear_final_isDisabled = true
             else if (val <= 2.54) this.gear_final_isDisabled = true
         },
@@ -419,7 +419,7 @@ console.log("setting default gear preset 0")
             eval("this.gear_5_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[5] / store.gearFinal))
         },
         g_final_change: function () {
-            store.gearFinal = this.gear_final
+            store.gearFinal = this.gearFinal
             eval("this.gear_0_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[0] / store.gearFinal))
             eval("this.gear_1_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[1] / store.gearFinal))
             eval("this.gear_2_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[2] / store.gearFinal))
@@ -485,11 +485,11 @@ console.log("setting default gear preset 0")
                     break;
                 case "final":
                     if (e[1] == "left") {
-                        this.gear_final = parseInt(Math.round(100 * this.gear_final) - 10) / 100
-                        store.gearFinal = this.gear_final
+                        this.gearFinal = parseInt(Math.round(100 * this.gearFinal) - 10) / 100
+                        store.gearFinal = this.gearFinal
                     } else {
-                        this.gear_final = parseInt(Math.round(100 * this.gear_final) + 10) / 100
-                        store.gearFinal = this.gear_final
+                        this.gearFinal = parseInt(Math.round(100 * this.gearFinal) + 10) / 100
+                        store.gearFinal = this.gearFinal
                     }
                     break;
                 default:
@@ -512,7 +512,7 @@ console.log("setting default gear preset 0")
             store.gearRatios[4] = this.gear_4_ratio
             this.gear_5_ratio = preset.gearRatios[5]
             store.gearRatios[5] = this.gear_5_ratio
-            this.gear_final = preset.finalDrive
+            this.gearFinal = preset.finalDrive
             store.gearFinal = preset.finalDrive
 
             // for(let i=0; i<preset.gearRatios.length; i++) {
