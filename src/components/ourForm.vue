@@ -247,6 +247,7 @@ export default {
             this.store.aeroCx = this.csac
             this.store.rollingRes = this.csrr
             this.store.maximumAccG = this.csmag
+            this.store.selectedCarPreset = e.target.value
           } else if( typeof(e) == "number") {
             this.$eventBus.$emit('selectCarPresetChange', 0)
             this.cskg = store.carPresets[0].weightKg
@@ -257,6 +258,7 @@ export default {
             this.store.aeroCx = this.csac
             this.store.rollingRes = this.csrr
             this.store.maximumAccG = this.csmag
+            this.store.selectedCarPreset = e
           }
         },
 

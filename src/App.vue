@@ -549,6 +549,13 @@ export default {
     },
   },
   mounted() {
+
+    console.log("⛳ ~ store.selectedEngine", store.selectedEngine)
+    console.log("⛳ ~ store.store.selectedCarPreset", store.selectedCarPreset)
+
+
+
+
     //  let f= [630, 685, 731, 779, 816, 854, 888, 924, 948, 971, 992, 1012, 1018, 1032, 1054, 1038, 1020, 1002, 992, 980, 958, 880, 800, 720]
     //
     //          for(let i=0; i<f.length; i++) {
