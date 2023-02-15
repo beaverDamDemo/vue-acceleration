@@ -1,5 +1,11 @@
 <template>
   <div id="app">
+    <button
+      style="position: absolute; right: 20px; top: 10px"
+      @click="onLogStore"
+    >
+      log store
+    </button>
     <ourForm class="ourForm"></ourForm>
     <div>
       <input type="checkbox" name="showMyChart" v-model="showMyChart" />
@@ -66,6 +72,11 @@ export default {
     window.dispatchEvent(new Event("myPreloderEvent"));
   },
   methods: {
+    onLogStore() {
+      Object.entries(this.store).forEach((e) => {
+        console.log(e[0] + ": " + e[1]);
+      });
+    },
     sendData() {
       this.$eventBus.$emit("send-data", this.setup);
     },

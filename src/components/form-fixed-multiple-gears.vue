@@ -202,7 +202,27 @@ export default {
     name: 'form-fixed-multiple-gears',
     props: [],
     mounted () {
-        this.$eventBus.$on('selectMode', (e) => {
+
+console.log("setting default gear preset 0")
+
+
+
+      this.gear_0_ratio = store.gearingPresets[0].gearRatios[0]
+      store.gearRatios[0] = this.gear_0_ratio
+      this.gear_1_ratio = store.gearingPresets[0].gearRatios[1]
+      store.gearRatios[1] = this.gear_1_ratio
+      this.gear_2_ratio = store.gearingPresets[0].gearRatios[2]
+      store.gearRatios[2] = this.gear_2_ratio
+      this.gear_3_ratio = store.gearingPresets[0].gearRatios[3]
+      store.gearRatios[3] = this.gear_3_ratio
+      this.gear_4_ratio = store.gearingPresets[0].gearRatios[4]
+      store.gearRatios[4] = this.gear_4_ratio
+      this.gear_5_ratio = store.gearingPresets[0].gearRatios[5]
+      store.gearRatios[5] = this.gear_5_ratio
+      this.gear_final = store.gearingPresets[0].finalDrive
+      store.gearFinal = store.gearingPresets[0].finalDrive
+
+      this.$eventBus.$on('selectMode', (e) => {
             if (e == "oneGear" || e == "topspeedRun") {
                 this.isDisabled = true
                 this.gear_0_left_isDisabled = true
@@ -237,11 +257,7 @@ export default {
                 this.gear_final_right_isDisabled = false
             }
         })
-
-        this.gear_final = store.gearFinal
-
-
-        this.$eventBus.$on('selectEngineChange', (e) => {
+      this.$eventBus.$on('selectEngineChange', (e) => {
           console.log("this.sele cted engine " , store.engines[store.selectedEngine].maxRpm)
             // for(let i=0; i<preset.gearRatios.length; i++) {
             //   eval("this.gear_" + i + "_computedSpeed = " + Math.round(store.transmissionConstant / preset.gearRatios[i] / preset.finalDrive))
@@ -261,6 +277,7 @@ export default {
             console.log("⛳ ~ store.transmissionConstant", store.transmissionConstant)
         })
     },
+
     data () {
         return {
             gear_0_ratio: undefined,

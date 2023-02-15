@@ -1,4 +1,12 @@
 export default {
+  selectedEngine: undefined,
+  selectedCarPreset: undefined,
+  gearFinal: undefined,
+  weightKg: undefined,
+  aeroCx: undefined,
+  rollingRes: undefined,
+  maximumAccG: undefined,
+  gearRatios: [],
   tanja: [],
   love: [],
   resultsFixedMultipleGears: [],
@@ -115,7 +123,8 @@ export default {
       powerLookupTable: [],
     },
     {
-      label: 'Stock GTS from real-world dyno "450hp" (not working if maxRpm not 6000)',
+      label:
+        'Stock GTS from real-world dyno "450hp" (not working if maxRpm not 6000)',
       effectiveMaxHp: "-",
       maxRpm: 5750,
       shiftRpm: 5600,
@@ -149,14 +158,6 @@ export default {
       powerLookupTable: [],
     },
   ],
-  gearRatios: [],
-  gearFinal: 3.74,
-  weightKg: undefined,
-  aeroCx: undefined,
-  rollingRes: undefined,
-  maximumAccG: undefined,
-  selectedEngine: undefined,
-  selectedCarPreset: undefined,
   carPresets: [
     {
       label: "Viper fully-upgraded",
