@@ -2,6 +2,7 @@
   <div id="app">
     <button
       style="position: absolute; right: 20px; top: 10px"
+      class="btn btn-danger"
       @click="onLogStore"
     >
       log store
