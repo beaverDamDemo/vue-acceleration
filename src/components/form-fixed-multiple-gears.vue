@@ -176,7 +176,6 @@
         @click="arrowClick(['customRange_final', 'left'])"
       ></div>
       <input
-        @input="onInputGearFinal($event)"
         type="range"
         class="custom-range"
         min="2.54"
@@ -184,6 +183,8 @@
         step="0.1"
         id="customRange_final"
         :disabled="isDisabled"
+        @input="onInputGearFinal($event)"
+        v-model="gearFinal"
       />
       <div
         class="arrow arrow-right"
@@ -295,7 +296,7 @@ console.log("setting default gear preset 0")
             gear_5_computedSpeed: undefined,
             gear_5_left_isDisabled: true,
             gear_5_right_isDisabled: true,
-            // gearFinal: undefined,
+            gearFinal: undefined,
             gearFinalLeftArrowIsDisabled: true,
             gearFinalRightArrowIsDisabled: true,
             isDisabled: true,
@@ -333,6 +334,9 @@ console.log("setting default gear preset 0")
             if (val >= 3.9) this.gear_5_isDisabled = true
             else if (val <= 0.02) this.gear_5_isDisabled = true
         },
+        gearFinal: function(val) {
+          console.log("⛳ change on gear final ~ val", val)
+        }
     },
     methods: {
         g_0_change: function (event) {
@@ -405,8 +409,9 @@ console.log("setting default gear preset 0")
             eval("this.gear_4_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[4] / store.gearFinal))
             eval("this.gear_5_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[5] / store.gearFinal))
         },
-        onInputGearFinal: function (e) {
+        onInputGearFinal: function(e) {
           store.gearFinal = e.target.value
+          this.gearFinal = e.target.value
           eval("this.gear_0_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[0] / store.gearFinal))
           eval("this.gear_1_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[1] / store.gearFinal))
           eval("this.gear_2_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[2] / store.gearFinal))
@@ -473,8 +478,10 @@ console.log("setting default gear preset 0")
                 case "final":
                     if (e[1] == "left") {
                       store.gearFinal = parseInt(Math.round(100 * store.gearFinal) - 10) / 100
+                      this.gearFinal = store.gearFinal
                     } else {
                       store.gearFinal = parseInt(Math.round(100 *store.gearFinal) + 10) / 100
+                      this.gearFinal = store.gearFinal
                     }
                     break;
                 default:
