@@ -633,6 +633,7 @@ html {
   color: rgb(255, 140, 139);
   font-family: Museo;
   padding: 10px;
+  min-height: 100vh;
 }
 
 #app .ourForm {
