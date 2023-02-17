@@ -179,16 +179,16 @@ export default {
       };
 
       var fixedMultipleGears = () => {
-        console.log("starting fixedMultipleGears");
-        console.log("this.store.weightKg,: ", this.store.weightKg);
-        console.log("this.store.aeroCx,: ", this.store.aeroCx);
-        console.log("this.store.rollingRes,: ", this.store.rollingRes);
-        console.log("this.store.maximumAccG: ", this.store.maximumAccG);
+        // console.log("starting fixedMultipleGears");
+        // console.log("this.store.weightKg,: ", this.store.weightKg);
+        // console.log("this.store.aeroCx,: ", this.store.aeroCx);
+        // console.log("this.store.rollingRes,: ", this.store.rollingRes);
+        // console.log("this.store.maximumAccG: ", this.store.maximumAccG);
 
-        console.log(
-          "this. sotre selected engine: ",
-          this.store.engines[this.store.selectedEngine].shiftRpm
-        );
+        // console.log(
+        //   "this. sotre selected engine: ",
+        //   this.store.engines[this.store.selectedEngine].shiftRpm
+        // );
 
         var acceleration, brakeforce, pushforce, netforce, power;
         var calculate_interval_ms = 10; //tested 10

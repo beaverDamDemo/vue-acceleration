@@ -125,9 +125,27 @@ export default {
   },
   created () {
     this.$eventBus.$on('calculationDone', (mode) => {
-      console.log("⚛ ~ mode", mode);
-      console.log("⚛ ~ store.tanja", store.tanja);
-      // this.populateTable()
+      console.log("Calculation done ⚛ ~ mode", mode);
+
+      let i=0
+      while(i < this.store.tanja[0].length) {
+
+        // console.log("⚛ ~ this.store.resultsFixedMultipleGears[i]", this.store.tanja[0][i]);
+
+        if( this.store.tanja[0][i][0] >= 100) {
+
+          console.log("⚛ currentSpeed: ", this.store.tanja[0][i][0]);
+          console.log("⚛ distance: ", this.store.tanja[0][i][1]);
+          console.log("⚛ executionTime: ", this.store.tanja[0][i][2]);
+          console.log("⚛ power: ", Math.round(this.store.tanja[0][i][3]));
+          console.log("⚛ currentRpm: ", this.store.tanja[0][i][4]);
+          console.log("⚛ currentGearIndex: ", this.store.tanja[0][i][5]);
+          console.log("⚛ gear: ", this.store.tanja[0][i][5] + 1);
+          break
+        } else {
+          i++
+        }
+      }
     })
   },
   methods: {
