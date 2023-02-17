@@ -37,10 +37,10 @@
         <input v-model="csmag" type="number" step="0.025" class="form-control form-control-sm col col-sm-6" />
       </div>
       <!-- <div class='row'>
-                                                <label class='col col-sm-6' for="">Initial speed km/h</label>
-                                                <input v-model="csin" @change="initialSpeedInputChange" type="number"
-                                                    class="form-control form-control-sm col col-sm-6">
-                                            </div> -->
+                                                                <label class='col col-sm-6' for="">Initial speed km/h</label>
+                                                                <input v-model="csin" @change="initialSpeedInputChange" type="number"
+                                                                    class="form-control form-control-sm col col-sm-6">
+                                                            </div> -->
     </div>
     <div class="form-group container">
       <h5>Choose Test Settings</h5>
@@ -81,8 +81,8 @@
         </div>
       </div>
       <div class="row justify-content-center">
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-          <div class="justify-content-center">
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+          <div class="">
             <div class="form-check form-initial-speed">
               <span for="">Initial speed km/h: </span>
               <input v-model="csin" @change="initialSpeedInputChange" type="number"
@@ -251,38 +251,16 @@ export default {
   justify-content: center;
 }
 
-.our-form .row {
-  /* margin-right: 8px; */
-}
-
-.our-form .form-group {
-  /* width: 600px; */
-}
-
 .our-form .form-group h5 {
   text-align: center;
-  /* margin-bottom: 14px; */
-}
-
-.our-form .form-group label {
-  text-align: right;
-  /* margin-top: 0.5rem; */
 }
 
 .our-form .form-group input:disabled {
   color: darkgray;
 }
 
-.our-form .form-group .form-check {
-  /* margin-left: 196px; */
-}
-
 .our-form .form-group .form-check label {
   margin-top: 0px;
-}
-
-.our-form .form-group .form-check:nth-of-type(4) label {
-  margin-bottom: 8px;
 }
 
 .form-initial-speed {
@@ -291,7 +269,7 @@ export default {
 }
 
 .form-initial-speed input {
-  margin-left: 5px;
-  width: 160px;
+  /* margin-left: 5px; */
+  /* width: 160px; */
 }
 </style>
