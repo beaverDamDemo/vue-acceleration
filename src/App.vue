@@ -170,17 +170,6 @@ export default {
       };
 
       var fixedMultipleGears = () => {
-        // console.log("starting fixedMultipleGears");
-        // console.log("this.store.weightKg,: ", this.store.weightKg);
-        // console.log("this.store.aeroCx,: ", this.store.aeroCx);
-        // console.log("this.store.rollingRes,: ", this.store.rollingRes);
-        // console.log("this.store.maximumAccG: ", this.store.maximumAccG);
-
-        // console.log(
-        //   "this. sotre selected engine: ",
-        //   this.store.engines[this.store.selectedEngine].shiftRpm
-        // );
-
         var acceleration, brakeforce, pushforce, netforce, power;
         var calculate_interval_ms = 10; //tested 10
         var distance = 0;
@@ -191,15 +180,12 @@ export default {
         let threshold = -1;
         var currentSpeed = 0;
         var arrResult = [];
-        var step_count = 0;
-
-        console.log("take care that the follwoing part works fikne");
-        console.log(
-          "zakaj je tisti store transmisison hardcodiran? A uposteva tudi obseg kolesa?"
-        );
         let gearing = store.gearRatios;
         let currentGearing = [];
         let gearLength = [];
+        let lastRpm = 0;
+        let currentGearIndex = 0;
+        let step_count = 0;
 
         for (let i = 0; i < gearing.length; i++) {
           gearLength.push(
@@ -210,14 +196,6 @@ export default {
           );
           currentGearing.push(store.gearRatios[i]);
         }
-
-        let lastRpm = 0;
-        let currentGearIndex = 0;
-
-        console.log(
-          "%cContinue work here, gear changes are not very good",
-          "background: sienna; font-weight: bold;"
-        );
 
         if (executionTime < 300 && currentSpeed < 10.0) {
           //pozor ker currentSpeed je v m/s
@@ -272,7 +250,6 @@ export default {
           distance =
             distance +
             ((currentSpeed + speedGain / 2) * calculate_interval_ms) / 1000;
-          // console.warn('currentSpeed: ', Math.round(currentSpeed * 3.6), 'km/h distance: ', Math.floor(distance), "m, exetime: ", executionTime / 1000 + 's')
           arrResult.push([
             Math.round(currentSpeed * 3.6),
             Math.floor(distance),
@@ -281,8 +258,6 @@ export default {
             currentRpm,
             currentGearIndex,
           ]);
-          // console.log("depaul", currentRpm, Math.round(currentSpeed * 3.6), (currentGearIndex + 1))
-          // console.log("Pushed fixed multiple gears to nevemkam")
         }
 
         // love.push([Number(gearLength).toFixed(0), arrResult[arrResult.length - 1][4], Number((currentSpeed * 3.6).toFixed(2)), 'km/h distance: ', Math.floor(distance), "m, exetime: ", executionTime / 1000 + 's'])
