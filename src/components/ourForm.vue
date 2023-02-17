@@ -37,10 +37,10 @@
         <input v-model="csmag" type="number" step="0.025" class="form-control form-control-sm col col-sm-6" />
       </div>
       <!-- <div class='row'>
-                                                                <label class='col col-sm-6' for="">Initial speed km/h</label>
-                                                                <input v-model="csin" @change="initialSpeedInputChange" type="number"
-                                                                    class="form-control form-control-sm col col-sm-6">
-                                                            </div> -->
+                                                                      <label class='col col-sm-6' for="">Initial speed km/h</label>
+                                                                      <input v-model="csin" @change="initialSpeedInputChange" type="number"
+                                                                          class="form-control form-control-sm col col-sm-6">
+                                                                  </div> -->
     </div>
     <div class="form-group container">
       <h5>Choose Test Settings</h5>
@@ -80,16 +80,10 @@
           </div>
         </div>
       </div>
-      <div class="row justify-content-center">
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-          <div class="">
-            <div class="form-check form-initial-speed">
-              <span for="">Initial speed km/h: </span>
-              <input v-model="csin" @change="initialSpeedInputChange" type="number"
-                class="form-control form-control-sm" />
-            </div>
-          </div>
-        </div>
+      <div class="row">
+        <label class="col col-sm-6" for="">Initial speed km/h:</label>
+        <input v-model="csin" @change="initialSpeedInputChange" type="number"
+          class="form-control form-control-sm col col-sm-6" />
       </div>
     </div>
     <div class="form-group" v-if="myForm_0_isShown">
