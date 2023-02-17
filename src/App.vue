@@ -170,7 +170,7 @@ export default {
       };
 
       var runWithGearShifting = (gearRatios, gearFinal) => {
-        var acceleration, brakeforce, pushforce, netforce, power;
+        var acceleration, brakeforce, pushforce, netforce, inertia, power;
         var calculate_interval_ms = 10; //tested 10
         var distance = 0;
         var executionTime = 0;
@@ -199,6 +199,7 @@ export default {
         if (executionTime < 300 && currentSpeed < 10.0) {
           //pozor ker currentSpeed je v m/s
           speedGain = this.maxg * 0.9; //wheelspin na začetku pospeševanja, prve 3 desetinke
+          console.log("⚛ ~ speedGain m/s", speedGain);
         }
         // while( distance < 1609 && executionTime < 60000 && speedGain > 0.0005)
         while (
@@ -328,18 +329,18 @@ export default {
         store.love = love;
       } else if (this.mode == "allPossibleGears") {
         var t0 = performance.now();
-        // let gear_0 = [3.2, 2.5, 2.0];
-        // let gear_1 = [2.0, 1.6, 1.4];
-        // let gear_2 = [1.7, 1.3];
-        // let gear_3 = [1.0, 0.9, 0.82];
-        // let gear_4 = [0.82, 0.72, 0.68];
-        // let gear_5 = [0.76, 0.7, 0.62, 0.56];
-        let gear_0 = [3.2, 2.5];
-        let gear_1 = [2.0, 1.6];
+        let gear_0 = [3.2, 2.5, 2.0];
+        let gear_1 = [2.0, 1.6, 1.4];
         let gear_2 = [1.7, 1.3];
-        let gear_3 = [1.0, 0.82];
-        let gear_4 = [0.72, 0.68];
-        let gear_5 = [0.62, 0.56];
+        let gear_3 = [1.0, 0.9, 0.82];
+        let gear_4 = [0.82, 0.72, 0.68];
+        let gear_5 = [0.76, 0.7, 0.62, 0.56];
+        // let gear_0 = [3.2, 2.5];
+        // let gear_1 = [2.0, 1.6];
+        // let gear_2 = [1.7, 1.3];
+        // let gear_3 = [1.0, 0.82];
+        // let gear_4 = [0.72, 0.68];
+        // let gear_5 = [0.62, 0.56];
         let total = 0;
 
         for (let i = 0; i < gear_0.length; i++) {
