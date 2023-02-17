@@ -37,15 +37,15 @@
         <input v-model="csmag" type="number" step="0.025" class="form-control form-control-sm col col-sm-6" />
       </div>
       <!-- <div class='row'>
-                      <label class='col col-sm-6' for="">Initial speed km/h</label>
-                      <input v-model="csin" @change="initialSpeedInputChange" type="number"
-                          class="form-control form-control-sm col col-sm-6">
-                  </div> -->
+                                                <label class='col col-sm-6' for="">Initial speed km/h</label>
+                                                <input v-model="csin" @change="initialSpeedInputChange" type="number"
+                                                    class="form-control form-control-sm col col-sm-6">
+                                            </div> -->
     </div>
-    <div class="form-group container" style="background: yellow; color: black;">
+    <div class="form-group container">
       <h5>Choose Test Settings</h5>
-      <div class="row justify-content-center" style="background: gold;">
-        <div style="background: sandybrown;" class="col-lg-3 col-md-4 col-sm-4 col-xs-6">
+      <div class="row justify-content-center">
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
           <div class="justify-content-start text-left">
             <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option0" checked
               @change="selectMode('oneGear')" />
@@ -54,7 +54,7 @@
         </div>
       </div>
       <div class="row justify-content-center">
-        <div style="background: sandybrown;" class="col-lg-3 col-md-4 col-sm-4 col-xs-6">
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
           <div class="justify-content-start text-left">
             <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option1"
               @change="selectMode('topspeedRun')" />
@@ -63,7 +63,7 @@
         </div>
       </div>
       <div class="row justify-content-center">
-        <div style="background: sandybrown;" class="col-lg-3 col-md-4 col-sm-4 col-xs-6">
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
           <div class="justify-content-start text-left">
             <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option2"
               @change="selectMode('fixedMultipleGears')" />
@@ -72,7 +72,7 @@
         </div>
       </div>
       <div class="row justify-content-center">
-        <div style="background: sandybrown;" class="col-lg-3 col-md-4 col-sm-4 col-xs-6">
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
           <div class="justify-content-start text-left">
             <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios4" value="option3"
               @change="selectMode('allPossibleGears')" />
@@ -81,10 +81,13 @@
         </div>
       </div>
       <div class="row justify-content-center">
-        <div style="background: sandybrown;" class="col-lg-3 col-md-4 col-sm-4 col-xs-6">
-          <div class="form-check form-initial-speed">
-            <span for="">Initial speed km/h: </span>
-            <input v-model="csin" @change="initialSpeedInputChange" type="number" class="form-control form-control-sm" />
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          <div class="justify-content-center">
+            <div class="form-check form-initial-speed">
+              <span for="">Initial speed km/h: </span>
+              <input v-model="csin" @change="initialSpeedInputChange" type="number"
+                class="form-control form-control-sm" />
+            </div>
           </div>
         </div>
       </div>
