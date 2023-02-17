@@ -396,28 +396,6 @@ export default {
 }
 </script>
 <style scoped>
-.preset-container {
-  /* margin: 0.75rem 0; */
-}
-
-.form-fixed-multiple-gears .preset-container {
-  /* display: flex;
-  flex-direction: row;
-  justify-content: center; */
-}
-
-.form-fixed-multiple-gears .preset-container .preset {
-  /* padding: 2px 4px;
-  width: 110px;
-  border-radius: 6px;
-  font-size: 0.75em;
-  margin: 0 3px; */
-}
-
-.form-fixed-multiple-gears .preset-container .preset:hover {
-  /* cursor: pointer; */
-}
-
 .form-fixed-multiple-gears .form-group {
   margin-bottom: 0.1rem;
   display: flex;
@@ -477,7 +455,8 @@ export default {
 }
 
 .form-fixed-multiple-gears .form-group .arrow-right {
-  border-left: 14px solid rgb(184, 35, 126);
+  border-left: 14px solid #0069d9;
+
   margin-right: 5px;
 }
 
@@ -486,7 +465,7 @@ export default {
 }
 
 .form-fixed-multiple-gears .form-group .arrow-left {
-  border-right: 14px solid rgb(184, 35, 126);
+  border-right: 14px solid #0069d9;
   margin-left: 5px;
 }
 
