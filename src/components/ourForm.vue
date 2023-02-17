@@ -3,7 +3,7 @@
     <div class="form-group">
       <h5>Select Engine</h5>
       <div class="input-group mb-4">
-        <select @change="selectEngineChange($event)" class="custom-select">
+        <select @change="selectEngineChange($event)" class="custom-select" v-model="selectedEngine">
           <option
             v-for="(e, index) in store.engines"
             :value="index"
@@ -15,7 +15,7 @@
       </div>
       <h5>Select Car Preset</h5>
       <div class="input-group">
-        <select @change="selectCarPresetChange($event)" class="custom-select">
+        <select @change="selectCarPresetChange($event)" class="custom-select" v-model="selectedCarPreset">
           <option
             v-for="(p, index) in store.carPresets"
             :value="index"
@@ -191,6 +191,7 @@ export default {
             csin: 100,
             divRpm: 50,
             selectedEngine: undefined,
+            selectedCarPreset: undefined,
             myForm_0_isShown: true,
             formfixShow: false,
         }
@@ -202,8 +203,8 @@ export default {
         console.log("⚛ ~ Vue.version", Vue.version);
 
         console.log("setting default engine and preset. This is not really working ")
-        this.selectCarPresetChange(0)
-        this.selectEngineChange(0)
+        this.selectEngineChange(4)
+        this.selectCarPresetChange(1)
     },
 
     methods: {
@@ -238,6 +239,7 @@ export default {
         },
         selectCarPresetChange (e) {
           if( typeof(e) == "object") {
+            this.selectedCarPreset = e.target.value
             this.$eventBus.$emit('selectCarPresetChange', e.target.value)
             this.cskg = store.carPresets[e.target.value].weightKg
             this.csac = store.carPresets[e.target.value].aeroCx
@@ -249,6 +251,7 @@ export default {
             this.store.maximumAccG = this.csmag
             this.store.selectedCarPreset = e.target.value
           } else if( typeof(e) == "number") {
+            this.selectedCarPreset = e
             this.$eventBus.$emit('selectCarPresetChange', 0)
             this.cskg = store.carPresets[0].weightKg
             this.csac = store.carPresets[0].aeroCx
