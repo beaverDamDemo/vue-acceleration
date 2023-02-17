@@ -1,40 +1,26 @@
 <template>
   <div id="app">
-    <button
-      style="position: absolute; right: 20px; top: 10px"
-      class="btn btn-warning"
-      @click="onLogStore"
-    >
+    <button style="position: absolute; right: 20px; top: 10px" class="btn btn-warning" @click="onLogStore">
       log store
     </button>
     <ourForm class="ourForm"></ourForm>
-    <div>
+    <div class="row justify-content-center">
       <input type="checkbox" name="showMyChart" v-model="showMyChart" />
-      <label for="showMyChart">show dyno</label>
+      <label for="showMyChart">&nbsp; show dyno</label>
     </div>
-    <div
-      :class="{ active: false, myChartContainer: true }"
-      class="mb-1"
-      v-show="showMyChart"
-    >
+    <div :class="{ active: false, myChartContainer: true }" class="mb-1" v-show="showMyChart">
       <canvas id="myChart"></canvas>
     </div>
     <div class="container">
-      <div class="myButContainer row justify-content-center" >
-        <button
-          @click="startButtonClick"
-          type="button"
-          class="btn btn-success ml-1 mr-1 col-lg-5 col-md-9 col-xs-12 "
+      <div class="myButContainer row justify-content-center">
+        <button @click="startButtonClick" type="button" class="btn btn-success ml-1 mr-1 col-lg-5 col-md-9 col-xs-12 "
           :disabled="
             store.selectedEngine == undefined ||
             store.selectedCarPreset == undefined
-          "
-        >
+          ">
           Run
         </button>
-        <button @click="exportWithSheetJS"
-          class="btn btn-primary ml-1 mr-1 col-xs-12 col-md-9 col-lg-5"
-           disabled>
+        <button @click="exportWithSheetJS" class="btn btn-primary ml-1 mr-1 col-xs-12 col-md-9 col-lg-5" disabled>
           Export with SheetJS (WIP)
         </button>
       </div>
@@ -60,7 +46,7 @@ export default {
     ourOutput,
   },
   // mixins: [fixedMultipleGears],
-  data() {
+  data () {
     return {
       store: store,
       divRpm: 50,
@@ -75,25 +61,25 @@ export default {
       showMyChart: false,
     };
   },
-  created() {
+  created () {
     window.dispatchEvent(new Event("myPreloderEvent"));
   },
   methods: {
-    onLogStore() {
+    onLogStore () {
       Object.entries(this.store).forEach((e) => {
         console.log(e[0] + ": " + e[1]);
       });
     },
-    sendData() {
+    sendData () {
       this.$eventBus.$emit("send-data", this.setup);
     },
-    myCSchange(e) {
+    myCSchange (e) {
       this.myChartShow = !this.myChartShow;
     },
-    exportWithSheetJS() {
+    exportWithSheetJS () {
       console.log("not done yet");
     },
-    startButtonClick() {
+    startButtonClick () {
       let tanja = [];
       let love = [];
       var t0 = performance.now();
@@ -219,8 +205,8 @@ export default {
           gearLength.push(
             (store.transmissionConstant *
               this.store.engines[this.store.selectedEngine].maxRpm) /
-              gearing[i] /
-              store.gearFinal
+            gearing[i] /
+            store.gearFinal
           );
           currentGearing.push(store.gearRatios[i]);
         }
@@ -268,7 +254,7 @@ export default {
 
           if (
             currentRpm >
-              this.store.engines[this.store.selectedEngine].shiftRpm &&
+            this.store.engines[this.store.selectedEngine].shiftRpm &&
             currentGearIndex + 1 < gearLength.length
           )
             currentGearIndex++;
@@ -425,9 +411,9 @@ export default {
           let tmp =
             parseFloat(this.finalGearMin) +
             i *
-              parseFloat(
-                (this.finalGearMax - this.finalGearMin) / (this.splits - 1)
-              );
+            parseFloat(
+              (this.finalGearMax - this.finalGearMin) / (this.splits - 1)
+            );
           tanja.push(singleRun(false, 1609, tmp));
         }
         store.tanja = tanja;
@@ -437,9 +423,9 @@ export default {
           let tmp =
             parseFloat(this.finalGearMin) +
             i *
-              parseFloat(
-                (this.finalGearMax - this.finalGearMin) / (this.splits - 1)
-              );
+            parseFloat(
+              (this.finalGearMax - this.finalGearMin) / (this.splits - 1)
+            );
           tanja.push(singleRun(true, Infinity, tmp));
         }
         store.tanja = tanja;
@@ -508,7 +494,7 @@ export default {
       }
       this.$eventBus.$emit("calculationDone", this.mode);
     },
-    drawPowerAndTorqueChart() {
+    drawPowerAndTorqueChart () {
       var rpmLookupTable = [];
       for (
         var currentRpm = 0;
@@ -554,7 +540,7 @@ export default {
       });
     },
   },
-  mounted() {
+  mounted () {
     this.sendData();
     this.$eventBus.$on("initialSpeedInputChange", (e) => {
       this.initialSpeed = e;
@@ -607,7 +593,7 @@ const calculatePower = (
     /* HARDCODED */
     var res =
       store.engines[selectedEngine].powerLookupTable[
-        Math.floor(currentRpm / _that.divRpm)
+      Math.floor(currentRpm / _that.divRpm)
       ];
     IDs[0] = res;
     IDs[1] = Math.round(currentRpm / 50) * 50;
