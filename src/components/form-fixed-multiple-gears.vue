@@ -479,9 +479,12 @@ export default {
                 default:
                     console.log("Unexpected value")
             }
-            for(let i=0; i<store.gearRatios.length; i++) {
-              eval("this.gear_" + i + "_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[i] / store.gearFinal))
-            }
+            this.gear_0_computedSpeed = Math.round(store.engines[store.selectedEngine].maxRpm * store.transmissionConstant / store.gearRatios[0] / store.gearFinal)
+            this.gear_1_computedSpeed = Math.round(store.engines[store.selectedEngine].maxRpm * store.transmissionConstant / store.gearRatios[1] / store.gearFinal)
+            this.gear_2_computedSpeed = Math.round(store.engines[store.selectedEngine].maxRpm * store.transmissionConstant / store.gearRatios[2] / store.gearFinal)
+            this.gear_3_computedSpeed = Math.round(store.engines[store.selectedEngine].maxRpm * store.transmissionConstant / store.gearRatios[3] / store.gearFinal)
+            this.gear_4_computedSpeed = Math.round(store.engines[store.selectedEngine].maxRpm * store.transmissionConstant / store.gearRatios[4] / store.gearFinal)
+            this.gear_5_computedSpeed = Math.round(store.engines[store.selectedEngine].maxRpm * store.transmissionConstant / store.gearRatios[5] / store.gearFinal)
         },
         onSelectGearingPreset (preset) {
             this.gear_0_ratio = preset.gearRatios[0]
@@ -498,12 +501,6 @@ export default {
             store.gearRatios[5] = this.gear_5_ratio
             this.gearFinal = preset.finalDrive
             store.gearFinal = preset.finalDrive
-
-            // for(let i=0; i<preset.gearRatios.length; i++) {
-            //   eval("this.gear_" + i + "_computedSpeed = " + Math.round(store.transmissionConstant / preset.gearRatios[i] / preset.finalDrive))
-            // }
-            // this.$eventBus.$emit('selectEngineChange')
-
         }
     },
 }
