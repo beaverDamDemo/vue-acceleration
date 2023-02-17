@@ -328,7 +328,6 @@ export default {
             else if (val <= 0.02) this.gear_5_isDisabled = true
         },
         gearFinal: function() {
-          console.log("⛳ change on gear final")
           this.gear_0_computedSpeed = Math.round(store.transmissionConstant * store.engines[store.selectedEngine].maxRpm / store.gearRatios[0] / store.gearFinal)
           this.gear_1_computedSpeed = Math.round(store.transmissionConstant * store.engines[store.selectedEngine].maxRpm / store.gearRatios[1] / store.gearFinal)
           this.gear_2_computedSpeed = Math.round(store.transmissionConstant * store.engines[store.selectedEngine].maxRpm / store.gearRatios[2] / store.gearFinal)
@@ -409,17 +408,8 @@ export default {
             this.gear_5_computedSpeed = Math.round(store.engines[store.selectedEngine].maxRpm * store.transmissionConstant / store.gearRatios[5] / store.gearFinal)
         },
         onInputGearFinal: function(e) {
-          this.gear_0_computedSpeed = 257
-
-          console.log("⛳ onInputGearFinal    ~ val WIP")
-          // store.gearFinal = e.target.value
-          // this.gearFinal = e.target.value
-          // eval("this.gear_0_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[0] / store.gearFinal))
-          // eval("this.gear_1_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[1] / store.gearFinal))
-          // eval("this.gear_2_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[2] / store.gearFinal))
-          // eval("this.gear_3_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[3] / store.gearFinal))
-          // eval("this.gear_4_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[4] / store.gearFinal))
-          // eval("this.gear_5_computedSpeed = " + Math.round(store.transmissionConstant / store.gearRatios[5] / store.gearFinal))
+          store.gearFinal = e.target.value
+          this.gearFinal = e.target.value
         },
         arrowClick: function (e) {
             switch (e[0].split('_')[1]) {
