@@ -410,12 +410,18 @@ export default {
         store.love = love;
       } else if (this.mode == "allPossibleGears") {
         var t0 = performance.now();
-        let gear_0 = [3.2, 2.5, 2.0];
-        let gear_1 = [2.0, 1.6, 1.4];
+        // let gear_0 = [3.2, 2.5, 2.0];
+        // let gear_1 = [2.0, 1.6, 1.4];
+        // let gear_2 = [1.7, 1.3];
+        // let gear_3 = [1.0, 0.9, 0.82];
+        // let gear_4 = [0.82, 0.72, 0.68];
+        // let gear_5 = [0.76, 0.7, 0.62, 0.56];
+        let gear_0 = [3.2, 2.5];
+        let gear_1 = [2.0, 1.6];
         let gear_2 = [1.7, 1.3];
-        let gear_3 = [1.0, 0.9, 0.82];
-        let gear_4 = [0.82, 0.72, 0.68];
-        let gear_5 = [0.76, 0.7, 0.62, 0.56];
+        let gear_3 = [1.0, 0.82];
+        let gear_4 = [0.72, 0.68];
+        let gear_5 = [0.62, 0.56];
         let total = 0;
 
         for (let i = 0; i < gear_0.length; i++) {
@@ -431,31 +437,13 @@ export default {
                             if (gear_4[m] > gear_5[n]) {
                               total++;
 
-                              tanja.push(runWithGearShifting(allPossibleGears(
-                                [
-                                  gear_0[i],
-                                  gear_1[j],
-                                  gear_2[k],
-                                  gear_3[l],
-                                  gear_4[m],
-                                  gear_5[n],
-                                ],
-                                2.999
-                              )));
-
-                              // tanja.push(
-                              //   allPossibleGears(
-                              //     [
-                              //       gear_0[i],
-                              //       gear_1[j],
-                              //       gear_2[k],
-                              //       gear_3[l],
-                              //       gear_4[m],
-                              //       gear_5[n],
-                              //     ],
-                              //     2.99
-                              //   )
-                              // );
+                              const tmp = [gear_0[i],
+                              gear_1[j],
+                              gear_2[k],
+                              gear_3[l],
+                              gear_4[m],
+                              gear_5[n],]
+                              tanja.push(runWithGearShifting(tmp, 2.999));
                             }
                           }
                         }
@@ -471,7 +459,7 @@ export default {
         store.tanja = tanja;
         store.love = love;
 
-        console.table(store.tanja);
+        // console.table(store.tanja);
         var t1 = performance.now();
         console.log(
           "Call took " + (t1 - t0) + " milliseconds. Total of runs made: ",
@@ -479,7 +467,7 @@ export default {
         );
         this.runPerformed += 1;
       }
-      this.$eventBus.$emit("calculationDone", this.mode);
+      // this.$eventBus.$emit("calculationDone", this.mode);
     },
     drawPowerAndTorqueChart () {
       var rpmLookupTable = [];
