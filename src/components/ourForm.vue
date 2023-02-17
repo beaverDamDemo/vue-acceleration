@@ -26,7 +26,7 @@
         </select>
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group container">
       <h5>Car Settings</h5>
       <div class="row">
         <label class="col col-sm-6" for="">Weight KG (WIP)</label>
@@ -70,66 +70,77 @@
                     class="form-control form-control-sm col col-sm-6">
             </div> -->
     </div>
-    <div class="form-group">
+    <div class="form-group container">
       <h5>Choose Test Settings</h5>
-      <div class="row form-check">
-        <input
-          class="form-check-input"
-          type="radio"
-          name="gridRadios"
-          id="gridRadios1"
-          value="option0"
-          checked
-          @change="selectMode('oneGear')"
-        />
-        <label class="form-check-label" for="gridRadios1">one gear</label>
-      </div>
-      <div class="row form-check">
-        <input
-          class="form-check-input"
-          type="radio"
-          name="gridRadios"
-          id="gridRadios2"
-          value="option1"
-          @change="selectMode('topspeedRun')"
-        />
-        <label class="form-check-label" for="gridRadios2">topspeed run</label>
-      </div>
-      <div class="row form-check">
-        <input
-          class="form-check-input"
-          type="radio"
-          name="gridRadios"
-          id="gridRadios3"
-          value="option2"
-          @change="selectMode('fixedMultipleGears')"
-        />
-        <label class="form-check-label" for="gridRadios3"
-          >fixed multiple gears</label
-        >
-      </div>
-      <div class="row form-check">
-        <input
-          class="form-check-input"
-          type="radio"
-          name="gridRadios"
-          id="gridRadios4"
-          value="option3"
-          @change="selectMode('allPossibleGears')"
-        />
-        <label class="form-check-label" for="gridRadios4"
-          >all possible gears</label
-        >
-      </div>
-      <div class="form-check form-initial-speed">
-        <span for="">Initial speed km/h: </span>
-        <input
-          v-model="csin"
-          @change="initialSpeedInputChange"
-          type="number"
-          class="form-control form-control-sm"
-        />
-      </div>
+
+
+                        <div class="row form-check">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="gridRadios"
+                            id="gridRadios1"
+                            value="option0"
+                            checked
+                            @change="selectMode('oneGear')"
+                          />
+                          <label class="form-check-label" for="gridRadios1">one gear</label>
+                        </div>
+                        <div class="row form-check">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="gridRadios"
+                            id="gridRadios2"
+                            value="option1"
+                            @change="selectMode('topspeedRun')"
+                          />
+                          <label class="form-check-label" for="gridRadios2">topspeed run</label>
+                        </div>
+                        <div class="row form-check">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="gridRadios"
+                            id="gridRadios3"
+                            value="option2"
+                            @change="selectMode('fixedMultipleGears')"
+                          />
+                          <label class="form-check-label" for="gridRadios3"
+                            >fixed multiple gears</label
+                          >
+                        </div>
+                        <div class="row form-check">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="gridRadios"
+                            id="gridRadios4"
+                            value="option3"
+                            @change="selectMode('allPossibleGears')"
+                          />
+                          <label class="form-check-label" for="gridRadios4"
+                            >all possible gears</label
+                          >
+                        </div>
+                        <div class="form-check form-initial-speed">
+                          <span for="">Initial speed km/h: </span>
+                          <input
+                            v-model="csin"
+                            @change="initialSpeedInputChange"
+                            type="number"
+                            class="form-control form-control-sm"
+                          />
+                        </div>
+
+
+
+
+
+
+
+
+
     </div>
     <div class="form-group" v-if="myForm_0_isShown">
       <h5>Select Gearing Options For Single Gear</h5>
@@ -304,21 +315,21 @@ export default {
 }
 
 .our-form .row {
-  margin-right: 8px;
+  /* margin-right: 8px; */
 }
 
 .our-form .form-group {
-  width: 600px;
+  /* width: 600px; */
 }
 
 .our-form .form-group h5 {
   text-align: center;
-  margin-bottom: 14px;
+  /* margin-bottom: 14px; */
 }
 
 .our-form .form-group label {
   text-align: right;
-  margin-top: 0.5rem;
+  /* margin-top: 0.5rem; */
 }
 
 .our-form .form-group input:disabled {
@@ -326,7 +337,7 @@ export default {
 }
 
 .our-form .form-group .form-check {
-  margin-left: 196px;
+  /* margin-left: 196px; */
 }
 
 .our-form .form-group .form-check label {

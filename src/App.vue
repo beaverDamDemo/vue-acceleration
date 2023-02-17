@@ -2,7 +2,7 @@
   <div id="app">
     <button
       style="position: absolute; right: 20px; top: 10px"
-      class="btn btn-danger"
+      class="btn btn-warning"
       @click="onLogStore"
     >
       log store
@@ -14,25 +14,30 @@
     </div>
     <div
       :class="{ active: false, myChartContainer: true }"
+      class="mb-1"
       v-show="showMyChart"
     >
       <canvas id="myChart"></canvas>
     </div>
-    <div class="myButContainer">
-      <button
-        @click="startButtonClick"
-        type="button"
-        class="btn btn-success"
-        :disabled="
-          store.selectedEngine == undefined ||
-          store.selectedCarPreset == undefined
-        "
-      >
-        Run
-      </button>
-      <button @click="exportWithSheetJS" class="btn btn-primary" disabled>
-        Export with SheetJS (WIP)
-      </button>
+    <div class="container">
+      <div class="myButContainer row justify-content-center" >
+        <button
+          @click="startButtonClick"
+          type="button"
+          class="btn btn-success ml-1 mr-1 col-lg-5 col-md-9 col-xs-12 "
+          :disabled="
+            store.selectedEngine == undefined ||
+            store.selectedCarPreset == undefined
+          "
+        >
+          Run
+        </button>
+        <button @click="exportWithSheetJS"
+          class="btn btn-primary ml-1 mr-1 col-xs-12 col-md-9 col-lg-5"
+           disabled>
+          Export with SheetJS (WIP)
+        </button>
+      </div>
     </div>
     <ourOutput :inputData.sync="finalGearMin" />
   </div>
@@ -616,10 +621,6 @@ const calculatePower = (
 };
 </script>
 <style>
-html {
-  min-width: 440px;
-}
-
 #app {
   background-color: rgb(30, 59, 52);
   color: rgb(255, 140, 139);
@@ -630,18 +631,6 @@ html {
 
 #app .ourForm {
   margin: 0.875rem;
-}
-
-#app .myButContainer {
-  display: flex;
-  margin: 1.25rem;
-}
-
-#app .myButContainer button {
-  padding: 1rem 2.75rem;
-  margin: 0 auto;
-  display: inline-block;
-  min-width: 320px;
 }
 
 .myChartContainer {
