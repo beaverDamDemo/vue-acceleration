@@ -1,8 +1,8 @@
 <template>
   <section class="form-fixed-multiple-gears">
     <h5>Gear ratios</h5>
-    <div class="preset-container">
-      <button class="preset btn btn-secondary" type="button" v-for="preset of store.gearingPresets"
+    <div class="preset-container d-inline-flex flex-row flex-wrap">
+      <button class="preset btn btn-primary m-1" type="button" v-for="preset of store.gearingPresets"
         :key="`preset-${preset.name}`" @click="onSelectGearingPreset(preset)">
         {{ preset.name }}
       </button>
@@ -397,25 +397,25 @@ export default {
 </script>
 <style scoped>
 .preset-container {
-  margin: 0.75rem 0;
+  /* margin: 0.75rem 0; */
 }
 
 .form-fixed-multiple-gears .preset-container {
-  display: flex;
+  /* display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: center; */
 }
 
 .form-fixed-multiple-gears .preset-container .preset {
-  padding: 2px 4px;
+  /* padding: 2px 4px;
   width: 110px;
   border-radius: 6px;
   font-size: 0.75em;
-  margin: 0 3px;
+  margin: 0 3px; */
 }
 
 .form-fixed-multiple-gears .preset-container .preset:hover {
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .form-fixed-multiple-gears .form-group {
