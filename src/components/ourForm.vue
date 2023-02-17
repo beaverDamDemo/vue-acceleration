@@ -72,91 +72,76 @@
     </div>
     <div class="form-group container" style="background: yellow; color: black;">
       <h5>Choose Test Settings</h5>
-
+      <div class="row justify-content-center" style="background: gold;">
+        <div style="background: sandybrown;" class="col-lg-3 col-md-4 col-sm-4 col-xs-6">
+          <div class="justify-content-start text-left">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="gridRadios"
+              id="gridRadios1"
+              value="option0"
+              checked
+              @change="selectMode('oneGear')"
+            />
+            <label class="form-check-label" for="gridRadios1">one gear</label>
+          </div>
+        </div>
+      </div>
       <div class="row justify-content-center">
-                        <div>
-                          <input
-                            class="form-check-input"
-                            type="radio"
-                            name="gridRadios"
-                            id="gridRadios1"
-                            value="option0"
-                            checked
-                            @change="selectMode('oneGear')"
-                          />
-                          <label class="form-check-label" for="gridRadios1">one gear</label>
-                        </div>
-                      </div>
-
-
-                      <div class="row justify-content-center">
-                        <div>
-                          <input
-                            class="form-check-input"
-                            type="radio"
-                            name="gridRadios"
-                            id="gridRadios2"
-                            value="option1"
-                            @change="selectMode('topspeedRun')"
-                          />
-                          <label class="form-check-label" for="gridRadios2">topspeed run</label>
-                        </div>
-                        </div>
-
-
-                        <div class="row justify-content-center">
-                        <div>
-                          <input
-                            class="form-check-input"
-                            type="radio"
-                            name="gridRadios"
-                            id="gridRadios3"
-                            value="option2"
-                            @change="selectMode('fixedMultipleGears')"
-                          />
-                          <label class="form-check-label" for="gridRadios3"
-                            >fixed multiple gears</label
-                          >
-                        </div>
-                      </div>
-
-
-                      <div class="row justify-content-center">
-                        <div>
-                          <input
-                            class="form-check-input"
-                            type="radio"
-                            name="gridRadios"
-                            id="gridRadios4"
-                            value="option3"
-                            @change="selectMode('allPossibleGears')"
-                          />
-                          <label class="form-check-label" for="gridRadios4"
-                            >all possible gears</label
-                          >
-                        </div>
-                      </div>
-
-                      <div class="row justify-content-center">
-                        <div class="form-check form-initial-speed">
-                          <span for="">Initial speed km/h: </span>
-                          <input
-                            v-model="csin"
-                            @change="initialSpeedInputChange"
-                            type="number"
-                            class="form-control form-control-sm"
-                          />
-                        </div>
-                      </div>
-
-
-
-
-
-
-
-
-
+        <div>
+          <input
+            class="form-check-input"
+            type="radio"
+            name="gridRadios"
+            id="gridRadios2"
+            value="option1"
+            @change="selectMode('topspeedRun')"
+          />
+          <label class="form-check-label" for="gridRadios2">topspeed run</label>
+        </div>
+        </div>
+        <div class="row justify-content-center">
+        <div>
+          <input
+            class="form-check-input"
+            type="radio"
+            name="gridRadios"
+            id="gridRadios3"
+            value="option2"
+            @change="selectMode('fixedMultipleGears')"
+          />
+          <label class="form-check-label" for="gridRadios3"
+            >fixed multiple gears</label
+          >
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div>
+          <input
+            class="form-check-input"
+            type="radio"
+            name="gridRadios"
+            id="gridRadios4"
+            value="option3"
+            @change="selectMode('allPossibleGears')"
+          />
+          <label class="form-check-label" for="gridRadios4"
+            >all possible gears</label
+          >
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="form-check form-initial-speed">
+          <span for="">Initial speed km/h: </span>
+          <input
+            v-model="csin"
+            @change="initialSpeedInputChange"
+            type="number"
+            class="form-control form-control-sm"
+          />
+        </div>
+      </div>
     </div>
     <div class="form-group" v-if="myForm_0_isShown">
       <h5>Select Gearing Options For Single Gear</h5>
