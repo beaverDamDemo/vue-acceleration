@@ -70,11 +70,11 @@
                     class="form-control form-control-sm col col-sm-6">
             </div> -->
     </div>
-    <div class="form-group container">
+    <div class="form-group container" style="background: yellow; color: black;">
       <h5>Choose Test Settings</h5>
 
-
-                        <div class="row form-check">
+      <div class="row justify-content-center">
+                        <div>
                           <input
                             class="form-check-input"
                             type="radio"
@@ -86,7 +86,11 @@
                           />
                           <label class="form-check-label" for="gridRadios1">one gear</label>
                         </div>
-                        <div class="row form-check">
+                      </div>
+
+
+                      <div class="row justify-content-center">
+                        <div>
                           <input
                             class="form-check-input"
                             type="radio"
@@ -97,7 +101,11 @@
                           />
                           <label class="form-check-label" for="gridRadios2">topspeed run</label>
                         </div>
-                        <div class="row form-check">
+                        </div>
+
+
+                        <div class="row justify-content-center">
+                        <div>
                           <input
                             class="form-check-input"
                             type="radio"
@@ -110,7 +118,11 @@
                             >fixed multiple gears</label
                           >
                         </div>
-                        <div class="row form-check">
+                      </div>
+
+
+                      <div class="row justify-content-center">
+                        <div>
                           <input
                             class="form-check-input"
                             type="radio"
@@ -123,6 +135,9 @@
                             >all possible gears</label
                           >
                         </div>
+                      </div>
+
+                      <div class="row justify-content-center">
                         <div class="form-check form-initial-speed">
                           <span for="">Initial speed km/h: </span>
                           <input
@@ -132,6 +147,7 @@
                             class="form-control form-control-sm"
                           />
                         </div>
+                      </div>
 
 
 
