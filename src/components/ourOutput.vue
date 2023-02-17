@@ -137,32 +137,31 @@ export default {
         // console.log("⚛ ~ this.store.resultsFixedMultipleGears[i]", this.store.tanja[0][i]);
 
         if(upto_100_check && this.store.tanja[0][i][0] >= 100) {
-
-          console.log("⚛ currentSpeed: ", this.store.tanja[0][i][0]);
-          console.log("⚛ distance: ", this.store.tanja[0][i][1]);
-          console.log("⚛ executionTime: ", this.store.tanja[0][i][2]);
-          console.log("⚛ power: ", Math.round(this.store.tanja[0][i][3]));
-          console.log("⚛ currentRpm: ", this.store.tanja[0][i][4]);
-          console.log("⚛ currentGearIndex: ", this.store.tanja[0][i][5]);
-          console.log("⚛ gear: ", this.store.tanja[0][i][5] + 1);
+          console.log(`%c⚛ currentSpeed: ${this.store.tanja[0][i][0]}`, "background: midnightblue; color: white; font-weight: bold;");
+          console.log(`%c⚛ distance: ${this.store.tanja[0][i][1]}`, "background: midnightblue; color: white; font-weight: bold;");
+          console.log(`%c⚛ executionTime: ${this.store.tanja[0][i][2]}`, "background: midnightblue; color: white; font-weight: bold;");
+          console.log(`%c⚛ power: ${Math.round(this.store.tanja[0][i][3])}`, "background: midnightblue; color: white; font-weight: bold;");
+          console.log(`%c⚛ currentRpm: ${this.store.tanja[0][i][4]}`, "background: midnightblue; color: white; font-weight: bold;");
+          console.log(`%c⚛ currentGearIndex: ${this.store.tanja[0][i][5]}`, "background: midnightblue; color: white; font-weight: bold;");
+          console.log(`%c⚛ gear: ${this.store.tanja[0][i][5] + 1}`, "background: midnightblue; color: white; font-weight: bold;");
           upto_100_check = false
         } else if(upto_150_check && this.store.tanja[0][i][0] >= 150) {
-          console.log("⚛ currentSpeed: ", this.store.tanja[0][i][0]);
-          console.log("⚛ distance: ", this.store.tanja[0][i][1]);
-          console.log("⚛ executionTime: ", this.store.tanja[0][i][2]);
-          console.log("⚛ power: ", Math.round(this.store.tanja[0][i][3]));
-          console.log("⚛ currentRpm: ", this.store.tanja[0][i][4]);
-          console.log("⚛ currentGearIndex: ", this.store.tanja[0][i][5]);
-          console.log("⚛ gear: ", this.store.tanja[0][i][5] + 1);
+          console.log(`%c⚛ currentSpeed: ${this.store.tanja[0][i][0]}`, "background: black; color: wheat; font-weight: bold;");
+          console.log(`%c⚛ distance: ${this.store.tanja[0][i][1]}`, "background: black; color: wheat; font-weight: bold;");
+          console.log(`%c⚛ executionTime: ${this.store.tanja[0][i][2]}`, "background: black; color: wheat; font-weight: bold;");
+          console.log(`%c⚛ power: ${Math.round(this.store.tanja[0][i][3])}`, "background: black; color: wheat; font-weight: bold;");
+          console.log(`%c⚛ currentRpm: ${this.store.tanja[0][i][4]}`, "background: black; color: wheat; font-weight: bold;");
+          console.log(`%c⚛ currentGearIndex: ${this.store.tanja[0][i][5]}`, "background: black; color: wheat; font-weight: bold;");
+          console.log(`%c⚛ gear: ${this.store.tanja[0][i][5] + 1}`, "background: black; color: wheat; font-weight: bold;");
           upto_150_check = false
           } else if(upto_200_check && this.store.tanja[0][i][0] >= 200) {
-          console.log("⚛ currentSpeed: ", this.store.tanja[0][i][0]);
-          console.log("⚛ distance: ", this.store.tanja[0][i][1]);
-          console.log("⚛ executionTime: ", this.store.tanja[0][i][2]);
-          console.log("⚛ power: ", Math.round(this.store.tanja[0][i][3]));
-          console.log("⚛ currentRpm: ", this.store.tanja[0][i][4]);
-          console.log("⚛ currentGearIndex: ", this.store.tanja[0][i][5]);
-          console.log("⚛ gear: ", this.store.tanja[0][i][5] + 1);
+            console.log(`%c⚛ currentSpeed: ${this.store.tanja[0][i][0]}`, "background: purple; color: lightcyan; font-weight: bold;");
+          console.log(`%c⚛ distance: ${this.store.tanja[0][i][1]}`, "background: purple; color: lightcyan; font-weight: bold;");
+          console.log(`%c⚛ executionTime: ${this.store.tanja[0][i][2]}`, "background: purple; color: lightcyan; font-weight: bold;");
+          console.log(`%c⚛ power: ${Math.round(this.store.tanja[0][i][3])}`, "background: purple; color: lightcyan; font-weight: bold;");
+          console.log(`%c⚛ currentRpm: ${this.store.tanja[0][i][4]}`, "background: purple; color: lightcyan; font-weight: bold;");
+          console.log(`%c⚛ currentGearIndex: ${this.store.tanja[0][i][5]}`, "background: purple; color: lightcyan; font-weight: bold;");
+          console.log(`%c⚛ gear: ${this.store.tanja[0][i][5] + 1}`, "background: purple; color: lightcyan; font-weight: bold;");
             upto_200_check = false
             break
           } else {
