@@ -128,11 +128,15 @@ export default {
       console.log("Calculation done ⚛ ~ mode", mode);
 
       let i=0
+      let upto_100_check = true
+      let upto_150_check = true
+      let upto_200_check = true
+
       while(i < this.store.tanja[0].length) {
 
         // console.log("⚛ ~ this.store.resultsFixedMultipleGears[i]", this.store.tanja[0][i]);
 
-        if( this.store.tanja[0][i][0] >= 100) {
+        if(upto_100_check && this.store.tanja[0][i][0] >= 100) {
 
           console.log("⚛ currentSpeed: ", this.store.tanja[0][i][0]);
           console.log("⚛ distance: ", this.store.tanja[0][i][1]);
@@ -141,8 +145,27 @@ export default {
           console.log("⚛ currentRpm: ", this.store.tanja[0][i][4]);
           console.log("⚛ currentGearIndex: ", this.store.tanja[0][i][5]);
           console.log("⚛ gear: ", this.store.tanja[0][i][5] + 1);
-          break
-        } else {
+          upto_100_check = false
+        } else if(upto_150_check && this.store.tanja[0][i][0] >= 150) {
+          console.log("⚛ currentSpeed: ", this.store.tanja[0][i][0]);
+          console.log("⚛ distance: ", this.store.tanja[0][i][1]);
+          console.log("⚛ executionTime: ", this.store.tanja[0][i][2]);
+          console.log("⚛ power: ", Math.round(this.store.tanja[0][i][3]));
+          console.log("⚛ currentRpm: ", this.store.tanja[0][i][4]);
+          console.log("⚛ currentGearIndex: ", this.store.tanja[0][i][5]);
+          console.log("⚛ gear: ", this.store.tanja[0][i][5] + 1);
+          upto_150_check = false
+          } else if(upto_200_check && this.store.tanja[0][i][0] >= 200) {
+          console.log("⚛ currentSpeed: ", this.store.tanja[0][i][0]);
+          console.log("⚛ distance: ", this.store.tanja[0][i][1]);
+          console.log("⚛ executionTime: ", this.store.tanja[0][i][2]);
+          console.log("⚛ power: ", Math.round(this.store.tanja[0][i][3]));
+          console.log("⚛ currentRpm: ", this.store.tanja[0][i][4]);
+          console.log("⚛ currentGearIndex: ", this.store.tanja[0][i][5]);
+          console.log("⚛ gear: ", this.store.tanja[0][i][5] + 1);
+            upto_200_check = false
+            break
+          } else {
           i++
         }
       }

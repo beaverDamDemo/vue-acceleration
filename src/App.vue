@@ -550,14 +550,6 @@ export default {
     },
   },
   mounted() {
-    store.selectedEngine = 0;
-    store.selectedCarPreset = 0;
-    //  let f= [630, 685, 731, 779, 816, 854, 888, 924, 948, 971, 992, 1012, 1018, 1032, 1054, 1038, 1020, 1002, 992, 980, 958, 880, 800, 720]
-    //
-    //          for(let i=0; i<f.length; i++) {
-    //              f[i] = Math.round(f[i]*0.9857)
-    //          }
-    //  debugger
     this.sendData();
     this.$eventBus.$on("initialSpeedInputChange", (e) => {
       this.initialSpeed = e;
