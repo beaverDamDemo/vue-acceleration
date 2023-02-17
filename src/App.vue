@@ -169,7 +169,7 @@ export default {
         return arrResult;
       };
 
-      var runWithGearShifting = (gearing) => {
+      var runWithGearShifting = (gearRatios, gearFinal) => {
         var acceleration, brakeforce, pushforce, netforce, power;
         var calculate_interval_ms = 10; //tested 10
         var distance = 0;
@@ -186,14 +186,14 @@ export default {
         let currentGearIndex = 0;
         let step_count = 0;
 
-        for (let i = 0; i < gearing.length; i++) {
+        for (let i = 0; i < gearRatios.length; i++) {
           gearLength.push(
             (store.transmissionConstant *
               this.store.engines[this.store.selectedEngine].maxRpm) /
-            gearing[i] /
-            store.gearFinal
+            gearRatios[i] /
+            gearFinal
           );
-          currentGearing.push(store.gearRatios[i]);
+          currentGearing.push(gearRatios[i]);
         }
 
         if (executionTime < 300 && currentSpeed < 10.0) {
@@ -287,7 +287,7 @@ export default {
           distance: Math.floor(distance) + " m",
           exetime: executionTime / 1000 + " s",
           currentGearing: currentGearing,
-          finalDrive: store.gearFinal,
+          finalDrive: gearFinal,
           computedGearLength: gearLength,
           currentWeightKg: currentWeightKg,
           currentAeroCx: currentAeroCx,
@@ -405,7 +405,7 @@ export default {
         store.tanja = tanja;
         store.love = love;
       } else if (this.mode == "fixedMultipleGears") {
-        tanja.push(runWithGearShifting(store.gearRatios));
+        tanja.push(runWithGearShifting(store.gearRatios, store.gearFinal));
         store.tanja = tanja;
         store.love = love;
       } else if (this.mode == "allPossibleGears") {
@@ -430,19 +430,32 @@ export default {
                           if (gear_3[l] > gear_4[m]) {
                             if (gear_4[m] > gear_5[n]) {
                               total++;
-                              tanja.push(
-                                allPossibleGears(
-                                  [
-                                    gear_0[i],
-                                    gear_1[j],
-                                    gear_2[k],
-                                    gear_3[l],
-                                    gear_4[m],
-                                    gear_5[n],
-                                  ],
-                                  2.99
-                                )
-                              );
+
+                              tanja.push(runWithGearShifting(allPossibleGears(
+                                [
+                                  gear_0[i],
+                                  gear_1[j],
+                                  gear_2[k],
+                                  gear_3[l],
+                                  gear_4[m],
+                                  gear_5[n],
+                                ],
+                                2.999
+                              )));
+
+                              // tanja.push(
+                              //   allPossibleGears(
+                              //     [
+                              //       gear_0[i],
+                              //       gear_1[j],
+                              //       gear_2[k],
+                              //       gear_3[l],
+                              //       gear_4[m],
+                              //       gear_5[n],
+                              //     ],
+                              //     2.99
+                              //   )
+                              // );
                             }
                           }
                         }
