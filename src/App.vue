@@ -467,7 +467,8 @@ export default {
         );
         this.runPerformed += 1;
       }
-      // this.$eventBus.$emit("calculationDone", this.mode);
+      console.log(`%cwill not work properly until we manage to limit tyre grip at beginning`, "color: red");
+      this.$eventBus.$emit("calculationDone", this.mode);
     },
     drawPowerAndTorqueChart () {
       var rpmLookupTable = [];

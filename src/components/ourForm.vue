@@ -21,26 +21,26 @@
     <div class="form-group">
       <h5>Car Settings</h5>
       <div class="row">
-        <label class="col col-sm-6" for="">Weight KG (WIP)</label>
+        <label class="col col-sm-6" for="">Weight KG (WIP missing binding)</label>
         <input v-model="cskg" type="number" step="1" class="form-control form-control-sm col col-sm-6" />
       </div>
       <div class="row">
-        <label class="col col-sm-6" for="">Aero Cx (WIP)</label>
+        <label class="col col-sm-6" for="">Aero Cx (WIP missing binding)</label>
         <input v-model="csac" type="number" step="0.005" class="form-control form-control-sm col col-sm-6" />
       </div>
       <div class="row">
-        <label class="col col-sm-6" for="">Rolling Res (WIP)</label>
+        <label class="col col-sm-6" for="">Rolling Res (WIP missing binding)</label>
         <input v-model="csrr" type="number" step="0.001" class="form-control form-control-sm col col-sm-6" />
       </div>
       <div class="row">
-        <label class="col col-sm-6" for="">Maximum acc G (WIP)</label>
+        <label class="col col-sm-6" for="">Maximum acc G (WIP missing binding)</label>
         <input v-model="csmag" type="number" step="0.025" class="form-control form-control-sm col col-sm-6" />
       </div>
       <!-- <div class='row'>
-                                                                                  <label class='col col-sm-6' for="">Initial speed km/h</label>
-                                                                                  <input v-model="csin" @change="initialSpeedInputChange" type="number"
-                                                                                      class="form-control form-control-sm col col-sm-6">
-                                                                              </div> -->
+                                                                                    <label class='col col-sm-6' for="">Initial speed km/h</label>
+                                                                                    <input v-model="csin" @change="initialSpeedInputChange" type="number"
+                                                                                        class="form-control form-control-sm col col-sm-6">
+                                                                                </div> -->
     </div>
     <div class="form-group container">
       <h5>Choose Test Settings</h5>
