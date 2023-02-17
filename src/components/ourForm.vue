@@ -190,7 +190,7 @@ export default {
             csmag: undefined,
             csin: 100,
             divRpm: 50,
-            selectedEngine: 0,
+            selectedEngine: undefined,
             myForm_0_isShown: true,
             formfixShow: false,
         }
@@ -201,7 +201,7 @@ export default {
         }
         console.log("⚛ ~ Vue.version", Vue.version);
 
-        console.log("setting default to zero ")
+        console.log("setting default engine and preset. This is not really working ")
         this.selectCarPresetChange(0)
         this.selectEngineChange(0)
     },
