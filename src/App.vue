@@ -169,7 +169,7 @@ export default {
         return arrResult;
       };
 
-      var fixedMultipleGears = () => {
+      var runWithGearShifting = (gearing) => {
         var acceleration, brakeforce, pushforce, netforce, power;
         var calculate_interval_ms = 10; //tested 10
         var distance = 0;
@@ -180,7 +180,6 @@ export default {
         let threshold = -1;
         var currentSpeed = 0;
         var arrResult = [];
-        let gearing = store.gearRatios;
         let currentGearing = [];
         let gearLength = [];
         let lastRpm = 0;
@@ -406,7 +405,7 @@ export default {
         store.tanja = tanja;
         store.love = love;
       } else if (this.mode == "fixedMultipleGears") {
-        tanja.push(fixedMultipleGears());
+        tanja.push(runWithGearShifting(store.gearRatios));
         store.tanja = tanja;
         store.love = love;
       } else if (this.mode == "allPossibleGears") {
