@@ -195,10 +195,10 @@ export default {
       } else if (typeof (e) == "number") {
         this.selectedCarPreset = e
         this.$eventBus.$emit('selectCarPresetChange', 0)
-        this.cskg = store.carPresets[0].weightKg
-        this.csac = store.carPresets[0].aeroCx
-        this.csrr = store.carPresets[0].rollingRes
-        this.csmag = store.carPresets[0].maximumAccG
+        this.cskg = store.carPresets[e].weightKg
+        this.csac = store.carPresets[e].aeroCx
+        this.csrr = store.carPresets[e].rollingRes
+        this.csmag = store.carPresets[e].maximumAccG
         this.store.weightKg = this.cskg
         this.store.aeroCx = this.csac
         this.store.rollingRes = this.csrr
