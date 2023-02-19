@@ -214,6 +214,7 @@ export default {
             calculate_interval_ms = calculate_interval_ms / 1; //povecaj za povecat natancnost
             interval = true;
           }
+
           step_count++;
           executionTime = executionTime + calculate_interval_ms;
           let cp = calculatePower(
@@ -249,14 +250,12 @@ export default {
             ((currentSpeed + speedGain / 2) * calculate_interval_ms) / 1000;
 
           if (executionTime < 6000 && currentSpeed < 20.0) {
-            console.log("⚛ ~ acceleration ", Math.round((10000*speedGain/calculate_interval_ms))/10, "m/s2 ", Math.round(currentSpeed*3.6), "km/h", currentRpm, "rpm");
+            console.log("⚛ ~ ", Math.round((10000*speedGain/calculate_interval_ms))/10, "m/s2 ", Math.round(currentSpeed*3.6), "km/h", Math.round(currentRpm), "rpm");
           }
 
           if (executionTime < 6000 && executionTime%1000 == 0) {
             console.log("☢️", "time: ", executionTime/1000, " acceleration ", Math.round((10000*speedGain/calculate_interval_ms))/10, "m/s2 ", Math.round(currentSpeed*3.6), "km/h", currentRpm, "rpm");
           }
-
-
 
           arrResult.push([
             Math.round(currentSpeed * 3.6),
@@ -485,7 +484,9 @@ const calculatePower = (
 ) => {
   var currentRpm = null;
   var IDs = new Object();
-  if (executionTime < 500) {
+  const clutchSlipStartTimeMs = 1000
+
+  if (executionTime < clutchSlipStartTimeMs) {
     IDs[0] = 100;
     IDs[1] = store.engines[selectedEngine].maxRpm*2/3;
     return IDs;
