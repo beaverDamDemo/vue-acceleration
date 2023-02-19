@@ -484,7 +484,7 @@ const calculatePower = (
 ) => {
   var currentRpm = null;
   var IDs = new Object();
-  const clutchSlipStartTimeMs = 1000
+  const clutchSlipStartTimeMs = 750
 
   if (executionTime < clutchSlipStartTimeMs) {
     IDs[0] = 100;
