@@ -252,6 +252,12 @@ export default {
             console.log("⚛ ~ acceleration ", Math.round((10000*speedGain/calculate_interval_ms))/10, "m/s2 ", Math.round(currentSpeed*3.6), "km/h", currentRpm, "rpm");
           }
 
+          if (executionTime < 6000 && executionTime%1000 == 0) {
+            console.log("☢️", "time: ", executionTime/1000, " acceleration ", Math.round((10000*speedGain/calculate_interval_ms))/10, "m/s2 ", Math.round(currentSpeed*3.6), "km/h", currentRpm, "rpm");
+          }
+
+
+
           arrResult.push([
             Math.round(currentSpeed * 3.6),
             Math.floor(distance),
