@@ -196,11 +196,8 @@ export default {
           currentGearing.push(gearRatios[i]);
         }
 
-        if (executionTime < 300 && currentSpeed < 10.0) {
-          //pozor ker currentSpeed je v m/s
-          speedGain = this.maxg * 0.9; //wheelspin na začetku pospeševanja, prve 3 desetinke
-          console.log("⚛ ~ speedGain m/s", speedGain);
-        }
+        speedGain = this.maxg * 0.9; //wheelspin na začetku pospeševanja, prve 3 desetinke
+
         // while( distance < 1609 && executionTime < 60000 && speedGain > 0.0005)
         while (
           distance < 1609 &&
@@ -250,6 +247,11 @@ export default {
           distance =
             distance +
             ((currentSpeed + speedGain / 2) * calculate_interval_ms) / 1000;
+
+          if (executionTime < 6000 && currentSpeed < 20.0) {
+            console.log("⚛ ~ acceleration ", Math.round((10000*speedGain/calculate_interval_ms))/10, "m/s2 ", Math.round(currentSpeed*3.6), "km/h", currentRpm, "rpm");
+          }
+
           arrResult.push([
             Math.round(currentSpeed * 3.6),
             Math.floor(distance),
@@ -479,7 +481,7 @@ const calculatePower = (
   var IDs = new Object();
   if (executionTime < 500) {
     IDs[0] = 100;
-    IDs[1] = 2500;
+    IDs[1] = store.engines[selectedEngine].maxRpm*2/3;
     return IDs;
   } else {
     currentRpm =
