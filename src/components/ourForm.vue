@@ -212,7 +212,6 @@ export default {
     },
 
     selectMode (e) {
-      console.log("��� ~ selectMode", e)
       if (e == "oneGear" || e == "topspeedRun") {
         this.myForm_0_isShown = true
         this.formfixShow = false
@@ -223,12 +222,6 @@ export default {
         this.myForm_0_isShown = false
         this.formfixShow = false
       }
-      console.log("��� ~ emitting selectMode")
-      this.$eventBus.$emit("selectMode", e)
-
-
-      console.log("⚛ ~ e:", e);
-
       this.$emit("onModeChanged", e)
     },
   },
