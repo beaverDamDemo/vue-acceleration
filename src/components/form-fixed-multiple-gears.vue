@@ -88,11 +88,13 @@
     </div>
   </section>
 </template>
-<script lang="js">
+<script>
 import store from '../store.js'
 export default {
   name: 'form-fixed-multiple-gears',
-  props: [],
+  props: [
+    'selectedMode'
+  ],
   mounted () {
     console.log("setting default gear preset 0")
     this.gear_0_ratio = store.gearingPresets[0].gearRatios[0]
@@ -110,41 +112,43 @@ export default {
     this.gearFinal = store.gearingPresets[0].finalDrive
     store.gearFinal = store.gearingPresets[0].finalDrive
 
-    this.$eventBus.$on('selectMode', (e) => {
-      if (e == "oneGear" || e == "topspeedRun") {
-        this.isDisabled = true
-        this.gear_0_left_isDisabled = true
-        this.gear_0_right_isDisabled = true
-        this.gear_1_left_isDisabled = true
-        this.gear_1_right_isDisabled = true
-        this.gear_2_left_isDisabled = true
-        this.gear_2_right_isDisabled = true
-        this.gear_3_left_isDisabled = true
-        this.gear_3_right_isDisabled = true
-        this.gear_4_left_isDisabled = true
-        this.gear_4_right_isDisabled = true
-        this.gear_5_left_isDisabled = true
-        this.gear_5_right_isDisabled = true
-        this.gearFinalLeftArrowIsDisabled = true
-        this.gearFinalRightArrowIsDisabled = true
-      } else {
-        this.isDisabled = false
-        this.gear_0_left_isDisabled = false
-        this.gear_0_right_isDisabled = false
-        this.gear_1_left_isDisabled = false
-        this.gear_1_right_isDisabled = false
-        this.gear_2_left_isDisabled = false
-        this.gear_2_right_isDisabled = false
-        this.gear_3_left_isDisabled = false
-        this.gear_3_right_isDisabled = false
-        this.gear_4_left_isDisabled = false
-        this.gear_4_right_isDisabled = false
-        this.gear_5_left_isDisabled = false
-        this.gear_5_right_isDisabled = false
-        this.gearFinalLeftArrowIsDisabled = false
-        this.gearFinalRightArrowIsDisabled = false
-      }
-    })
+    console.log(" selectedMode: ", this.selectedMode)
+
+    // this.$eventBus.$on('selectMode', (e) => {
+    //   if (e == "oneGear" || e == "topspeedRun") {
+    //     this.isDisabled = true
+    //     this.gear_0_left_isDisabled = true
+    //     this.gear_0_right_isDisabled = true
+    //     this.gear_1_left_isDisabled = true
+    //     this.gear_1_right_isDisabled = true
+    //     this.gear_2_left_isDisabled = true
+    //     this.gear_2_right_isDisabled = true
+    //     this.gear_3_left_isDisabled = true
+    //     this.gear_3_right_isDisabled = true
+    //     this.gear_4_left_isDisabled = true
+    //     this.gear_4_right_isDisabled = true
+    //     this.gear_5_left_isDisabled = true
+    //     this.gear_5_right_isDisabled = true
+    //     this.gearFinalLeftArrowIsDisabled = true
+    //     this.gearFinalRightArrowIsDisabled = true
+    //   } else {
+    //     this.isDisabled = false
+    //     this.gear_0_left_isDisabled = false
+    //     this.gear_0_right_isDisabled = false
+    //     this.gear_1_left_isDisabled = false
+    //     this.gear_1_right_isDisabled = false
+    //     this.gear_2_left_isDisabled = false
+    //     this.gear_2_right_isDisabled = false
+    //     this.gear_3_left_isDisabled = false
+    //     this.gear_3_right_isDisabled = false
+    //     this.gear_4_left_isDisabled = false
+    //     this.gear_4_right_isDisabled = false
+    //     this.gear_5_left_isDisabled = false
+    //     this.gear_5_right_isDisabled = false
+    //     this.gearFinalLeftArrowIsDisabled = false
+    //     this.gearFinalRightArrowIsDisabled = false
+    //   }
+    // })
     this.$eventBus.$on('selectEngineChange', (e) => {
       this.gear_0_computedSpeed = Math.round(store.transmissionConstant * store.engines[store.selectedEngine].maxRpm / store.gearRatios[0] / store.gearFinal)
       this.gear_1_computedSpeed = Math.round(store.transmissionConstant * store.engines[store.selectedEngine].maxRpm / store.gearRatios[1] / store.gearFinal)
@@ -226,6 +230,41 @@ export default {
       this.gear_3_computedSpeed = Math.round(store.transmissionConstant * store.engines[store.selectedEngine].maxRpm / store.gearRatios[3] / store.gearFinal)
       this.gear_4_computedSpeed = Math.round(store.transmissionConstant * store.engines[store.selectedEngine].maxRpm / store.gearRatios[4] / store.gearFinal)
       this.gear_5_computedSpeed = Math.round(store.transmissionConstant * store.engines[store.selectedEngine].maxRpm / store.gearRatios[5] / store.gearFinal)
+    },
+    selectedMode: function (e) {
+      if (e == "oneGear" || e == "topspeedRun") {
+        this.isDisabled = true
+        this.gear_0_left_isDisabled = true
+        this.gear_0_right_isDisabled = true
+        this.gear_1_left_isDisabled = true
+        this.gear_1_right_isDisabled = true
+        this.gear_2_left_isDisabled = true
+        this.gear_2_right_isDisabled = true
+        this.gear_3_left_isDisabled = true
+        this.gear_3_right_isDisabled = true
+        this.gear_4_left_isDisabled = true
+        this.gear_4_right_isDisabled = true
+        this.gear_5_left_isDisabled = true
+        this.gear_5_right_isDisabled = true
+        this.gearFinalLeftArrowIsDisabled = true
+        this.gearFinalRightArrowIsDisabled = true
+      } else {
+        this.isDisabled = false
+        this.gear_0_left_isDisabled = false
+        this.gear_0_right_isDisabled = false
+        this.gear_1_left_isDisabled = false
+        this.gear_1_right_isDisabled = false
+        this.gear_2_left_isDisabled = false
+        this.gear_2_right_isDisabled = false
+        this.gear_3_left_isDisabled = false
+        this.gear_3_right_isDisabled = false
+        this.gear_4_left_isDisabled = false
+        this.gear_4_right_isDisabled = false
+        this.gear_5_left_isDisabled = false
+        this.gear_5_right_isDisabled = false
+        this.gearFinalLeftArrowIsDisabled = false
+        this.gearFinalRightArrowIsDisabled = false
+      }
     }
   },
   methods: {

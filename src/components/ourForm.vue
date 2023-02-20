@@ -105,7 +105,7 @@
       </div>
     </div>
     <div class="form-group" v-show="formfixShow">
-      <formfix v-show="formfixShow" />
+      <formfix v-show="formfixShow" :selectedMode="selectedMode" />
     </div>
   </section>
 </template>
@@ -136,6 +136,7 @@ export default {
       selectedCarPreset: undefined,
       myForm_0_isShown: true,
       formfixShow: false,
+      selectedMode: undefined,
     }
   },
   mounted () {
@@ -144,6 +145,7 @@ export default {
     }
     console.log("⚛ ~ Vue.version", Vue.version);
     console.log("setting default engine and preset and mode.")
+
     this.selectEngineChange(4)
     this.selectCarPresetChange(1)
     this.selectMode('fixedMultipleGears')
@@ -221,6 +223,7 @@ export default {
         this.formfixShow = false
       }
       this.$emit("onModeChanged", e)
+      this.selectedMode = e
     },
   },
   watch: {
