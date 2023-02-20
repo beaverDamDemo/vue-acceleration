@@ -124,6 +124,7 @@ export default {
             calculate_interval_ms = calculate_interval_ms / 1; //povecaj za povecat natancnost
             interval = true;
           }
+
           step_count++;
           executionTime = executionTime + calculate_interval_ms;
           let cp = calculatePower(
@@ -220,6 +221,7 @@ export default {
 
           step_count++;
           executionTime = executionTime + calculate_interval_ms;
+
           let cp = calculatePower(
             currentSpeed,
             executionTime,
@@ -252,13 +254,13 @@ export default {
             distance +
             ((currentSpeed + speedGain / 2) * calculate_interval_ms) / 1000;
 
-          if (executionTime < 3000 && currentSpeed < 20.0 && executionTime % 100 == 0) {
-            console.log("⚛ ~ ", Math.round((10000 * speedGain / calculate_interval_ms)) / 10, "m/s2 ", Math.round(currentSpeed * 3.6), "km/h", Math.round(currentRpm), "rpm");
-          }
+          // if (executionTime < 3000 && currentSpeed < 20.0 && executionTime % 100 == 0) {
+          //   console.log("⚛ ~ ", Math.round((10000 * speedGain / calculate_interval_ms)) / 10, "m/s2 ", Math.round(currentSpeed * 3.6), "km/h", Math.round(currentRpm), "rpm");
+          // }
 
-          if (executionTime < 6000 && executionTime % 1000 == 0) {
-            console.log("☢️", "time: ", executionTime / 1000, " acceleration ", Math.round((10000 * speedGain / calculate_interval_ms)) / 10, "m/s2 ", Math.round(currentSpeed * 3.6), "km/h", currentRpm, "rpm");
-          }
+          // if (executionTime < 6000 && executionTime % 1000 == 0) {
+          //   console.log("☢️", "time: ", executionTime / 1000, " acceleration ", Math.round((10000 * speedGain / calculate_interval_ms)) / 10, "m/s2 ", Math.round(currentSpeed * 3.6), "km/h", currentRpm, "rpm");
+          // }
 
           arrResult.push([
             Math.round(currentSpeed * 3.6),
@@ -268,6 +270,10 @@ export default {
             currentRpm,
             currentGearIndex,
           ]);
+
+          if (executionTime < 2000) {
+            console.log("⚛ ~ power:", Math.round(power), "hp ", Math.round(currentRpm) + " rpm ", Math.round(currentSpeed * 3.6), " km/h", acceleration);
+          }
         }
 
         // love.push([Number(gearLength).toFixed(0), arrResult[arrResult.length - 1][4], Number((currentSpeed * 3.6).toFixed(2)), 'km/h distance: ', Math.floor(distance), "m, exetime: ", executionTime / 1000 + 's'])
@@ -484,10 +490,10 @@ const calculatePower = (
 ) => {
   var currentRpm = null;
   var IDs = new Object();
-  const clutchSlipStartTimeMs = 750
+  const clutchSlipStartTimeMs = 1301
 
   if (executionTime < clutchSlipStartTimeMs) {
-    IDs[0] = 100;
+    IDs[0] = store.engines[selectedEngine].powerLookupTable[Math.floor(store.engines[selectedEngine].powerLookupTable.length * 1 / 2)];
     IDs[1] = store.engines[selectedEngine].maxRpm * 2 / 3;
     return IDs;
   } else {

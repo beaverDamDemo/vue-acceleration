@@ -2,7 +2,7 @@
   <section class="form-fixed-multiple-gears">
     <h5>Gear ratios</h5>
     <div class="preset-container d-inline-flex flex-row flex-wrap">
-      <button class="preset btn btn-primary m-1" type="button" v-for="preset of store.gearingPresets"
+      <button class="preset btn btn-secondary btn-sm m-1" type="button" v-for="preset of store.gearingPresets"
         :key="`preset-${preset.name}`" @click="onSelectGearingPreset(preset)">
         {{ preset.name }}
       </button>
