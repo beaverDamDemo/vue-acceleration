@@ -7,8 +7,6 @@
         {{ preset.name }}
       </button>
     </div>
-    <div style="background: orange; border: 20px solid yellow; color: black">why only arrows on 1st gear are enabled ?
-    </div>
     <div class="form-group">
       <label for="customRange_0">1st gear</label>
       <div class="arrow arrow-left" :class="{ disabled: gear_0_left_isDisabled }"
