@@ -249,12 +249,12 @@ export default {
             distance +
             ((currentSpeed + speedGain / 2) * calculate_interval_ms) / 1000;
 
-          if (executionTime < 6000 && currentSpeed < 20.0) {
-            console.log("⚛ ~ ", Math.round((10000*speedGain/calculate_interval_ms))/10, "m/s2 ", Math.round(currentSpeed*3.6), "km/h", Math.round(currentRpm), "rpm");
+          if (executionTime < 3000 && currentSpeed < 20.0 && executionTime % 100 == 0) {
+            console.log("⚛ ~ ", Math.round((10000 * speedGain / calculate_interval_ms)) / 10, "m/s2 ", Math.round(currentSpeed * 3.6), "km/h", Math.round(currentRpm), "rpm");
           }
 
-          if (executionTime < 6000 && executionTime%1000 == 0) {
-            console.log("☢️", "time: ", executionTime/1000, " acceleration ", Math.round((10000*speedGain/calculate_interval_ms))/10, "m/s2 ", Math.round(currentSpeed*3.6), "km/h", currentRpm, "rpm");
+          if (executionTime < 6000 && executionTime % 1000 == 0) {
+            console.log("☢️", "time: ", executionTime / 1000, " acceleration ", Math.round((10000 * speedGain / calculate_interval_ms)) / 10, "m/s2 ", Math.round(currentSpeed * 3.6), "km/h", currentRpm, "rpm");
           }
 
           arrResult.push([
@@ -488,7 +488,7 @@ const calculatePower = (
 
   if (executionTime < clutchSlipStartTimeMs) {
     IDs[0] = 100;
-    IDs[1] = store.engines[selectedEngine].maxRpm*2/3;
+    IDs[1] = store.engines[selectedEngine].maxRpm * 2 / 3;
     return IDs;
   } else {
     currentRpm =
