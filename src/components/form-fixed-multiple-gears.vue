@@ -77,7 +77,7 @@
       <label for="customRange_final">final drive</label>
       <div class="arrow arrow-left" :class="{ disabled: gearFinalLeftArrowIsDisabled }"
         @click="arrowClick(['customRange_final', 'left'])"></div>
-      <input type="range" class="custom-range" min="2.54" max="4.74" step="0.1" id="customRange_final"
+      <input type="range" class="custom-range" min="2.54" max="8.74" step="0.1" id="customRange_final"
         :disabled="isDisabled" @input="onInputGearFinal($event)" v-model="gearFinal" />
       <div class="arrow arrow-right" :class="{ disabled: gearFinalRightArrowIsDisabled }"
         @click="arrowClick(['customRange_final', 'right'])"></div>
