@@ -3,7 +3,7 @@
     <button style="position: absolute; right: 20px; top: 10px" class="btn btn-warning" @click="onLogStore">
       log store
     </button>
-    <ourForm class="ourForm"></ourForm>
+    <ourForm class="ourForm" @onModeChanged=onModeChanged($event)></ourForm>
     <div class="row justify-content-center">
       <input type="checkbox" name="showMyChart" v-model="showMyChart" />
       <label for="showMyChart">&nbsp; show dyno</label>
@@ -57,7 +57,7 @@ export default {
       splits: 5,
       results: [],
       myChartShow: false,
-      mode: "oneGear",
+      mode: undefined,
       showMyChart: false,
     };
   },
@@ -65,6 +65,9 @@ export default {
     window.dispatchEvent(new Event("myPreloderEvent"));
   },
   methods: {
+    onModeChanged (e) {
+      this.mode = e
+    },
     onLogStore () {
       Object.entries(this.store).forEach((e) => {
         console.log(e[0] + ": " + e[1]);

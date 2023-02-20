@@ -225,6 +225,11 @@ export default {
       }
       console.log("��� ~ emitting selectMode")
       this.$eventBus.$emit("selectMode", e)
+
+
+      console.log("⚛ ~ e:", e);
+
+      this.$emit("onModeChanged", e)
     },
   },
   watch: {
