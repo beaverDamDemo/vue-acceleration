@@ -47,7 +47,7 @@
       <div class="row justify-content-center">
         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
           <div class="justify-content-start text-left">
-            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option0" checked
+            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option0"
               @change="selectMode('oneGear')" />
             <label class="form-check-label" for="gridRadios1">one gear</label>
           </div>
@@ -144,9 +144,13 @@ export default {
     }
     console.log("⚛ ~ Vue.version", Vue.version);
 
-    console.log("setting default engine and preset. This is not really working ")
+    console.log("setting default engine and preset and mode.")
     this.selectEngineChange(4)
     this.selectCarPresetChange(1)
+    this.selectMode('fixedMultipleGears')
+    // this input has to be checked
+    // <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option2"
+    // checked
   },
 
   methods: {
@@ -208,6 +212,7 @@ export default {
     },
 
     selectMode (e) {
+      console.log("��� ~ selectMode", e)
       if (e == "oneGear" || e == "topspeedRun") {
         this.myForm_0_isShown = true
         this.formfixShow = false
@@ -218,6 +223,7 @@ export default {
         this.myForm_0_isShown = false
         this.formfixShow = false
       }
+      console.log("��� ~ emitting selectMode")
       this.$eventBus.$emit("selectMode", e)
     },
   },

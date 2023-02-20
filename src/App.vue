@@ -469,6 +469,7 @@ export default {
       store.maximumAccG = store.carPresets[e].maximumAccG;
     });
     this.$eventBus.$on("selectMode", (e) => {
+      console.log("⚛ ~ selectMode e:", e);
       this.mode = e;
     });
     this.drawPowerAndTorqueChart();
