@@ -143,14 +143,12 @@ export default {
       this.fillTorqueLookupTable(i)
     }
     console.log("⚛ ~ Vue.version", Vue.version);
-
     console.log("setting default engine and preset and mode.")
     this.selectEngineChange(4)
     this.selectCarPresetChange(1)
     this.selectMode('fixedMultipleGears')
-    // this input has to be checked
-    // <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option2"
-    // checked
+    const radiobutton = document.getElementById("gridRadios3")
+    radiobutton.checked = true
   },
 
   methods: {
