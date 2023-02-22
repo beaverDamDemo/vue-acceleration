@@ -1,6 +1,7 @@
 <template>
   <section class="form-fixed-multiple-gears">
     <h5>Gear ratios</h5>
+    <div style="border: 12px solid red; background: yellow; color: black;">currently it shifts at hardcoded rpm, so very close gear ratios will not work that good</div>
     <div class="preset-container d-inline-flex flex-row flex-wrap">
       <button class="preset btn btn-secondary btn-sm m-1" type="button" v-for="preset of store.gearingPresets"
         :key="`preset-${preset.name}`" @click="onSelectGearingPreset(preset)">
