@@ -148,9 +148,10 @@ export default {
 
     this.selectEngineChange(4)
     this.selectCarPresetChange(1)
-    this.selectMode('fixedMultipleGears')
-    const radiobutton = document.getElementById("gridRadios3")
-    radiobutton.checked = true
+
+    const localStorageMode = localStorage.selectedMode || undefined
+    this.selectMode(localStorageMode)
+    localStorage.setItem('selectedMode', localStorageMode)
   },
 
   methods: {
@@ -212,16 +213,26 @@ export default {
     },
 
     selectMode (e) {
-      if (e == "oneGear" || e == "topspeedRun") {
+      let radiobutton = undefined
+      if (e == "oneGear") {
         this.myForm_0_isShown = true
         this.formfixShow = false
+        radiobutton = document.getElementById("gridRadios1")
+      } else if (e == "topspeedRun") {
+        this.myForm_0_isShown = true
+        this.formfixShow = false
+        radiobutton = document.getElementById("gridRadios2")
       } else if (e == "fixedMultipleGears") {
         this.myForm_0_isShown = false
         this.formfixShow = true
+        radiobutton = document.getElementById("gridRadios3")
       } else {
         this.myForm_0_isShown = false
         this.formfixShow = false
+        radiobutton = document.getElementById("gridRadios4")
       }
+      radiobutton.checked = true
+      localStorage.setItem('selectedMode', e)
       this.$emit("onModeChanged", e)
       this.selectedMode = e
     },
