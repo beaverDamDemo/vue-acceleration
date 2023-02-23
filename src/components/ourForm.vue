@@ -146,8 +146,6 @@ export default {
     console.log("⚛ ~ Vue.version", Vue.version);
     console.log("setting default engine and preset and mode.")
 
-    this.selectCarPresetChange(1)
-
     const localStorageMode = localStorage.selectedMode || undefined
 
     this.selectMode(localStorageMode)
@@ -157,6 +155,12 @@ export default {
       this.selectEngineChange(parseInt(localStorage.getItem('selectedEngine')))
     } else {
       this.selectEngineChange(4)
+    }
+
+    if (localStorage.getItem('selectedCarPreset')) {
+      this.selectCarPresetChange(parseInt(localStorage.getItem('selectedCarPreset')))
+    } else {
+      this.selectCarPresetChange(1)
     }
   },
 
@@ -205,6 +209,7 @@ export default {
         this.store.rollingRes = this.csrr
         this.store.maximumAccG = this.csmag
         this.store.selectedCarPreset = e.target.value
+        localStorage.setItem('selectedCarPreset', e.target.value)
       } else if (typeof (e) == "number") {
         this.selectedCarPreset = e
         this.$eventBus.$emit('selectCarPresetChange', 0)
@@ -217,6 +222,7 @@ export default {
         this.store.rollingRes = this.csrr
         this.store.maximumAccG = this.csmag
         this.store.selectedCarPreset = e
+        localStorage.setItem('selectedCarPreset', e)
       }
     },
 
