@@ -345,45 +345,35 @@ export default {
         store.love = love;
       } else if (this.mode == "allPossibleGears") {
         var t0 = performance.now();
-        let gear_0 = [3.2, 2.5, 2.0];
-        let gear_1 = [2.0, 1.6, 1.4];
-        let gear_2 = [1.7, 1.3];
-        let gear_3 = [1.0, 0.9, 0.82];
-        let gear_4 = [0.82, 0.72, 0.68];
-        let gear_5 = [0.76, 0.7, 0.62, 0.56];
-        // let gear_0 = [3.2, 2.5];
-        // let gear_1 = [2.0, 1.6];
-        // let gear_2 = [1.7, 1.3];
-        // let gear_3 = [1.0, 0.82];
-        // let gear_4 = [0.72, 0.68];
-        // let gear_5 = [0.62, 0.56];
+        const gear_0 = [3.2, 3.1, 3, 2.9, 2.8, 2.7, 2.6, 2.5, 2.4, 2.3, 2.2];
+        const gear_1 = [3.2, 3.1, 3, 2.9, 2.8, 2.7, 2.6, 2.5, 2.4, 2.3, 2.2, 2.1, 2.0, 1.9, 1.8, 1.7];
+        const gear_2 = [2.9, 2.8, 2.7, 2.6, 2.5, 2.4, 2.3, 2.2, 2.1, 2.0, 1.9, 1.8, 1.7];
+        const gear_3 = [2.5, 2.4, 2.3, 2.2, 2.1, 2.0, 1.9, 1.8, 1.7, 1.6, 1.5, 1.4, 1.3, 1.2];
+        const gear_4 = [2.2, 2.1, 2.0, 1.9, 1.8, 1.7, 1.6, 1.5, 1.4, 1.3, 1.2, 1.1, 1.0, 0.9, 0.8, 0.7];
+        const gear_5 = [2.2, 2.1, 2.0, 1.9, 1.8, 1.7, 1.6, 1.5, 1.4, 1.3, 1.2, 1.1, 1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4];
         let total = 0;
 
         for (let i = 0; i < gear_0.length; i++) {
           for (let j = 0; j < gear_1.length; j++) {
+            if (gear_0[i] <= gear_1[j]) continue;
             for (let k = 0; k < gear_2.length; k++) {
+              if (gear_1[j] <= gear_2[k]) continue;
               for (let l = 0; l < gear_3.length; l++) {
+                if (gear_2[k] <= gear_3[l]) continue;
                 for (let m = 0; m < gear_4.length; m++) {
+                  if (gear_3[l] <= gear_4[m]) continue;
                   for (let n = 0; n < gear_5.length; n++) {
-                    if (gear_0[i] > gear_1[j]) {
-                      if (gear_1[j] > gear_2[k]) {
-                        if (gear_2[k] > gear_3[l]) {
-                          if (gear_3[l] > gear_4[m]) {
-                            if (gear_4[m] > gear_5[n]) {
-                              total++;
+                    if (gear_4[m] <= gear_5[n]) continue;
 
-                              const tmp = [gear_0[i],
-                              gear_1[j],
-                              gear_2[k],
-                              gear_3[l],
-                              gear_4[m],
-                              gear_5[n],]
-                              tanja.push(runWithGearShifting(tmp, 2.999));
-                            }
-                          }
-                        }
-                      }
-                    }
+                    total++;
+                    const tmp = [gear_0[i],
+                    gear_1[j],
+                    gear_2[k],
+                    gear_3[l],
+                    gear_4[m],
+                    gear_5[n],]
+                    tanja.push(runWithGearShifting(tmp, 2.999));
+
                   }
                 }
               }
