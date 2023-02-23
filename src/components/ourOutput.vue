@@ -8,11 +8,7 @@
         needed: {{ l[6] }}&nbsp;
       </div>
       <div class="detailedTextContainer">
-        <div
-          v-for="(singleRun, index) of store.tanja"
-          :key="`tanja-${index}`"
-          class="detailedText"
-        >
+        <div v-for="(singleRun, index) of store.tanja" :key="`tanja-${index}`" class="detailedText">
           <div class="detailedText">
             <span>speed</span>
             <span>dist.</span>
@@ -20,14 +16,8 @@
             <span>dist. inc.</span>
             <span>rpm</span>
           </div>
-          <div
-            v-for="(entry, innerIndex) of singleRun"
-            :key="`singleRun-${innerIndex}`"
-          >
-            <span
-              v-for="(span, innerMostIndex) of entry"
-              :key="`span-${innerMostIndex}`"
-            >
+          <div v-for="(entry, innerIndex) of singleRun" :key="`singleRun-${innerIndex}`">
+            <span v-for="(span, innerMostIndex) of entry" :key="`span-${innerMostIndex}`">
               <span v-if="innerMostIndex == 3">
                 {{ span | decimalsShortenFilter }}
               </span>
@@ -42,30 +32,19 @@
     <div v-else-if="store.tanja.length > 0">
       <h1>Results for multiple gears</h1>
       <div class="shortText">
-        <div
-          v-for="(entry, index) of store.resultsFixedMultipleGears"
-          :key="`resultsFixedMultipleGears-${index}`"
-        >
+        <div v-for="(entry, index) of store.resultsFixedMultipleGears" :key="`resultsFixedMultipleGears-${index}`">
           <h5 style="display: flex">
             <span>Result n. {{ index }}</span>
             <span style="flex-grow: 1"></span>
-            <span
-              style="font-size: 0.625em; text-align: right; cursor: pointer"
-            >
+            <span style="font-size: 0.625em; text-align: right; cursor: pointer">
               <button @click="deleteResult(index)">❌</button>
             </span>
           </h5>
-          <div
-            v-for="(o, innerIndex) in Object.entries(entry)"
-            :key="`object-${innerIndex}`"
-          >
+          <div v-for="(o, innerIndex) in Object.entries(entry)" :key="`object-${innerIndex}`">
             <span>{{ o[0] }}: </span>
             <span>
               <span v-if="Array.isArray(o[1])">
-                <div
-                  v-for="(a, innerMostIndex) of o[1]"
-                  :key="`div-array-${innerMostIndex}`"
-                >
+                <div v-for="(a, innerMostIndex) of o[1]" :key="`div-array-${innerMostIndex}`">
                   {{ a | decimalsShortenFilter }}
                 </div>
               </span>
@@ -127,25 +106,25 @@ export default {
     this.$eventBus.$on('calculationDone', (mode) => {
       console.log("Calculation done ⚛ ~ mode", mode);
 
-      let i=0
+      let i = 0
       let upto_100_check = true
       let upto_150_check = true
       let upto_200_check = true
 
-      while(i < this.store.tanja[0].length) {
+      while (i < this.store.tanja[0].length) {
         // console.log("⚛ ~ this.store.resultsFixedMultipleGears[i]", this.store.tanja[0][i]);
 
-        if(upto_100_check && this.store.tanja[0][i][0] >= 100) {
-          console.log(`%c⚛ currentSpeed: ${this.store.tanja[0][i][0]} km/h; t= ${this.store.tanja[0][i][2]} s`, "background: midnightblue; color: white; font-weight: bold;");
-          console.log(`%c⚛ distance: ${this.store.tanja[0][i][1]} power: ${Math.round(this.store.tanja[0][i][3])} rpm: ${this.store.tanja[0][i][4]} gear: ${this.store.tanja[0][i][5] + 1}`, "background: midnightblue; color: white; font-weight: normal;");
+        if (upto_100_check && this.store.tanja[0][i][0] >= 100) {
+          // console.log(`%c⚛ currentSpeed: ${this.store.tanja[0][i][0]} km/h; t= ${this.store.tanja[0][i][2]} s`, "background: midnightblue; color: white; font-weight: bold;");
+          // console.log(`%c⚛ distance: ${this.store.tanja[0][i][1]} power: ${Math.round(this.store.tanja[0][i][3])} rpm: ${this.store.tanja[0][i][4]} gear: ${this.store.tanja[0][i][5] + 1}`, "background: midnightblue; color: white; font-weight: normal;");
           upto_100_check = false
-        } else if(upto_150_check && this.store.tanja[0][i][0] >= 150) {
-          console.log(`%c⚛ currentSpeed: ${this.store.tanja[0][i][0]} km/h; t= ${this.store.tanja[0][i][2]} s`, "background: black; color: wheat; font-weight: bold;");
-          console.log(`%c⚛ distance: ${this.store.tanja[0][i][1]} power: ${Math.round(this.store.tanja[0][i][3])} rpm: ${this.store.tanja[0][i][4]} gear: ${this.store.tanja[0][i][5] + 1}`, "background: black; color: wheat; font-weight: normal;");
+        } else if (upto_150_check && this.store.tanja[0][i][0] >= 150) {
+          // console.log(`%c⚛ currentSpeed: ${this.store.tanja[0][i][0]} km/h; t= ${this.store.tanja[0][i][2]} s`, "background: black; color: wheat; font-weight: bold;");
+          // console.log(`%c⚛ distance: ${this.store.tanja[0][i][1]} power: ${Math.round(this.store.tanja[0][i][3])} rpm: ${this.store.tanja[0][i][4]} gear: ${this.store.tanja[0][i][5] + 1}`, "background: black; color: wheat; font-weight: normal;");
           upto_150_check = false
-        } else if(upto_200_check && this.store.tanja[0][i][0] >= 200) {
-          console.log(`%c⚛ currentSpeed: ${this.store.tanja[0][i][0]} km/h; t= ${this.store.tanja[0][i][2]} s`, "background: purple; color: lightcyan; font-weight: bold;");
-          console.log(`%c⚛ distance: ${this.store.tanja[0][i][1]} power: ${Math.round(this.store.tanja[0][i][3])} rpm: ${this.store.tanja[0][i][4]} gear: ${this.store.tanja[0][i][5] + 1}`, "background: purple; color: lightcyan; font-weight: normal;");
+        } else if (upto_200_check && this.store.tanja[0][i][0] >= 200) {
+          // console.log(`%c⚛ currentSpeed: ${this.store.tanja[0][i][0]} km/h; t= ${this.store.tanja[0][i][2]} s`, "background: purple; color: lightcyan; font-weight: bold;");
+          // console.log(`%c⚛ distance: ${this.store.tanja[0][i][1]} power: ${Math.round(this.store.tanja[0][i][3])} rpm: ${this.store.tanja[0][i][4]} gear: ${this.store.tanja[0][i][5] + 1}`, "background: purple; color: lightcyan; font-weight: normal;");
           upto_200_check = false
           break
         } else {
@@ -296,7 +275,7 @@ export default {
         }
       })
     },
-    deleteResult(index) {
+    deleteResult (index) {
       this.store.resultsFixedMultipleGears.splice(index, 1)
     }
   }
@@ -425,9 +404,11 @@ h1 {
   flex-direction: row;
   flex-wrap: wrap;
 }
+
 .shortText h5 {
   text-align: center;
 }
+
 .shortText > div {
   margin: 0.5rem 1.5rem;
   padding: 0.25rem;
@@ -438,11 +419,13 @@ h1 {
 .shortText > div > div {
   display: flex;
 }
+
 .shortText > div > div > span:nth-child(1) {
   text-align: right;
   display: inline-block;
   min-width: 170px;
 }
+
 .shortText > div > div > span:nth-child(2) {
   text-align: right;
   display: inline-block;

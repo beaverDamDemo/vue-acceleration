@@ -3,6 +3,9 @@
     <button style="position: absolute; right: 20px; top: 10px" class="btn btn-warning" @click="onLogStore">
       log store
     </button>
+    <button style="position: absolute; right: 120px; top: 10px" class="btn btn-danger" @click="onTableStore">
+      Table Store
+    </button>
     <ourForm class="ourForm" @onModeChanged=onModeChanged($event)></ourForm>
     <div class="row justify-content-center">
       <input type="checkbox" name="showMyChart" v-model="showMyChart" />
@@ -73,6 +76,19 @@ export default {
         console.log(e[0] + ": " + e[1]);
       });
     },
+    onTableStore () {
+      for (let i = 0; i < this.store.runWithGearShifting.length; i++) {
+        console.log(`%c⚛ ${i}: ${this.store.runWithGearShifting[i].exetime}`, "font-weight: bold;");
+        console.log(`⚛ `, this.store.runWithGearShifting[i].currentGearing);
+        console.log(`⚛ `, this.store.runWithGearShifting[i]["final speed"]);
+        console.log(`⚛ `, Math.round(this.store.runWithGearShifting[i].computedGearLength[0]));
+        console.log(`⚛ `, Math.round(this.store.runWithGearShifting[i].computedGearLength[1]));
+        console.log(`⚛ `, Math.round(this.store.runWithGearShifting[i].computedGearLength[2]));
+        console.log(`⚛ `, Math.round(this.store.runWithGearShifting[i].computedGearLength[3]));
+        console.log(`⚛ `, Math.round(this.store.runWithGearShifting[i].computedGearLength[4]));
+        console.log(`⚛ `, Math.round(this.store.runWithGearShifting[i].computedGearLength[5]));
+      }
+    },
     sendData () {
       this.$eventBus.$emit("send-data", this.setup);
     },
@@ -85,7 +101,8 @@ export default {
     startButtonClick () {
       let tanja = [];
       let love = [];
-      var t0 = performance.now();
+      // var t0 = performance.now();
+      let bestResult = undefined
 
       var singleRun = (isMaximumSpeedRun, maxDistance, gearLength) => {
         var acceleration, brakeforce, pushforce, netforce, power;
@@ -262,55 +279,69 @@ export default {
           //   console.log("☢️", "time: ", executionTime / 1000, " acceleration ", Math.round((10000 * speedGain / calculate_interval_ms)) / 10, "m/s2 ", Math.round(currentSpeed * 3.6), "km/h", currentRpm, "rpm");
           // }
 
-          arrResult.push([
-            Math.round(currentSpeed * 3.6),
-            Math.floor(distance),
-            executionTime / 1000,
-            power,
-            currentRpm,
-            currentGearIndex,
-          ]);
+          // arrResult.push([
+          //   Math.round(currentSpeed * 3.6),
+          //   Math.floor(distance),
+          //   executionTime / 1000,
+          //   power,
+          //   currentRpm,
+          //   currentGearIndex,
+          // ]);
 
           if (executionTime < 2000) {
-            console.log("⚛ ~ power:", Math.round(power), "hp ", Math.round(currentRpm) + " rpm ", Math.round(currentSpeed * 3.6), " km/h", acceleration);
+            // console.log("⚛ ~ power:", Math.round(power), "hp ", Math.round(currentRpm) + " rpm ", Math.round(currentSpeed * 3.6), " km/h", acceleration);
           }
         }
 
         // love.push([Number(gearLength).toFixed(0), arrResult[arrResult.length - 1][4], Number((currentSpeed * 3.6).toFixed(2)), 'km/h distance: ', Math.floor(distance), "m, exetime: ", executionTime / 1000 + 's'])
-        console.error(
-          "final speed: ",
-          Math.round(currentSpeed * 3.6),
-          "km/h gear:",
-          currentGearIndex + 1,
-          "rpm:",
-          lastRpm,
-          " distance:",
-          Math.floor(distance),
-          "m, exetime: ",
-          executionTime / 1000 + "s"
-        );
-        var t1 = performance.now();
-        console.log("Call took " + (t1 - t0) + " milliseconds.");
+        // console.error(
+        //   "final speed: ",
+        //   Math.round(currentSpeed * 3.6),
+        //   "km/h gear:",
+        //   currentGearIndex + 1,
+        //   "rpm:",
+        //   lastRpm,
+        //   " distance:",
+        //   Math.floor(distance),
+        //   "m, exetime: ",
+        //   executionTime / 1000 + "s"
+        // );
+        // var t1 = performance.now();
+        // console.log("Call took " + (t1 - t0) + " milliseconds.");
 
         let currentWeightKg = this.store.weightKg;
         let currentAeroCx = this.store.aeroCx;
         let currentRollingRes = this.store.rollingRes;
         let currentMaximumAccG = this.store.maximumAccG;
 
-        store.resultsFixedMultipleGears.push({
-          "final speed": Math.round(currentSpeed * 3.6) + " km/h",
-          gear: currentGearIndex + 1,
-          rpm: lastRpm + " rpm",
-          distance: Math.floor(distance) + " m",
-          exetime: executionTime / 1000 + " s",
-          currentGearing: currentGearing,
-          finalDrive: gearFinal,
-          computedGearLength: gearLength,
-          currentWeightKg: currentWeightKg,
-          currentAeroCx: currentAeroCx,
-          currentRollingRes: currentRollingRes,
-          currentMaximumAccG: currentMaximumAccG,
-        });
+        function pushToStore () {
+          console.log("pushing to store");
+          store.runWithGearShifting.push({
+            "final speed": Math.round(currentSpeed * 3.6) + " km/h",
+            gear: currentGearIndex + 1,
+            rpm: lastRpm + " rpm",
+            distance: Math.floor(distance) + " m",
+            exetime: executionTime / 1000 + " s",
+            currentGearing: currentGearing,
+            finalDrive: gearFinal,
+            computedGearLength: gearLength,
+            currentWeightKg: currentWeightKg,
+            currentAeroCx: currentAeroCx,
+            currentRollingRes: currentRollingRes,
+            currentMaximumAccG: currentMaximumAccG,
+          });
+        }
+
+        if (!bestResult) {
+          bestResult = executionTime
+        }
+        if (executionTime < bestResult) {
+          bestResult = executionTime
+          // pushToStore()
+        }
+        if (Math.random() < 0.02) {
+          pushToStore()
+        }
 
         return arrResult;
       };
@@ -344,13 +375,13 @@ export default {
         store.tanja = tanja;
         store.love = love;
       } else if (this.mode == "allPossibleGears") {
-        var t0 = performance.now();
-        const gear_0 = [3.2, 3.1, 3, 2.9, 2.8, 2.7, 2.6, 2.5, 2.4, 2.3, 2.2];
-        const gear_1 = [3.2, 3.1, 3, 2.9, 2.8, 2.7, 2.6, 2.5, 2.4, 2.3, 2.2, 2.1, 2.0, 1.9, 1.8, 1.7];
-        const gear_2 = [2.9, 2.8, 2.7, 2.6, 2.5, 2.4, 2.3, 2.2, 2.1, 2.0, 1.9, 1.8, 1.7];
-        const gear_3 = [2.5, 2.4, 2.3, 2.2, 2.1, 2.0, 1.9, 1.8, 1.7, 1.6, 1.5, 1.4, 1.3, 1.2];
-        const gear_4 = [2.2, 2.1, 2.0, 1.9, 1.8, 1.7, 1.6, 1.5, 1.4, 1.3, 1.2, 1.1, 1.0, 0.9, 0.8, 0.7];
-        const gear_5 = [2.2, 2.1, 2.0, 1.9, 1.8, 1.7, 1.6, 1.5, 1.4, 1.3, 1.2, 1.1, 1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4];
+        // var t0 = performance.now();
+        const gear_0 = [3.7, 2.4, 2.3, 2.2];
+        const gear_1 = [2.8, 1.9, 1.8, 1.7];
+        const gear_2 = [2.9, 2.8, 1.9, 1.8, 1.7];
+        const gear_3 = [2.5, 2.4, 1.4, 1.3, 1.2];
+        const gear_4 = [1.6, 1.5, 1.4, 1.3, 1.2, 1.1, 1.0, 0.9, 0.8, 0.7];
+        const gear_5 = [1.6, 1.5, 1.4, 1.3, 1.2, 1.1, 1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4];
         let total = 0;
 
         for (let i = 0; i < gear_0.length; i++) {
@@ -373,7 +404,6 @@ export default {
                     gear_4[m],
                     gear_5[n],]
                     tanja.push(runWithGearShifting(tmp, 2.999));
-
                   }
                 }
               }
@@ -383,14 +413,11 @@ export default {
 
         store.tanja = tanja;
         store.love = love;
-
-        // console.table(store.tanja);
-        var t1 = performance.now();
+        // const t1 = performance.now();
         console.log(
-          "Call took " + (t1 - t0) + " milliseconds. Total of runs made: ",
+          "Total of runs made: ",
           total
         );
-        this.runPerformed += 1;
       }
       console.log(`%cwill not work properly until we manage to limit tyre grip at beginning`, "color: red");
       this.$eventBus.$emit("calculationDone", this.mode);

@@ -9,7 +9,7 @@ export default {
   gearRatios: [],
   tanja: [],
   love: [],
-  resultsFixedMultipleGears: [],
+  runWithGearShifting: [],
   engines: [
     {
       label: 'Viper "700hp"',
