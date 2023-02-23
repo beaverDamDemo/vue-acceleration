@@ -88,6 +88,7 @@ export default {
         console.log(`⚛ `, Math.round(this.store.runWithGearShifting[i].computedGearLength[4]));
         console.log(`⚛ `, Math.round(this.store.runWithGearShifting[i].computedGearLength[5]));
       }
+      // here we must create a custom sorting
     },
     sendData () {
       this.$eventBus.$emit("send-data", this.setup);
