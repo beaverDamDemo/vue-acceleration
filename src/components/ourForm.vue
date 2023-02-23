@@ -146,12 +146,18 @@ export default {
     console.log("⚛ ~ Vue.version", Vue.version);
     console.log("setting default engine and preset and mode.")
 
-    this.selectEngineChange(4)
     this.selectCarPresetChange(1)
 
     const localStorageMode = localStorage.selectedMode || undefined
+
     this.selectMode(localStorageMode)
     localStorage.setItem('selectedMode', localStorageMode)
+
+    if (localStorage.getItem('selectedEngine')) {
+      this.selectEngineChange(parseInt(localStorage.getItem('selectedEngine')))
+    } else {
+      this.selectEngineChange(4)
+    }
   },
 
   methods: {
@@ -175,6 +181,7 @@ export default {
           this.fillTorqueLookupTable(this.selectedEngine)
         }
         this.$eventBus.$emit('selectEngineChange', e.target.value)
+        localStorage.setItem('selectedEngine', e.target.value)
       } else if (typeof (e) == "number") {
         this.selectedEngine = e
         this.store.selectedEngine = e
@@ -182,6 +189,7 @@ export default {
           this.fillTorqueLookupTable(this.selectedEngine)
         }
         this.$eventBus.$emit('selectEngineChange', e)
+        localStorage.setItem('selectedEngine', e)
       }
     },
     selectCarPresetChange (e) {

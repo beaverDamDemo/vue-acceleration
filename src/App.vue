@@ -466,7 +466,6 @@ export default {
       this.splits = e;
     });
     this.$eventBus.$on("selectEngineChange", (e) => {
-      console.log("⛳ ~ e", e);
       store.selectedEngine = e;
       this.drawPowerAndTorqueChart();
     });
