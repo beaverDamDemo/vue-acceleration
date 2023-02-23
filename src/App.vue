@@ -315,7 +315,6 @@ export default {
         let currentMaximumAccG = this.store.maximumAccG;
 
         function pushToStore () {
-          console.log("pushing to store");
           store.runWithGearShifting.push({
             "final speed": Math.round(currentSpeed * 3.6) + " km/h",
             gear: currentGearIndex + 1,
@@ -332,7 +331,7 @@ export default {
           });
         }
 
-        if (!bestResult) {
+        if (Object.keys(bestResult).length == 0) {
           bestResult.executionTime = executionTime
           bestResult.finalSpeed = Math.round(currentSpeed * 3.6) + " km/h"
           bestResult.gear = currentGearIndex + 1
@@ -340,7 +339,8 @@ export default {
           bestResult.exetime = executionTime / 1000 + " s"
           bestResult.currentGearing = currentGearing
         }
-        if (executionTime < bestResult) {
+
+        if (executionTime < bestResult.executionTime) {
           bestResult.executionTime = executionTime
           bestResult.finalSpeed = Math.round(currentSpeed * 3.6) + " km/h"
           bestResult.gear = currentGearIndex + 1
@@ -349,9 +349,9 @@ export default {
           bestResult.currentGearing = currentGearing
           pushToStore()
         }
-        // if (Math.random() < 0.001) {
-        //   pushToStore()
-        // }
+        if (Math.random() < 0.0005) {
+          pushToStore()
+        }
 
         return arrResult;
       };
