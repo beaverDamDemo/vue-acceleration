@@ -102,7 +102,7 @@ export default {
       let tanja = [];
       let love = [];
       // var t0 = performance.now();
-      let bestResult = undefined
+      let bestResult = {}
 
       var singleRun = (isMaximumSpeedRun, maxDistance, gearLength) => {
         var acceleration, brakeforce, pushforce, netforce, power;
@@ -333,15 +333,25 @@ export default {
         }
 
         if (!bestResult) {
-          bestResult = executionTime
+          bestResult.executionTime = executionTime
+          bestResult.finalSpeed = Math.round(currentSpeed * 3.6) + " km/h"
+          bestResult.gear = currentGearIndex + 1
+          bestResult.rpm = lastRpm + " rpm"
+          bestResult.exetime = executionTime / 1000 + " s"
+          bestResult.currentGearing = currentGearing
         }
         if (executionTime < bestResult) {
-          bestResult = executionTime
-          // pushToStore()
-        }
-        if (Math.random() < 0.002) {
+          bestResult.executionTime = executionTime
+          bestResult.finalSpeed = Math.round(currentSpeed * 3.6) + " km/h"
+          bestResult.gear = currentGearIndex + 1
+          bestResult.rpm = lastRpm + " rpm"
+          bestResult.exetime = executionTime / 1000 + " s"
+          bestResult.currentGearing = currentGearing
           pushToStore()
         }
+        // if (Math.random() < 0.001) {
+        //   pushToStore()
+        // }
 
         return arrResult;
       };
@@ -383,12 +393,12 @@ export default {
         // const gear_4 = [2.2, 2.1, 2.0, 1.9, 1.8, 1.7, 1.6, 1.5, 1.4, 1.3, 1.2, 1.1, 1.0, 0.9, 0.8, 0.7];
         // const gear_5 = [2.2, 2.1, 2.0, 1.9, 1.8, 1.7, 1.6, 1.5, 1.4, 1.3, 1.2, 1.1, 1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4];
         const gear_0 = [3.2, 3, 2.8, 2.6, 2.4, 2.3, 2.2];
-        const gear_1 = [3.2, 2.8, 2.7, 2.4, 2.3, 2.0, 1.9, 1.8, 1.7];
+        const gear_1 = [3.2, 2.8, 2.7, 2.3, 2.0, 1.9, 1.8, 1.7];
         const gear_2 = [2.4, 2.3, 2.2, 1.9, 1.8, 1.7];
-        const gear_3 = [2.3, 2.2, 2.1, 2.0, 1.7, 1.6, 1.5, 1.4, 1.3, 1.2];
+        const gear_3 = [2.3, 2.0, 1.7, 1.6, 1.5, 1.4, 1.3, 1.2];
         const gear_4 = [1.9, 1.8, 1.5, 1.4, 1.3, 1.2, 1.1, 1.0, 0.9, 0.8, 0.7];
-        const gear_5 = [1.6, 1.5, 1.4, 1.3, 1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4];
-        // 32.000 runs
+        const gear_5 = [1.6, 1.5, 1.3, 1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4];
+        // 23.000 runs
         let total = 0;
 
         for (let i = 0; i < gear_0.length; i++) {
@@ -425,6 +435,7 @@ export default {
           "Total of runs made: ",
           total
         );
+        console.log(" best result: ", bestResult);
       }
       console.log(`%cwill not work properly until we manage to limit tyre grip at beginning`, "color: red");
       this.$eventBus.$emit("calculationDone", this.mode);
