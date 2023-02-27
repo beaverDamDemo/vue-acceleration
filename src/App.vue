@@ -98,6 +98,35 @@ export default {
     },
     exportWithSheetJS () {
       console.log("not done yet");
+      const ExportJsonExcel = require("js-export-excel");
+
+      var option = {};
+
+      option.fileName = "vue-acceleration-export";
+
+      option.datas = [
+        {
+          sheetName: "prvi list",
+          sheetHeader: ["name", "model"],
+          columnWidths: [8, 8],
+          sheetData: [
+            { one: "ferrari", two: "testarossa" },
+            { one: "lamborghini", two: "diablo" },
+          ],
+        },
+        {
+          sheetName: "drugi list",
+          sheetHeader: ["name", "model"],
+          columnWidths: [8, 8],
+          sheetData: [
+            { one: "porsche", two: "959" },
+            { one: "bmw", two: "765Li" },
+          ],
+        },
+      ];
+
+      var toExcel = new ExportJsonExcel(option); //new
+      toExcel.saveExcel();
     },
     startButtonClick () {
       let tanja = [];
