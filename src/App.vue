@@ -125,8 +125,19 @@ export default {
         },
       ];
 
-      var toExcel = new ExportJsonExcel(option); //new
-      toExcel.saveExcel();
+      console.log("⚛ ~ store.runWithGearShifting.length:", store.runWithGearShifting.length);
+
+      Object.entries(store.runWithGearShifting[50]).forEach((e) => {
+        console.log(`%c${e[0]}: ${e[1]}`, "font-weight: normal; background: wheat; color: black");
+      })
+
+      for (let i = 0; i < store.runWithGearShifting.length; i++) {
+        // store.runWithGearShifting[i]
+      }
+
+
+      // var toExcel = new ExportJsonExcel(option); //new
+      // toExcel.saveExcel();
     },
     startButtonClick () {
       let tanja = [];
@@ -221,6 +232,7 @@ export default {
       };
 
       var runWithGearShifting = (gearRatios, gearFinal) => {
+        // console.log("⚛ ~ runWithGearShifting:", runWithGearShifting);
         var acceleration, brakeforce, pushforce, netforce, inertia, power;
         var calculate_interval_ms = 10; //tested 10
         var distance = 0;
@@ -318,9 +330,9 @@ export default {
           //   currentGearIndex,
           // ]);
 
-          if (executionTime < 2000) {
-            // console.log("⚛ ~ power:", Math.round(power), "hp ", Math.round(currentRpm) + " rpm ", Math.round(currentSpeed * 3.6), " km/h", acceleration);
-          }
+          // if (executionTime < 2000) {
+          //   console.log("⚛ ~ power:", Math.round(power), "hp ", Math.round(currentRpm) + " rpm ", Math.round(currentSpeed * 3.6), " km/h", acceleration);
+          // }
         }
 
         // love.push([Number(gearLength).toFixed(0), arrResult[arrResult.length - 1][4], Number((currentSpeed * 3.6).toFixed(2)), 'km/h distance: ', Math.floor(distance), "m, exetime: ", executionTime / 1000 + 's'])
@@ -377,11 +389,13 @@ export default {
           bestResult.rpm = lastRpm + " rpm"
           bestResult.exetime = executionTime / 1000 + " s"
           bestResult.currentGearing = currentGearing
-          pushToStore()
+          // pushToStore()
         }
-        if (Math.random() < 0.0005) {
-          pushToStore()
-        }
+        // if (Math.random() < 0.0005) {
+        //   pushToStore()
+        // }
+
+        pushToStore()
 
         return arrResult;
       };
@@ -430,12 +444,12 @@ export default {
         // const gear_4 = [1.9, 1.8, 1.5, 1.4, 1.3, 1.2, 1.1, 1.0, 0.9, 0.8, 0.7];
         // const gear_5 = [1.6, 1.5, 1.3, 1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4];
 
-        const gear_0 = [3.2, 3, 2.4, 2.3, 2.2];
-        const gear_1 = [3.2, 2.8, 1.9, 1.8, 1.7];
-        const gear_2 = [2.4, 2.3, 1.8, 1.7];
-        const gear_3 = [2.3, 2.0, 1.5, 1.4, 1.3, 1.2];
-        const gear_4 = [1.9, 1.8, 1.0, 0.9, 0.8, 0.7];
-        const gear_5 = [1.6, 1.5, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4];
+        const gear_0 = [3.2, 2.3, 2.2];
+        const gear_1 = [3.2, 1.9, 1.8, 1.7];
+        const gear_2 = [2.4, 2.3, 1.7];
+        const gear_3 = [2.3, 2.0, 1.4, 1.3, 1.2];
+        const gear_4 = [1.9, 1.8, 0.9, 0.8, 0.7];
+        const gear_5 = [1.6, 1.5, 0.7, 0.6, 0.5, 0.4];
         // 23.000 runs
         let total = 0;
 
@@ -458,7 +472,8 @@ export default {
                     gear_3[l],
                     gear_4[m],
                     gear_5[n],]
-                    tanja.push(runWithGearShifting(tmp, 2.875));
+                    // tanja.push(runWithGearShifting(tmp, 2.875));
+                    runWithGearShifting(tmp, 3.2)
                   }
                 }
               }

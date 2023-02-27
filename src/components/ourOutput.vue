@@ -106,31 +106,31 @@ export default {
     this.$eventBus.$on('calculationDone', (mode) => {
       console.log("Calculation done ⚛ ~ mode", mode);
 
-      let i = 0
-      let upto_100_check = true
-      let upto_150_check = true
-      let upto_200_check = true
+      // let i = 0
+      // let upto_100_check = true
+      // let upto_150_check = true
+      // let upto_200_check = true
 
-      while (i < this.store.tanja[0].length) {
-        // console.log("⚛ ~ this.store.resultsFixedMultipleGears[i]", this.store.tanja[0][i]);
+      // while (i < this.store.tanja[0].length) {
+      //   // console.log("⚛ ~ this.store.resultsFixedMultipleGears[i]", this.store.tanja[0][i]);
 
-        if (upto_100_check && this.store.tanja[0][i][0] >= 100) {
-          // console.log(`%c⚛ currentSpeed: ${this.store.tanja[0][i][0]} km/h; t= ${this.store.tanja[0][i][2]} s`, "background: midnightblue; color: white; font-weight: bold;");
-          // console.log(`%c⚛ distance: ${this.store.tanja[0][i][1]} power: ${Math.round(this.store.tanja[0][i][3])} rpm: ${this.store.tanja[0][i][4]} gear: ${this.store.tanja[0][i][5] + 1}`, "background: midnightblue; color: white; font-weight: normal;");
-          upto_100_check = false
-        } else if (upto_150_check && this.store.tanja[0][i][0] >= 150) {
-          // console.log(`%c⚛ currentSpeed: ${this.store.tanja[0][i][0]} km/h; t= ${this.store.tanja[0][i][2]} s`, "background: black; color: wheat; font-weight: bold;");
-          // console.log(`%c⚛ distance: ${this.store.tanja[0][i][1]} power: ${Math.round(this.store.tanja[0][i][3])} rpm: ${this.store.tanja[0][i][4]} gear: ${this.store.tanja[0][i][5] + 1}`, "background: black; color: wheat; font-weight: normal;");
-          upto_150_check = false
-        } else if (upto_200_check && this.store.tanja[0][i][0] >= 200) {
-          // console.log(`%c⚛ currentSpeed: ${this.store.tanja[0][i][0]} km/h; t= ${this.store.tanja[0][i][2]} s`, "background: purple; color: lightcyan; font-weight: bold;");
-          // console.log(`%c⚛ distance: ${this.store.tanja[0][i][1]} power: ${Math.round(this.store.tanja[0][i][3])} rpm: ${this.store.tanja[0][i][4]} gear: ${this.store.tanja[0][i][5] + 1}`, "background: purple; color: lightcyan; font-weight: normal;");
-          upto_200_check = false
-          break
-        } else {
-          i++
-        }
-      }
+      //   if (upto_100_check && this.store.tanja[0][i][0] >= 100) {
+      //     // console.log(`%c⚛ currentSpeed: ${this.store.tanja[0][i][0]} km/h; t= ${this.store.tanja[0][i][2]} s`, "background: midnightblue; color: white; font-weight: bold;");
+      //     // console.log(`%c⚛ distance: ${this.store.tanja[0][i][1]} power: ${Math.round(this.store.tanja[0][i][3])} rpm: ${this.store.tanja[0][i][4]} gear: ${this.store.tanja[0][i][5] + 1}`, "background: midnightblue; color: white; font-weight: normal;");
+      //     upto_100_check = false
+      //   } else if (upto_150_check && this.store.tanja[0][i][0] >= 150) {
+      //     // console.log(`%c⚛ currentSpeed: ${this.store.tanja[0][i][0]} km/h; t= ${this.store.tanja[0][i][2]} s`, "background: black; color: wheat; font-weight: bold;");
+      //     // console.log(`%c⚛ distance: ${this.store.tanja[0][i][1]} power: ${Math.round(this.store.tanja[0][i][3])} rpm: ${this.store.tanja[0][i][4]} gear: ${this.store.tanja[0][i][5] + 1}`, "background: black; color: wheat; font-weight: normal;");
+      //     upto_150_check = false
+      //   } else if (upto_200_check && this.store.tanja[0][i][0] >= 200) {
+      //     // console.log(`%c⚛ currentSpeed: ${this.store.tanja[0][i][0]} km/h; t= ${this.store.tanja[0][i][2]} s`, "background: purple; color: lightcyan; font-weight: bold;");
+      //     // console.log(`%c⚛ distance: ${this.store.tanja[0][i][1]} power: ${Math.round(this.store.tanja[0][i][3])} rpm: ${this.store.tanja[0][i][4]} gear: ${this.store.tanja[0][i][5] + 1}`, "background: purple; color: lightcyan; font-weight: normal;");
+      //     upto_200_check = false
+      //     break
+      //   } else {
+      //     i++
+      //   }
+      // }
     })
   },
   methods: {
