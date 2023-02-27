@@ -139,7 +139,7 @@ export default {
             three: store.runWithGearShifting[i]["rpm"],
             four: store.runWithGearShifting[i]["exetime"],
             five: store.runWithGearShifting[i]["currentGearing"],
-            six: store.runWithGearShifting[i]["finalDrive"],
+            six: "",
             seven: Math.round(store.runWithGearShifting[i]["computedGearLength"][0]),
             eight: Math.round(store.runWithGearShifting[i]["computedGearLength"][1]),
             nine: Math.round(store.runWithGearShifting[i]["computedGearLength"][2]),
