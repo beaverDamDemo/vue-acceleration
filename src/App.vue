@@ -23,7 +23,7 @@
           ">
           Run
         </button>
-        <button @click="exportWithSheetJS" class="btn btn-primary ml-1 mr-1 col-xs-12 col-md-9 col-lg-5" disabled>
+        <button @click="exportWithSheetJS" class="btn btn-primary ml-1 mr-1 col-xs-12 col-md-9 col-lg-5">
           Export with SheetJS (WIP)
         </button>
       </div>
