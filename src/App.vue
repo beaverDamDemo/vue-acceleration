@@ -105,41 +105,52 @@ export default {
       option.fileName = "vue-acceleration-export";
 
       option.datas = [
-        {
-          sheetName: "prvi list",
-          sheetHeader: ["name", "model"],
-          columnWidths: [8, 8],
-          sheetData: [
-            { one: "ferrari", two: "testarossa" },
-            { one: "lamborghini", two: "diablo" },
-          ],
-        },
-        {
-          sheetName: "drugi list",
-          sheetHeader: ["final speed", "gear", "rpm", "distance", "exetime", "currentGearing", "finalDrive", "computedGearLength", "currentWeightKg", "currentAeroCx", "currentRollingRes", "currentMaximumAccG",],
-          columnWidths: [8, 8],
-          sheetData: [
-            { one: "porsche", two: "959" },
-            { one: "bmw", two: "765Li" },
-          ],
-        },
+        // {
+        //   sheetName: "prvi list",
+        //   sheetHeader: ["name", "model"],
+        //   columnWidths: [8, 8],
+        //   sheetData: [
+        //     { one: "ferrari", two: "testarossa" },
+        //     { one: "lamborghini", two: "diablo" },
+        //   ],
+        // },
       ];
 
-      console.log("⚛ ~ store.runWithGearShifting.length:", store.runWithGearShifting.length);
+      console.log("⚛ ~ store.runWithGearShifting.length:", store.runWithGearShifting[50]);
+
+      // for (let i = 0; i < store.runWithGearShifting.length; i++) {
+      //   store.runWithGearShifting[i]
+      // }
 
       let tmpSheetData = [];
+      let sheetHeader = ["final speed", "gear", "rpm", "distance", "exetime", "currentGearing", "finalDrive", "computedGearLength", "currentWeightKg", "currentAeroCx", "currentRollingRes", "currentMaximumAccG",]
 
-      Object.entries(store.runWithGearShifting[50]).forEach((e) => {
-        console.log(`%c${e[0]}: ${e[1]}`, "font-weight: normal; background: wheat; color: black");
+      tmpSheetData.push(
+        {
+          one: store.runWithGearShifting[50]["final speed"],
+          two: store.runWithGearShifting[50]["gear"],
+          three: store.runWithGearShifting[50]["rpm"],
+          four: store.runWithGearShifting[50]["distance"],
+          five: store.runWithGearShifting[50]["exetime"],
+          six: store.runWithGearShifting[50]["currentGearing"],
+          seven: store.runWithGearShifting[50]["finalDrive"],
+          eight: store.runWithGearShifting[50]["computedGearLength"],
+          nine: store.runWithGearShifting[50]["currentWeightKg"],
+          ten: store.runWithGearShifting[50]["currentAeroCx"],
+          eleven: store.runWithGearShifting[50]["currentRollingRes"],
+          twelve: store.runWithGearShifting[50]["currentMaximumAccG"],
+        })
+
+
+      option.datas.push({
+        sheetName: "drugi list",
+        sheetHeader: sheetHeader,
+        columnWidths: [4, 2, 4, 4, 4, 10, 4, 7, 7, 7, 7, 7,],
+        sheetData: tmpSheetData
       })
 
-      for (let i = 0; i < store.runWithGearShifting.length; i++) {
-        // store.runWithGearShifting[i]
-      }
-
-
-      // var toExcel = new ExportJsonExcel(option); //new
-      // toExcel.saveExcel();
+      var toExcel = new ExportJsonExcel(option); //new
+      toExcel.saveExcel();
     },
     startButtonClick () {
       let tanja = [];
