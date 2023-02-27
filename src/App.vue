@@ -117,29 +117,26 @@ export default {
       ];
 
       console.log("⚛ ~ store.runWithGearShifting.length:", store.runWithGearShifting[50]);
-
-      // for (let i = 0; i < store.runWithGearShifting.length; i++) {
-      //   store.runWithGearShifting[i]
-      // }
-
       let tmpSheetData = [];
       let sheetHeader = ["final speed", "gear", "rpm", "distance", "exetime", "currentGearing", "finalDrive", "computedGearLength", "currentWeightKg", "currentAeroCx", "currentRollingRes", "currentMaximumAccG",]
 
-      tmpSheetData.push(
-        {
-          one: store.runWithGearShifting[50]["final speed"],
-          two: store.runWithGearShifting[50]["gear"],
-          three: store.runWithGearShifting[50]["rpm"],
-          four: store.runWithGearShifting[50]["distance"],
-          five: store.runWithGearShifting[50]["exetime"],
-          six: store.runWithGearShifting[50]["currentGearing"],
-          seven: store.runWithGearShifting[50]["finalDrive"],
-          eight: store.runWithGearShifting[50]["computedGearLength"],
-          nine: store.runWithGearShifting[50]["currentWeightKg"],
-          ten: store.runWithGearShifting[50]["currentAeroCx"],
-          eleven: store.runWithGearShifting[50]["currentRollingRes"],
-          twelve: store.runWithGearShifting[50]["currentMaximumAccG"],
-        })
+      for (let i = 0; i < store.runWithGearShifting.length; i++) {
+        tmpSheetData.push(
+          {
+            one: store.runWithGearShifting[i]["final speed"],
+            two: store.runWithGearShifting[i]["gear"],
+            three: store.runWithGearShifting[i]["rpm"],
+            four: store.runWithGearShifting[i]["distance"],
+            five: store.runWithGearShifting[i]["exetime"],
+            six: store.runWithGearShifting[i]["currentGearing"],
+            seven: store.runWithGearShifting[i]["finalDrive"],
+            eight: store.runWithGearShifting[i]["computedGearLength"].delimiter(','),
+            nine: store.runWithGearShifting[i]["currentWeightKg"],
+            ten: store.runWithGearShifting[i]["currentAeroCx"],
+            eleven: store.runWithGearShifting[i]["currentRollingRes"],
+            twelve: store.runWithGearShifting[i]["currentMaximumAccG"],
+          })
+      }
 
 
       option.datas.push({
