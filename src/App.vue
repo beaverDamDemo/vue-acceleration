@@ -62,6 +62,7 @@ export default {
       myChartShow: false,
       mode: undefined,
       showMyChart: false,
+      calculate_interval_ms: 50
     };
   },
   created () {
@@ -167,7 +168,6 @@ export default {
       var singleRun = (isMaximumSpeedRun, maxDistance, gearLength) => {
         var acceleration, brakeforce, pushforce, netforce, power;
         var value = 0;
-        var calculate_interval_ms = 100; //tested 100
         var distance = 0;
         var executionTime = 0;
         var speedGain = 1.0;
@@ -198,12 +198,11 @@ export default {
           ) {
             //to pazi kako postaviš
             /* this is for slowing down calculation when it approaches 1600m mark */
-            calculate_interval_ms = calculate_interval_ms / 1; //povecaj za povecat natancnost
             interval = true;
           }
 
           step_count++;
-          executionTime = executionTime + calculate_interval_ms;
+          executionTime = executionTime + this.calculate_interval_ms;
           let cp = calculatePower(
             currentSpeed,
             executionTime,
@@ -221,12 +220,12 @@ export default {
             this.store.rollingRes,
             this.store.maximumAccG
           );
-          speedGain = acceleration * calculate_interval_ms;
+          speedGain = acceleration * this.calculate_interval_ms;
 
           currentSpeed += speedGain;
           distance =
             distance +
-            ((currentSpeed + speedGain / 2) * calculate_interval_ms) / 1000;
+            ((currentSpeed + speedGain / 2) * this.calculate_interval_ms) / 1000;
           // console.warn('currentSpeed: ', Math.round(currentSpeed*3.6), 'km/h distance: ', Math.floor(distance), "m, exetime: ", executionTime/1000+'s')
           arrResult.push([
             Math.round(currentSpeed * 3.6),
@@ -253,7 +252,6 @@ export default {
       var runWithGearShifting = (gearRatios, gearFinal) => {
         // console.log("⚛ ~ runWithGearShifting:", runWithGearShifting);
         var acceleration, brakeforce, pushforce, netforce, inertia, power;
-        var calculate_interval_ms = 10; //tested 10
         var distance = 0;
         var executionTime = 0;
         var speedGain = 1.0;
@@ -293,12 +291,11 @@ export default {
           ) {
             //to pazi kako postaviš
             /* this is for slowing down calculation when it approaches 1600m mark */
-            calculate_interval_ms = calculate_interval_ms / 1; //povecaj za povecat natancnost
             interval = true;
           }
 
           step_count++;
-          executionTime = executionTime + calculate_interval_ms;
+          executionTime = executionTime + this.calculate_interval_ms;
 
           let cp = calculatePower(
             currentSpeed,
@@ -326,18 +323,18 @@ export default {
             this.store.rollingRes,
             this.store.maximumAccG
           );
-          speedGain = acceleration * calculate_interval_ms;
+          speedGain = acceleration * this.calculate_interval_ms;
           currentSpeed += speedGain;
           distance =
             distance +
-            ((currentSpeed + speedGain / 2) * calculate_interval_ms) / 1000;
+            ((currentSpeed + speedGain / 2) * this.calculate_interval_ms) / 1000;
 
           // if (executionTime < 3000 && currentSpeed < 20.0 && executionTime % 100 == 0) {
-          //   console.log("⚛ ~ ", Math.round((10000 * speedGain / calculate_interval_ms)) / 10, "m/s2 ", Math.round(currentSpeed * 3.6), "km/h", Math.round(currentRpm), "rpm");
+          //   console.log("⚛ ~ ", Math.round((10000 * speedGain / this.calculate_interval_ms)) / 10, "m/s2 ", Math.round(currentSpeed * 3.6), "km/h", Math.round(currentRpm), "rpm");
           // }
 
           // if (executionTime < 6000 && executionTime % 1000 == 0) {
-          //   console.log("☢️", "time: ", executionTime / 1000, " acceleration ", Math.round((10000 * speedGain / calculate_interval_ms)) / 10, "m/s2 ", Math.round(currentSpeed * 3.6), "km/h", currentRpm, "rpm");
+          //   console.log("☢️", "time: ", executionTime / 1000, " acceleration ", Math.round((10000 * speedGain / this.calculate_interval_ms)) / 10, "m/s2 ", Math.round(currentSpeed * 3.6), "km/h", currentRpm, "rpm");
           // }
 
           // arrResult.push([
@@ -462,7 +459,8 @@ export default {
         const gear_3 = [1.6, 1.5, 1.4, 1.3, 1.2, 1.1];
         const gear_4 = [1.1, 1.0, 0.9, 0.8, 0.72, 0.64, 0.56];
         const gear_5 = [0.8, 0.72, 0.65, 0.58, 0.52];
-        // 20.000 runs, 17 sekund, 9 MB
+        // 20.000 runs, 17 sekund za 10 ms, 9 MB
+        // 20.000 runs, 3 sekunde za 50 ms
 
         // const gear_0 = [3.2, 2.3, 2.2];
         // const gear_1 = [3.2, 1.9, 1.8, 1.7];
