@@ -102,13 +102,14 @@ export default {
 
       var option = {};
       option.fileName = "vue-acceleration-export";
+      option.datas = []
 
       console.log("⚛ ~ store.runWithGearShifting.length:", store.runWithGearShifting[50]["computedGearLength"]);
 
       let tmpSheetData = [];
       let sheetHeader = ["final speed", "gear", "rpm", "distance", "exetime", "currentGearing", "finalDrive", "1st gear len", "2nd gear len", "3rd gear len", "4th gear len", "5th gear len", "6th gear len", "currentWeightKg", "currentAeroCx", "currentRollingRes", "currentMaximumAccG",]
 
-      for (let i = 0; i < store.runWithGearShifting.length; i++) {
+      for (let i = 0; i < 1; i++) {
         tmpSheetData.push(
           {
             one: store.runWithGearShifting[i]["final speed"],
@@ -128,6 +129,24 @@ export default {
             fifteen: store.runWithGearShifting[i]["currentAeroCx"],
             sixteen: store.runWithGearShifting[i]["currentRollingRes"],
             seventeen: store.runWithGearShifting[i]["currentMaximumAccG"],
+          })
+      }
+      for (let i = 1; i < store.runWithGearShifting.length; i++) {
+        tmpSheetData.push(
+          {
+            one: store.runWithGearShifting[i]["final speed"],
+            two: store.runWithGearShifting[i]["gear"],
+            three: store.runWithGearShifting[i]["rpm"],
+            four: store.runWithGearShifting[i]["distance"],
+            five: store.runWithGearShifting[i]["exetime"],
+            six: store.runWithGearShifting[i]["currentGearing"],
+            seven: store.runWithGearShifting[i]["finalDrive"],
+            eight: Math.round(store.runWithGearShifting[i]["computedGearLength"][0]),
+            nine: Math.round(store.runWithGearShifting[i]["computedGearLength"][1]),
+            ten: Math.round(store.runWithGearShifting[i]["computedGearLength"][2]),
+            eleven: Math.round(store.runWithGearShifting[i]["computedGearLength"][3]),
+            twelve: Math.round(store.runWithGearShifting[i]["computedGearLength"][4]),
+            thirteen: Math.round(store.runWithGearShifting[i]["computedGearLength"][5]),
           })
       }
 
