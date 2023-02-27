@@ -107,7 +107,7 @@ export default {
       console.log("⚛ ~ store.runWithGearShifting.length:", store.runWithGearShifting[50]["computedGearLength"]);
 
       let tmpSheetData = [];
-      let sheetHeader = ["final speed", "gear", "rpm", "distance", "exetime", "currentGearing", "finalDrive", "1st gear len", "2nd gear len", "3rd gear len", "4th gear len", "5th gear len", "6th gear len", "currentWeightKg", "currentAeroCx", "currentRollingRes", "currentMaximumAccG",]
+      let sheetHeader = ["final speed", "gear", "rpm", "exetime", "currentGearing", "finalDrive", "1st gear len", "2nd gear len", "3rd gear len", "4th gear len", "5th gear len", "6th gear len", "currentWeightKg", "currentAeroCx", "currentRollingRes", "currentMaximumAccG",]
 
       for (let i = 0; i < 1; i++) {
         tmpSheetData.push(
@@ -115,7 +115,6 @@ export default {
             one: store.runWithGearShifting[i]["final speed"],
             two: store.runWithGearShifting[i]["gear"],
             three: store.runWithGearShifting[i]["rpm"],
-            four: store.runWithGearShifting[i]["distance"],
             five: store.runWithGearShifting[i]["exetime"],
             six: store.runWithGearShifting[i]["currentGearing"],
             seven: store.runWithGearShifting[i]["finalDrive"],
@@ -153,7 +152,7 @@ export default {
       option.datas.push({
         sheetName: "prvi list",
         sheetHeader: sheetHeader,
-        columnWidths: [4, 2, 4, 4, 4, 10, 3, 3, 3, 3, 3, 3, 3, 7, 7, 7, 8],
+        columnWidths: [4, 2, 4, 4, 10, 3, 3, 3, 3, 3, 3, 3, 7, 7, 7, 8],
         sheetData: tmpSheetData
       })
 
@@ -379,11 +378,10 @@ export default {
 
         function pushToStore () {
           store.runWithGearShifting.push({
-            "final speed": Math.round(currentSpeed * 3.6) + " km/h",
+            "final speed": Math.round(currentSpeed * 3.6),
             gear: currentGearIndex + 1,
-            rpm: lastRpm + " rpm",
-            distance: Math.floor(distance) + " m",
-            exetime: executionTime / 1000 + " s",
+            rpm: lastRpm,
+            exetime: executionTime,
             currentGearing: currentGearing,
             finalDrive: gearFinal,
             computedGearLength: gearLength,
@@ -396,19 +394,19 @@ export default {
 
         if (Object.keys(bestResult).length == 0) {
           bestResult.executionTime = executionTime
-          bestResult.finalSpeed = Math.round(currentSpeed * 3.6) + " km/h"
+          bestResult.finalSpeed = Math.round(currentSpeed * 3.6)
           bestResult.gear = currentGearIndex + 1
-          bestResult.rpm = lastRpm + " rpm"
-          bestResult.exetime = executionTime / 1000 + " s"
+          bestResult.rpm = lastRpm
+          bestResult.exetime = executionTime
           bestResult.currentGearing = currentGearing
         }
 
         if (executionTime < bestResult.executionTime) {
           bestResult.executionTime = executionTime
-          bestResult.finalSpeed = Math.round(currentSpeed * 3.6) + " km/h"
+          bestResult.finalSpeed = Math.round(currentSpeed * 3.6)
           bestResult.gear = currentGearIndex + 1
-          bestResult.rpm = lastRpm + " rpm"
-          bestResult.exetime = executionTime / 1000 + " s"
+          bestResult.rpm = lastRpm
+          bestResult.exetime = executionTime
           bestResult.currentGearing = currentGearing
           // pushToStore()
         }
@@ -457,21 +455,23 @@ export default {
         // const gear_3 = [2.5, 2.4, 2.3, 2.2, 2.1, 2.0, 1.9, 1.8, 1.7, 1.6, 1.5, 1.4, 1.3, 1.2];
         // const gear_4 = [2.2, 2.1, 2.0, 1.9, 1.8, 1.7, 1.6, 1.5, 1.4, 1.3, 1.2, 1.1, 1.0, 0.9, 0.8, 0.7];
         // const gear_5 = [2.2, 2.1, 2.0, 1.9, 1.8, 1.7, 1.6, 1.5, 1.4, 1.3, 1.2, 1.1, 1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4];
+        // 300.000 runs, 136 MB
 
-        // const gear_0 = [3.2, 3, 2.8, 2.6, 2.4, 2.3, 2.2];
-        // const gear_1 = [3.2, 2.8, 2.7, 2.3, 2.0, 1.9, 1.8, 1.7];
-        // const gear_2 = [2.4, 2.3, 2.2, 1.9, 1.8, 1.7];
-        // const gear_3 = [2.3, 2.0, 1.7, 1.6, 1.5, 1.4, 1.3, 1.2];
-        // const gear_4 = [1.9, 1.8, 1.5, 1.4, 1.3, 1.2, 1.1, 1.0, 0.9, 0.8, 0.7];
-        // const gear_5 = [1.6, 1.5, 1.3, 1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4];
+        const gear_0 = [3.6, 3.2, 2.8, 2.6, 2.4, 2.2];
+        const gear_1 = [2.8, 2.6, 2.4, 2.2, 2.0, 1.8, 1.7];
+        const gear_2 = [2.2, 1.9, 1.8, 1.7, 1.6, 1.5, 1.4];
+        const gear_3 = [1.6, 1.5, 1.4, 1.3, 1.2, 1.1];
+        const gear_4 = [1.1, 1.0, 0.9, 0.8, 0.72, 0.64, 0.56];
+        const gear_5 = [0.8, 0.72, 0.65, 0.58, 0.52];
+        // 23.000 runs, 17 sekund, 9 MB
 
-        const gear_0 = [3.2, 2.3, 2.2];
-        const gear_1 = [3.2, 1.9, 1.8, 1.7];
-        const gear_2 = [2.4, 2.3, 1.7];
-        const gear_3 = [2.3, 2.0, 1.4, 1.3, 1.2];
-        const gear_4 = [1.9, 1.8, 0.9, 0.8, 0.7];
-        const gear_5 = [1.6, 1.5, 0.7, 0.6, 0.5, 0.4];
-        // 23.000 runs
+        // const gear_0 = [3.2, 2.3, 2.2];
+        // const gear_1 = [3.2, 1.9, 1.8, 1.7];
+        // const gear_2 = [2.4, 2.3, 1.7];
+        // const gear_3 = [2.3, 2.0, 1.4, 1.3, 1.2];
+        // const gear_4 = [1.9, 1.8, 0.9, 0.8, 0.7];
+        // const gear_5 = [1.6, 1.5, 0.7, 0.6, 0.5, 0.4];
+
         let total = 0;
 
         for (let i = 0; i < gear_0.length; i++) {
@@ -494,7 +494,7 @@ export default {
                     gear_4[m],
                     gear_5[n],]
                     // tanja.push(runWithGearShifting(tmp, 2.875));
-                    runWithGearShifting(tmp, 3.2)
+                    runWithGearShifting(tmp, 4.5)
                   }
                 }
               }
