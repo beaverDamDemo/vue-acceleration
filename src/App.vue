@@ -101,24 +101,12 @@ export default {
       const ExportJsonExcel = require("js-export-excel");
 
       var option = {};
-
       option.fileName = "vue-acceleration-export";
 
-      option.datas = [
-        // {
-        //   sheetName: "prvi list",
-        //   sheetHeader: ["name", "model"],
-        //   columnWidths: [8, 8],
-        //   sheetData: [
-        //     { one: "ferrari", two: "testarossa" },
-        //     { one: "lamborghini", two: "diablo" },
-        //   ],
-        // },
-      ];
+      console.log("⚛ ~ store.runWithGearShifting.length:", store.runWithGearShifting[50]["computedGearLength"]);
 
-      console.log("⚛ ~ store.runWithGearShifting.length:", store.runWithGearShifting[50]);
       let tmpSheetData = [];
-      let sheetHeader = ["final speed", "gear", "rpm", "distance", "exetime", "currentGearing", "finalDrive", "computedGearLength", "currentWeightKg", "currentAeroCx", "currentRollingRes", "currentMaximumAccG",]
+      let sheetHeader = ["final speed", "gear", "rpm", "distance", "exetime", "currentGearing", "finalDrive", "1st gear len", "2nd gear len", "3rd gear len", "4th gear len", "5th gear len", "6th gear len", "currentWeightKg", "currentAeroCx", "currentRollingRes", "currentMaximumAccG",]
 
       for (let i = 0; i < store.runWithGearShifting.length; i++) {
         tmpSheetData.push(
@@ -130,19 +118,23 @@ export default {
             five: store.runWithGearShifting[i]["exetime"],
             six: store.runWithGearShifting[i]["currentGearing"],
             seven: store.runWithGearShifting[i]["finalDrive"],
-            eight: store.runWithGearShifting[i]["computedGearLength"].delimiter(','),
-            nine: store.runWithGearShifting[i]["currentWeightKg"],
-            ten: store.runWithGearShifting[i]["currentAeroCx"],
-            eleven: store.runWithGearShifting[i]["currentRollingRes"],
-            twelve: store.runWithGearShifting[i]["currentMaximumAccG"],
+            eight: Math.round(store.runWithGearShifting[i]["computedGearLength"][0]),
+            nine: Math.round(store.runWithGearShifting[i]["computedGearLength"][1]),
+            ten: Math.round(store.runWithGearShifting[i]["computedGearLength"][2]),
+            eleven: Math.round(store.runWithGearShifting[i]["computedGearLength"][3]),
+            twelve: Math.round(store.runWithGearShifting[i]["computedGearLength"][4]),
+            thirteen: Math.round(store.runWithGearShifting[i]["computedGearLength"][5]),
+            fourteen: store.runWithGearShifting[i]["currentWeightKg"],
+            fifteen: store.runWithGearShifting[i]["currentAeroCx"],
+            sixteen: store.runWithGearShifting[i]["currentRollingRes"],
+            seventeen: store.runWithGearShifting[i]["currentMaximumAccG"],
           })
       }
 
-
       option.datas.push({
-        sheetName: "drugi list",
+        sheetName: "prvi list",
         sheetHeader: sheetHeader,
-        columnWidths: [4, 2, 4, 4, 4, 10, 4, 7, 7, 7, 7, 7,],
+        columnWidths: [4, 2, 4, 4, 4, 10, 3, 3, 3, 3, 3, 3, 3, 7, 7, 7, 8],
         sheetData: tmpSheetData
       })
 
