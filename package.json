@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "chart.js": "^2.9.1",
-    "core-js": "^2.6.12",
+    "core-js": "^3.29.0",
+    "core-js-compat": "^3.25.1",
     "vue": "^2.6.10",
     "vue-gh-pages": "^1.19.0"
   },
@@ -17,6 +18,8 @@
     "@fortawesome/fontawesome-free": "^5.11.2",
     "@vue/cli-plugin-babel": "^5.0.8",
     "@vue/cli-service": "^5.0.8",
+    "assert": "^2.0.0",
+    "node-polyfill-webpack-plugin": "^2.0.1",
     "vue-jd-table": "^1.1.2",
     "vue-template-compiler": "^2.6.10"
   },

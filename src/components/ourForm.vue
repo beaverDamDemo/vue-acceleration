@@ -109,7 +109,7 @@
     </div>
   </section>
 </template>
-<script lang="js">
+<script>
 import store from '../store.js'
 import formfix from './form-fixed-multiple-gears'
 import mixin from '../../mixins/mixin.js'

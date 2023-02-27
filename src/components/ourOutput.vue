@@ -91,7 +91,7 @@
   </section>
 </template>
 
-<script lang="js">
+<script>
 import store from '../store.js'
 import { nextTick } from 'process'
 
