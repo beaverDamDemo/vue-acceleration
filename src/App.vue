@@ -116,7 +116,7 @@ export default {
         },
         {
           sheetName: "drugi list",
-          sheetHeader: ["name", "model"],
+          sheetHeader: ["final speed", "gear", "rpm", "distance", "exetime", "currentGearing", "finalDrive", "computedGearLength", "currentWeightKg", "currentAeroCx", "currentRollingRes", "currentMaximumAccG",],
           columnWidths: [8, 8],
           sheetData: [
             { one: "porsche", two: "959" },
@@ -126,6 +126,8 @@ export default {
       ];
 
       console.log("⚛ ~ store.runWithGearShifting.length:", store.runWithGearShifting.length);
+
+      let tmpSheetData = [];
 
       Object.entries(store.runWithGearShifting[50]).forEach((e) => {
         console.log(`%c${e[0]}: ${e[1]}`, "font-weight: normal; background: wheat; color: black");
