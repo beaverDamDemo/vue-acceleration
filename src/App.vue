@@ -33,9 +33,6 @@
 </template>
 <script>
 import vue from "vue";
-import physics from "./physics";
-import mainWindow from "./mainWindow";
-import compute from "./compute";
 import store from "./store.js";
 import ourForm from "./components/ourForm.vue";
 import ourOutput from "./components/ourOutput.vue";
