@@ -41,7 +41,13 @@ import ourForm from "./components/ourForm.vue";
 import ourOutput from "./components/ourOutput.vue";
 import Chart from "chart.js";
 // import fixedMultipleGears from '../mixins/fixedMultipleGears.js'
-
+import {
+  acceleration_calc,
+  aero_drag,
+  rolling_drag,
+  pushforce,
+  sample,
+} from "./physics.js";
 export default {
   name: "app",
   components: {

@@ -94,7 +94,13 @@
 <script>
 import store from '../store.js'
 import { nextTick } from 'process'
-
+import {
+  acceleration_calc,
+  aero_drag,
+  rolling_drag,
+  pushforce,
+  sample,
+} from "../physics.js";
 export default {
   name: 'our-output',
   data () {

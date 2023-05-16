@@ -114,6 +114,13 @@ import store from '../store.js'
 import formfix from './form-fixed-multiple-gears'
 import mixin from '../../mixins/mixin.js'
 import Vue from 'vue'
+import {
+  acceleration_calc,
+  aero_drag,
+  rolling_drag,
+  pushforce,
+  sample,
+} from "../physics.js";
 export default {
   name: 'our-form',
   components: {

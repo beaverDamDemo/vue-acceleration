@@ -89,6 +89,13 @@
 </template>
 <script>
 import store from '../store.js'
+import {
+  acceleration_calc,
+  aero_drag,
+  rolling_drag,
+  pushforce,
+  sample,
+} from "../physics.js";
 export default {
   name: 'form-fixed-multiple-gears',
   props: [
