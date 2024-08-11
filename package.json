@@ -4,22 +4,24 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --port 4200",
+    "start": "vue-cli-service serve --port 4200",
+    "start:dev": "vue-cli-service serve --port 4200",
     "build": "vue-cli-service build",
     "deploy": "node ./node_modules/vue-gh-pages/index.js"
   },
   "dependencies": {
     "chart.js": "^2.9.1",
-    "core-js": "^3.29.0",
-    "core-js-compat": "^3.25.1",
+    "core-js": "^3.38.0",
+    "core-js-compat": "^3.38.0",
     "js-export-excel": "^1.1.4",
-    "vue": "^2.6.10",
+    "vue": "^2.7.16",
     "vue-gh-pages": "^1.19.0"
   },
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "^5.11.2",
+    "@fortawesome/fontawesome-free": "^6.6.0",
     "@vue/cli-plugin-babel": "^5.0.8",
     "@vue/cli-service": "^5.0.8",
-    "assert": "^2.0.0",
+    "assert": "^2.1.0",
     "node-polyfill-webpack-plugin": "^2.0.1",
     "vue-jd-table": "^1.1.2",
     "vue-template-compiler": "^2.6.10"
