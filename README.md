@@ -10,8 +10,7 @@ nvm use v14
 
 ```
 likely you ll need to run npm install
-npm run serve
-in case of problems try to remove node_modules and then re-do the npm install
+npm run start:dev
 ```
 
 ### Also compiles and hot-reloads for development

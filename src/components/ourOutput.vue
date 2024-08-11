@@ -3,9 +3,8 @@
     <div v-if="store.love.length > 0">
       <h1>Results for single gear</h1>
       <div v-for="(l, index) in store.love" :key="`store-love-${index}`">
-        &nbsp;gear length: {{ l[0] }} km/h, max reached rpm: {{ l[1] }} rpm, max
-        reached speed: {{ l[2] }} km/h, covered distance: {{ l[4] }} m, time
-        needed: {{ l[6] }}&nbsp;
+        &nbsp;gear length: {{ l[0] }} km/h, max reached rpm: {{ l[1] }} rpm, max reached speed: {{ l[2] }} km/h, covered distance: {{ l[4] }} m,
+        time needed: {{ l[6] }}&nbsp;
       </div>
       <div class="detailedTextContainer">
         <div v-for="(singleRun, index) of store.tanja" :key="`tanja-${index}`" class="detailedText">
@@ -84,7 +83,7 @@
       </div>
     </div>
     <div v-else>
-      <h4>
+      <h4 style="margin-left: 100px">
         <i>Use the <strong>Run</strong> button to populate results.</i>
       </h4>
     </div>
@@ -92,25 +91,19 @@
 </template>
 
 <script>
-import store from '../store.js'
-import { nextTick } from 'process'
-import {
-  acceleration_calc,
-  aero_drag,
-  rolling_drag,
-  pushforce,
-  sample,
-} from "../physics.js";
+import store from '../store.js';
+import { nextTick } from 'process';
+import { acceleration_calc, aero_drag, rolling_drag, pushforce, sample } from '../physics.js';
 export default {
   name: 'our-output',
-  data () {
+  data() {
     return {
       store: store,
-    }
+    };
   },
-  created () {
+  created() {
     this.$eventBus.$on('calculationDone', (mode) => {
-      console.log("Calculation done ⚛ ~ mode", mode);
+      console.log('Calculation done ⚛ ~ mode', mode);
 
       // let i = 0
       // let upto_100_check = true
@@ -137,16 +130,16 @@ export default {
       //     i++
       //   }
       // }
-    })
+    });
   },
   methods: {
-    populateTable () {
+    populateTable() {
       nextTick(() => {
         let i = 0;
 
         tanja(30, 5, 0);
 
-        function tanja (min, tanjaLevel, n) {
+        function tanja(min, tanjaLevel, n) {
           var answerIsInRange = false;
           var firstNumber;
           var secoundNumber;
@@ -160,7 +153,7 @@ export default {
                 if (count > 100) break;
                 firstNumber = 2 + Math.round(Math.random() * 8);
                 secoundNumber = Math.round(Math.random() * 10);
-                if (firstNumber >= secoundNumber && (firstNumber - secoundNumber <= ourMaxValue) && (firstNumber - secoundNumber >= 0)) {
+                if (firstNumber >= secoundNumber && firstNumber - secoundNumber <= ourMaxValue && firstNumber - secoundNumber >= 0) {
                   answerIsInRange = true;
                 }
               }
@@ -172,7 +165,7 @@ export default {
                 if (count > 100) break;
                 firstNumber = 15 + Math.round(Math.random() * 5);
                 secoundNumber = Math.round(Math.random() * 10);
-                if (firstNumber >= secoundNumber && (firstNumber - secoundNumber <= ourMaxValue) && (firstNumber - secoundNumber >= 10)) {
+                if (firstNumber >= secoundNumber && firstNumber - secoundNumber <= ourMaxValue && firstNumber - secoundNumber >= 10) {
                   answerIsInRange = true;
                 }
               }
@@ -184,7 +177,7 @@ export default {
                 if (count > 100) break;
                 firstNumber = 20 + Math.round(Math.random() * 10);
                 secoundNumber = Math.round(Math.random() * 20);
-                if (firstNumber >= secoundNumber && (firstNumber - secoundNumber <= ourMaxValue) && (firstNumber - secoundNumber >= 10)) {
+                if (firstNumber >= secoundNumber && firstNumber - secoundNumber <= ourMaxValue && firstNumber - secoundNumber >= 10) {
                   answerIsInRange = true;
                 }
               }
@@ -196,7 +189,7 @@ export default {
                 if (count > 100) break;
                 firstNumber = 25 + Math.round(Math.random() * 15);
                 secoundNumber = Math.round(Math.random() * 20);
-                if (firstNumber >= secoundNumber && (firstNumber - secoundNumber <= ourMaxValue) && (firstNumber - secoundNumber >= 20)) {
+                if (firstNumber >= secoundNumber && firstNumber - secoundNumber <= ourMaxValue && firstNumber - secoundNumber >= 20) {
                   answerIsInRange = true;
                 }
               }
@@ -208,7 +201,7 @@ export default {
                 if (count > 100) break;
                 firstNumber = 35 + Math.round(Math.random() * 15);
                 secoundNumber = 5 + Math.round(Math.random() * 25);
-                if (firstNumber >= secoundNumber && (firstNumber - secoundNumber <= ourMaxValue) && (firstNumber - secoundNumber >= 20)) {
+                if (firstNumber >= secoundNumber && firstNumber - secoundNumber <= ourMaxValue && firstNumber - secoundNumber >= 20) {
                   answerIsInRange = true;
                 }
               }
@@ -220,7 +213,7 @@ export default {
                 if (count > 100) break;
                 firstNumber = 40 + Math.round(Math.random() * 20);
                 secoundNumber = Math.round(Math.random() * 30);
-                if (firstNumber >= secoundNumber && (firstNumber - secoundNumber <= ourMaxValue) && (firstNumber - secoundNumber >= 30)) {
+                if (firstNumber >= secoundNumber && firstNumber - secoundNumber <= ourMaxValue && firstNumber - secoundNumber >= 30) {
                   answerIsInRange = true;
                 }
               }
@@ -232,7 +225,7 @@ export default {
                 if (count > 100) break;
                 firstNumber = 45 + Math.round(Math.random() * 25);
                 secoundNumber = 5 + Math.round(Math.random() * 35);
-                if (firstNumber >= secoundNumber && (firstNumber - secoundNumber <= ourMaxValue) && (firstNumber - secoundNumber >= 30)) {
+                if (firstNumber >= secoundNumber && firstNumber - secoundNumber <= ourMaxValue && firstNumber - secoundNumber >= 30) {
                   answerIsInRange = true;
                 }
               }
@@ -244,7 +237,7 @@ export default {
                 if (count > 100) break;
                 firstNumber = 50 + Math.round(Math.random() * 30);
                 secoundNumber = Math.round(Math.random() * 40);
-                if (firstNumber >= secoundNumber && (firstNumber - secoundNumber <= ourMaxValue) && (firstNumber - secoundNumber >= 40)) {
+                if (firstNumber >= secoundNumber && firstNumber - secoundNumber <= ourMaxValue && firstNumber - secoundNumber >= 40) {
                   answerIsInRange = true;
                 }
               }
@@ -256,7 +249,7 @@ export default {
                 if (count > 100) break;
                 firstNumber = 55 + Math.round(Math.random() * 35);
                 secoundNumber = 5 + Math.round(Math.random() * 45);
-                if (firstNumber >= secoundNumber && (firstNumber - secoundNumber <= ourMaxValue) && (firstNumber - secoundNumber >= 40)) {
+                if (firstNumber >= secoundNumber && firstNumber - secoundNumber <= ourMaxValue && firstNumber - secoundNumber >= 40) {
                   answerIsInRange = true;
                 }
               }
@@ -268,24 +261,24 @@ export default {
                 if (count > 100) break;
                 firstNumber = 60 + Math.round(Math.random() * 40);
                 secoundNumber = Math.round(Math.random() * 50);
-                if (firstNumber >= secoundNumber && (firstNumber - secoundNumber <= ourMaxValue) && (firstNumber - secoundNumber >= 50)) {
+                if (firstNumber >= secoundNumber && firstNumber - secoundNumber <= ourMaxValue && firstNumber - secoundNumber >= 50) {
                   answerIsInRange = true;
                 }
               }
               break;
             default:
-              console.log("Unexpected value")
+              console.log('Unexpected value');
           }
-          console.log("count: ", count, firstNumber, secoundNumber, 'result: ', firstNumber - secoundNumber)
+          console.log('count: ', count, firstNumber, secoundNumber, 'result: ', firstNumber - secoundNumber);
           results[tanjaLevel][n] += 1;
         }
-      })
+      });
     },
-    deleteResult (index) {
-      this.store.resultsFixedMultipleGears.splice(index, 1)
-    }
-  }
-}
+    deleteResult(index) {
+      this.store.resultsFixedMultipleGears.splice(index, 1);
+    },
+  },
+};
 </script>
 
 <style scoped>

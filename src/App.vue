@@ -1,12 +1,11 @@
 <template>
   <div id="app">
-    <button style="position: absolute; right: 20px; top: 10px" class="btn btn-warning" @click="onLogStore">
-      log store
-    </button>
-    <button style="position: absolute; right: 120px; top: 10px" class="btn btn-danger" @click="onTableStore">
-      Table Store
-    </button>
-    <ourForm class="ourForm" @onModeChanged=onModeChanged($event)></ourForm>
+    <header>
+      <span></span>
+      <button class="btn btn-warning" @click="onLogStore">Use log store</button>
+      <button class="btn btn-danger" @click="onTableStore">Use table store</button>
+    </header>
+    <ourForm class="ourForm" @onModeChanged="onModeChanged($event)"></ourForm>
     <div class="row justify-content-center">
       <input type="checkbox" name="showMyChart" v-model="showMyChart" />
       <label for="showMyChart">&nbsp; show dyno</label>
@@ -16,43 +15,36 @@
     </div>
     <div class="container">
       <div class="myButContainer row justify-content-center">
-        <button @click="startButtonClick" type="button" class="btn btn-success ml-1 mr-1 col-lg-5 col-md-9 col-xs-12 "
-          :disabled="
-            store.selectedEngine == undefined ||
-            store.selectedCarPreset == undefined
-          ">
+        <button
+          @click="startButtonClick"
+          type="button"
+          class="btn btn-success ml-1 mr-1 mb-1 col-lg-5 col-md-9 col-xs-12"
+          :disabled="store.selectedEngine == undefined || store.selectedCarPreset == undefined"
+        >
           Run
         </button>
-        <button @click="exportWithSheetJS" class="btn btn-primary ml-1 mr-1 col-xs-12 col-md-9 col-lg-5">
-          Export with SheetJS (WIP)
-        </button>
+        <button @click="exportWithSheetJS" class="btn btn-primary ml-1 mr-1 mb-1 col-xs-12 col-md-9 col-lg-5">Export with SheetJS (WIP)</button>
       </div>
     </div>
     <ourOutput :inputData.sync="finalGearMin" />
   </div>
 </template>
 <script>
-import vue from "vue";
-import store from "./store.js";
-import ourForm from "./components/ourForm.vue";
-import ourOutput from "./components/ourOutput.vue";
-import Chart from "chart.js";
+import vue from 'vue';
+import store from './store.js';
+import ourForm from './components/ourForm.vue';
+import ourOutput from './components/ourOutput.vue';
+import Chart from 'chart.js';
 // import fixedMultipleGears from '../mixins/fixedMultipleGears.js'
-import {
-  acceleration_calc,
-  aero_drag,
-  rolling_drag,
-  pushforce,
-  sample,
-} from "./physics.js";
+import { acceleration_calc, aero_drag, rolling_drag, pushforce, sample } from './physics.js';
 export default {
-  name: "app",
+  name: 'app',
   components: {
     ourForm,
     ourOutput,
   },
   // mixins: [fixedMultipleGears],
-  data () {
+  data() {
     return {
       store: store,
       divRpm: 50,
@@ -65,26 +57,26 @@ export default {
       myChartShow: false,
       mode: undefined,
       showMyChart: false,
-      calculate_interval_ms: 50
+      calculate_interval_ms: 50,
     };
   },
-  created () {
-    window.dispatchEvent(new Event("myPreloderEvent"));
+  created() {
+    window.dispatchEvent(new Event('myPreloderEvent'));
   },
   methods: {
-    onModeChanged (e) {
-      this.mode = e
+    onModeChanged(e) {
+      this.mode = e;
     },
-    onLogStore () {
+    onLogStore() {
       Object.entries(this.store).forEach((e) => {
-        console.log(e[0] + ": " + e[1]);
+        console.log(e[0] + ': ' + e[1]);
       });
     },
-    onTableStore () {
+    onTableStore() {
       for (let i = 0; i < this.store.runWithGearShifting.length; i++) {
-        console.log(`%c⚛ ${i}: ${this.store.runWithGearShifting[i].exetime}`, "font-weight: bold;");
+        console.log(`%c⚛ ${i}: ${this.store.runWithGearShifting[i].exetime}`, 'font-weight: bold;');
         console.log(`⚛ `, this.store.runWithGearShifting[i].currentGearing);
-        console.log(`⚛ `, this.store.runWithGearShifting[i]["final speed"]);
+        console.log(`⚛ `, this.store.runWithGearShifting[i]['final speed']);
         console.log(`⚛ `, Math.round(this.store.runWithGearShifting[i].computedGearLength[0]));
         console.log(`⚛ `, Math.round(this.store.runWithGearShifting[i].computedGearLength[1]));
         console.log(`⚛ `, Math.round(this.store.runWithGearShifting[i].computedGearLength[2]));
@@ -94,79 +86,94 @@ export default {
       }
       // here we must create a custom sorting
     },
-    sendData () {
-      this.$eventBus.$emit("send-data", this.setup);
+    sendData() {
+      this.$eventBus.$emit('send-data', this.setup);
     },
-    myCSchange (e) {
+    myCSchange(e) {
       this.myChartShow = !this.myChartShow;
     },
-    exportWithSheetJS () {
-      console.log("not done yet");
-      const ExportJsonExcel = require("js-export-excel");
+    exportWithSheetJS() {
+      console.log('not done yet');
+      const ExportJsonExcel = require('js-export-excel');
 
       var option = {};
-      option.fileName = "vue-acceleration-export";
-      option.datas = []
+      option.fileName = 'vue-acceleration-export';
+      option.datas = [];
 
-      console.log("⚛ ~ store.runWithGearShifting.length:", store.runWithGearShifting[50]["computedGearLength"]);
+      console.log('⚛ ~ store.runWithGearShifting.length:', store.runWithGearShifting[50]['computedGearLength']);
 
       let tmpSheetData = [];
-      let sheetHeader = ["final speed", "gear", "rpm", "exetime", "currentGearing", "finalDrive", "1st gear len", "2nd gear len", "3rd gear len", "4th gear len", "5th gear len", "6th gear len", "currentWeightKg", "currentAeroCx", "currentRollingRes", "currentMaximumAccG",]
+      let sheetHeader = [
+        'final speed',
+        'gear',
+        'rpm',
+        'exetime',
+        'currentGearing',
+        'finalDrive',
+        '1st gear len',
+        '2nd gear len',
+        '3rd gear len',
+        '4th gear len',
+        '5th gear len',
+        '6th gear len',
+        'currentWeightKg',
+        'currentAeroCx',
+        'currentRollingRes',
+        'currentMaximumAccG',
+      ];
 
       for (let i = 0; i < 1; i++) {
-        tmpSheetData.push(
-          {
-            one: store.runWithGearShifting[i]["final speed"],
-            two: store.runWithGearShifting[i]["gear"],
-            three: store.runWithGearShifting[i]["rpm"],
-            four: store.runWithGearShifting[i]["exetime"],
-            five: store.runWithGearShifting[i]["currentGearing"],
-            six: store.runWithGearShifting[i]["finalDrive"],
-            seven: Math.round(store.runWithGearShifting[i]["computedGearLength"][0]),
-            eight: Math.round(store.runWithGearShifting[i]["computedGearLength"][1]),
-            nine: Math.round(store.runWithGearShifting[i]["computedGearLength"][2]),
-            ten: Math.round(store.runWithGearShifting[i]["computedGearLength"][3]),
-            eleven: Math.round(store.runWithGearShifting[i]["computedGearLength"][4]),
-            twelve: Math.round(store.runWithGearShifting[i]["computedGearLength"][5]),
-            thirteen: store.runWithGearShifting[i]["currentWeightKg"],
-            fourteen: store.runWithGearShifting[i]["currentAeroCx"],
-            fifteen: store.runWithGearShifting[i]["currentRollingRes"],
-            sixteen: store.runWithGearShifting[i]["currentMaximumAccG"],
-          })
+        tmpSheetData.push({
+          one: store.runWithGearShifting[i]['final speed'],
+          two: store.runWithGearShifting[i]['gear'],
+          three: store.runWithGearShifting[i]['rpm'],
+          four: store.runWithGearShifting[i]['exetime'],
+          five: store.runWithGearShifting[i]['currentGearing'],
+          six: store.runWithGearShifting[i]['finalDrive'],
+          seven: Math.round(store.runWithGearShifting[i]['computedGearLength'][0]),
+          eight: Math.round(store.runWithGearShifting[i]['computedGearLength'][1]),
+          nine: Math.round(store.runWithGearShifting[i]['computedGearLength'][2]),
+          ten: Math.round(store.runWithGearShifting[i]['computedGearLength'][3]),
+          eleven: Math.round(store.runWithGearShifting[i]['computedGearLength'][4]),
+          twelve: Math.round(store.runWithGearShifting[i]['computedGearLength'][5]),
+          thirteen: store.runWithGearShifting[i]['currentWeightKg'],
+          fourteen: store.runWithGearShifting[i]['currentAeroCx'],
+          fifteen: store.runWithGearShifting[i]['currentRollingRes'],
+          sixteen: store.runWithGearShifting[i]['currentMaximumAccG'],
+        });
       }
       for (let i = 1; i < store.runWithGearShifting.length; i++) {
-        tmpSheetData.push(
-          {
-            one: store.runWithGearShifting[i]["final speed"],
-            two: store.runWithGearShifting[i]["gear"],
-            three: store.runWithGearShifting[i]["rpm"],
-            four: store.runWithGearShifting[i]["exetime"],
-            five: store.runWithGearShifting[i]["currentGearing"],
-            six: "",
-            seven: Math.round(store.runWithGearShifting[i]["computedGearLength"][0]),
-            eight: Math.round(store.runWithGearShifting[i]["computedGearLength"][1]),
-            nine: Math.round(store.runWithGearShifting[i]["computedGearLength"][2]),
-            ten: Math.round(store.runWithGearShifting[i]["computedGearLength"][3]),
-            eleven: Math.round(store.runWithGearShifting[i]["computedGearLength"][4]),
-            twelve: Math.round(store.runWithGearShifting[i]["computedGearLength"][5]),
-          })
+        tmpSheetData.push({
+          one: store.runWithGearShifting[i]['final speed'],
+          two: store.runWithGearShifting[i]['gear'],
+          three: store.runWithGearShifting[i]['rpm'],
+          four: store.runWithGearShifting[i]['exetime'],
+          five: store.runWithGearShifting[i]['currentGearing'],
+          six: '',
+          seven: Math.round(store.runWithGearShifting[i]['computedGearLength'][0]),
+          eight: Math.round(store.runWithGearShifting[i]['computedGearLength'][1]),
+          nine: Math.round(store.runWithGearShifting[i]['computedGearLength'][2]),
+          ten: Math.round(store.runWithGearShifting[i]['computedGearLength'][3]),
+          eleven: Math.round(store.runWithGearShifting[i]['computedGearLength'][4]),
+          twelve: Math.round(store.runWithGearShifting[i]['computedGearLength'][5]),
+        });
       }
 
       option.datas.push({
-        sheetName: "prvi list",
+        sheetName: 'prvi list',
         sheetHeader: sheetHeader,
         columnWidths: [4, 2, 4, 4, 10, 3, 3, 3, 3, 3, 3, 3, 7, 7, 7, 8],
-        sheetData: tmpSheetData
-      })
+        sheetData: tmpSheetData,
+      });
 
       var toExcel = new ExportJsonExcel(option); //new
       toExcel.saveExcel();
     },
-    startButtonClick () {
+    startButtonClick() {
       let tanja = [];
       let love = [];
       // var t0 = performance.now();
-      let bestResult = {}
+      let bestResult = {};
 
       var singleRun = (isMaximumSpeedRun, maxDistance, gearLength) => {
         var acceleration, brakeforce, pushforce, netforce, power;
@@ -189,16 +196,8 @@ export default {
           speedGain = this.maxg * 0.9; //wheelspin na začetku pospeševanja, prve 3 desetinke
         }
         // while( distance < 1609 && executionTime < 60000 && speedGain > 0.0005)
-        while (
-          distance < maxDistance &&
-          executionTime < 180000 &&
-          speedGain > threshold
-        ) {
-          if (
-            maxDistance - 30 < distance &&
-            distance < maxDistance + 100 &&
-            interval == false
-          ) {
+        while (distance < maxDistance && executionTime < 180000 && speedGain > threshold) {
+          if (maxDistance - 30 < distance && distance < maxDistance + 100 && interval == false) {
             //to pazi kako postaviš
             /* this is for slowing down calculation when it approaches 1600m mark */
             interval = true;
@@ -206,13 +205,7 @@ export default {
 
           step_count++;
           executionTime = executionTime + this.calculate_interval_ms;
-          let cp = calculatePower(
-            currentSpeed,
-            executionTime,
-            this,
-            gearLength,
-            store.selectedEngine
-          );
+          let cp = calculatePower(currentSpeed, executionTime, this, gearLength, store.selectedEngine);
           power = cp[0];
           currentRpm = cp[1];
           acceleration = acceleration_calc(
@@ -221,32 +214,24 @@ export default {
             this.store.weightKg,
             this.store.aeroCx,
             this.store.rollingRes,
-            this.store.maximumAccG
+            this.store.maximumAccG,
           );
           speedGain = acceleration * this.calculate_interval_ms;
 
           currentSpeed += speedGain;
-          distance =
-            distance +
-            ((currentSpeed + speedGain / 2) * this.calculate_interval_ms) / 1000;
+          distance = distance + ((currentSpeed + speedGain / 2) * this.calculate_interval_ms) / 1000;
           // console.warn('currentSpeed: ', Math.round(currentSpeed*3.6), 'km/h distance: ', Math.floor(distance), "m, exetime: ", executionTime/1000+'s')
-          arrResult.push([
-            Math.round(currentSpeed * 3.6),
-            Math.floor(distance),
-            executionTime / 1000,
-            power,
-            currentRpm,
-          ]);
+          arrResult.push([Math.round(currentSpeed * 3.6), Math.floor(distance), executionTime / 1000, power, currentRpm]);
         }
 
         love.push([
           Number(gearLength).toFixed(0),
           arrResult[arrResult.length - 1][4],
           Number((currentSpeed * 3.6).toFixed(2)),
-          "km/h distance: ",
+          'km/h distance: ',
           Math.floor(distance),
-          "m, exetime: ",
-          executionTime / 1000 + "s",
+          'm, exetime: ',
+          executionTime / 1000 + 's',
         ]);
         // console.error('final speed: ', Math.round(currentSpeed*3.6), 'km/h distance: ', Math.floor(distance), "m, exetime: ", executionTime/1000+'s')
         return arrResult;
@@ -270,28 +255,15 @@ export default {
         let step_count = 0;
 
         for (let i = 0; i < gearRatios.length; i++) {
-          gearLength.push(
-            (store.transmissionConstant *
-              this.store.engines[this.store.selectedEngine].maxRpm) /
-            gearRatios[i] /
-            gearFinal
-          );
+          gearLength.push((store.transmissionConstant * this.store.engines[this.store.selectedEngine].maxRpm) / gearRatios[i] / gearFinal);
           currentGearing.push(gearRatios[i]);
         }
 
         speedGain = this.maxg * 0.9; //wheelspin na začetku pospeševanja, prve 3 desetinke
 
         // while( distance < 1609 && executionTime < 60000 && speedGain > 0.0005)
-        while (
-          distance < 1609 &&
-          executionTime < 180000 &&
-          speedGain > threshold
-        ) {
-          if (
-            1609 - 30 < distance &&
-            distance < 1609 + 100 &&
-            interval == false
-          ) {
+        while (distance < 1609 && executionTime < 180000 && speedGain > threshold) {
+          if (1609 - 30 < distance && distance < 1609 + 100 && interval == false) {
             //to pazi kako postaviš
             /* this is for slowing down calculation when it approaches 1600m mark */
             interval = true;
@@ -300,22 +272,12 @@ export default {
           step_count++;
           executionTime = executionTime + this.calculate_interval_ms;
 
-          let cp = calculatePower(
-            currentSpeed,
-            executionTime,
-            this,
-            gearLength[currentGearIndex],
-            store.selectedEngine
-          );
+          let cp = calculatePower(currentSpeed, executionTime, this, gearLength[currentGearIndex], store.selectedEngine);
           power = cp[0];
           currentRpm = cp[1];
           lastRpm = currentRpm;
 
-          if (
-            currentRpm >
-            this.store.engines[this.store.selectedEngine].shiftRpm &&
-            currentGearIndex + 1 < gearLength.length
-          )
+          if (currentRpm > this.store.engines[this.store.selectedEngine].shiftRpm && currentGearIndex + 1 < gearLength.length)
             currentGearIndex++;
 
           acceleration = acceleration_calc(
@@ -324,13 +286,11 @@ export default {
             this.store.weightKg,
             this.store.aeroCx,
             this.store.rollingRes,
-            this.store.maximumAccG
+            this.store.maximumAccG,
           );
           speedGain = acceleration * this.calculate_interval_ms;
           currentSpeed += speedGain;
-          distance =
-            distance +
-            ((currentSpeed + speedGain / 2) * this.calculate_interval_ms) / 1000;
+          distance = distance + ((currentSpeed + speedGain / 2) * this.calculate_interval_ms) / 1000;
 
           // if (executionTime < 3000 && currentSpeed < 20.0 && executionTime % 100 == 0) {
           //   console.log("⚛ ~ ", Math.round((10000 * speedGain / this.calculate_interval_ms)) / 10, "m/s2 ", Math.round(currentSpeed * 3.6), "km/h", Math.round(currentRpm), "rpm");
@@ -375,9 +335,9 @@ export default {
         let currentRollingRes = this.store.rollingRes;
         let currentMaximumAccG = this.store.maximumAccG;
 
-        function pushToStore () {
+        function pushToStore() {
           store.runWithGearShifting.push({
-            "final speed": Math.round(currentSpeed * 3.6),
+            'final speed': Math.round(currentSpeed * 3.6),
             gear: currentGearIndex + 1,
             rpm: lastRpm,
             exetime: executionTime,
@@ -392,61 +352,51 @@ export default {
         }
 
         if (Object.keys(bestResult).length == 0) {
-          bestResult.executionTime = executionTime
-          bestResult.finalSpeed = Math.round(currentSpeed * 3.6)
-          bestResult.gear = currentGearIndex + 1
-          bestResult.rpm = lastRpm
-          bestResult.exetime = executionTime
-          bestResult.currentGearing = currentGearing
+          bestResult.executionTime = executionTime;
+          bestResult.finalSpeed = Math.round(currentSpeed * 3.6);
+          bestResult.gear = currentGearIndex + 1;
+          bestResult.rpm = lastRpm;
+          bestResult.exetime = executionTime;
+          bestResult.currentGearing = currentGearing;
         }
 
         if (executionTime < bestResult.executionTime) {
-          bestResult.executionTime = executionTime
-          bestResult.finalSpeed = Math.round(currentSpeed * 3.6)
-          bestResult.gear = currentGearIndex + 1
-          bestResult.rpm = lastRpm
-          bestResult.exetime = executionTime
-          bestResult.currentGearing = currentGearing
+          bestResult.executionTime = executionTime;
+          bestResult.finalSpeed = Math.round(currentSpeed * 3.6);
+          bestResult.gear = currentGearIndex + 1;
+          bestResult.rpm = lastRpm;
+          bestResult.exetime = executionTime;
+          bestResult.currentGearing = currentGearing;
           // pushToStore()
         }
         // if (Math.random() < 0.0005) {
         //   pushToStore()
         // }
 
-        pushToStore()
+        pushToStore();
 
         return arrResult;
       };
 
-      if (this.mode == "oneGear") {
+      if (this.mode == 'oneGear') {
         for (let i = 0; i < this.splits; i++) {
-          let tmp =
-            parseFloat(this.finalGearMin) +
-            i *
-            parseFloat(
-              (this.finalGearMax - this.finalGearMin) / (this.splits - 1)
-            );
+          let tmp = parseFloat(this.finalGearMin) + i * parseFloat((this.finalGearMax - this.finalGearMin) / (this.splits - 1));
           tanja.push(singleRun(false, 1609, tmp));
         }
         store.tanja = tanja;
         store.love = love;
-      } else if (this.mode == "topspeedRun") {
+      } else if (this.mode == 'topspeedRun') {
         for (let i = 0; i < this.splits; i++) {
-          let tmp =
-            parseFloat(this.finalGearMin) +
-            i *
-            parseFloat(
-              (this.finalGearMax - this.finalGearMin) / (this.splits - 1)
-            );
+          let tmp = parseFloat(this.finalGearMin) + i * parseFloat((this.finalGearMax - this.finalGearMin) / (this.splits - 1));
           tanja.push(singleRun(true, Infinity, tmp));
         }
         store.tanja = tanja;
         store.love = love;
-      } else if (this.mode == "fixedMultipleGears") {
+      } else if (this.mode == 'fixedMultipleGears') {
         tanja.push(runWithGearShifting(store.gearRatios, store.gearFinal));
         store.tanja = tanja;
         store.love = love;
-      } else if (this.mode == "allPossibleGears") {
+      } else if (this.mode == 'allPossibleGears') {
         // var t0 = performance.now();
         // const gear_0 = [3.2, 3.1, 3, 2.9, 2.8, 2.7, 2.6, 2.5, 2.4, 2.3, 2.2];
         // const gear_1 = [3.2, 3.1, 3, 2.9, 2.8, 2.7, 2.6, 2.5, 2.4, 2.3, 2.2, 2.1, 2.0, 1.9, 1.8, 1.7];
@@ -487,14 +437,9 @@ export default {
                     if (gear_4[m] <= gear_5[n]) continue;
 
                     total++;
-                    const tmp = [gear_0[i],
-                    gear_1[j],
-                    gear_2[k],
-                    gear_3[l],
-                    gear_4[m],
-                    gear_5[n],]
+                    const tmp = [gear_0[i], gear_1[j], gear_2[k], gear_3[l], gear_4[m], gear_5[n]];
                     // tanja.push(runWithGearShifting(tmp, 2.875));
-                    runWithGearShifting(tmp, 4.5)
+                    runWithGearShifting(tmp, 4.5);
                   }
                 }
               }
@@ -505,43 +450,36 @@ export default {
         store.tanja = tanja;
         store.love = love;
         // const t1 = performance.now();
-        console.log(
-          "Total of runs made: ",
-          total
-        );
-        console.log(" best result: ", bestResult);
+        console.log('Total of runs made: ', total);
+        console.log(' best result: ', bestResult);
       }
-      console.log(`%cwill not work properly until we manage to limit tyre grip at beginning`, "color: red");
-      this.$eventBus.$emit("calculationDone", this.mode);
+      console.log(`%cwill not work properly until we manage to limit tyre grip at beginning`, 'color: red');
+      this.$eventBus.$emit('calculationDone', this.mode);
     },
-    drawPowerAndTorqueChart () {
+    drawPowerAndTorqueChart() {
       var rpmLookupTable = [];
-      for (
-        var currentRpm = 0;
-        currentRpm <= store.engines[store.selectedEngine].maxRpm;
-        currentRpm += this.divRpm
-      ) {
+      for (var currentRpm = 0; currentRpm <= store.engines[store.selectedEngine].maxRpm; currentRpm += this.divRpm) {
         rpmLookupTable.push(currentRpm);
       }
 
-      var ctx = document.getElementById("myChart");
+      var ctx = document.getElementById('myChart');
       while (ctx.firstChild) ctx.removeChild(ctx.firstChild);
 
       var myChart = new Chart(ctx, {
-        type: "line",
+        type: 'line',
         data: {
           labels: rpmLookupTable,
           datasets: [
             {
-              label: "torque nm",
+              label: 'torque nm',
               data: store.engines[store.selectedEngine].torqueLookupTable,
-              backgroundColor: ["rgba(54, 162, 235, 0.2)"],
+              backgroundColor: ['rgba(54, 162, 235, 0.2)'],
               borderWidth: 1,
             },
             {
-              label: "power hp",
+              label: 'power hp',
               data: store.engines[store.selectedEngine].powerLookupTable,
-              backgroundColor: ["rgba(127, 127, 127, 1)"],
+              backgroundColor: ['rgba(127, 127, 127, 1)'],
               borderWidth: 1,
             },
           ],
@@ -560,25 +498,25 @@ export default {
       });
     },
   },
-  mounted () {
+  mounted() {
     this.sendData();
-    this.$eventBus.$on("initialSpeedInputChange", (e) => {
+    this.$eventBus.$on('initialSpeedInputChange', (e) => {
       this.initialSpeed = e;
     });
-    this.$eventBus.$on("finalGearMinChange", (e) => {
+    this.$eventBus.$on('finalGearMinChange', (e) => {
       this.finalGearMin = e;
     });
-    this.$eventBus.$on("finalGearMaxChange", (e) => {
+    this.$eventBus.$on('finalGearMaxChange', (e) => {
       this.finalGearMax = e;
     });
-    this.$eventBus.$on("splitsChange", (e) => {
+    this.$eventBus.$on('splitsChange', (e) => {
       this.splits = e;
     });
-    this.$eventBus.$on("selectEngineChange", (e) => {
+    this.$eventBus.$on('selectEngineChange', (e) => {
       store.selectedEngine = e;
       this.drawPowerAndTorqueChart();
     });
-    this.$eventBus.$on("selectCarPresetChange", (e) => {
+    this.$eventBus.$on('selectCarPresetChange', (e) => {
       store.selectedCarPreset = e;
       store.weightKg = store.carPresets[e].weightKg;
       store.aeroCx = store.carPresets[e].aeroCx;
@@ -589,30 +527,20 @@ export default {
   },
 };
 
-const calculatePower = (
-  speed,
-  executionTime,
-  _that,
-  gearLength,
-  selectedEngine
-) => {
+const calculatePower = (speed, executionTime, _that, gearLength, selectedEngine) => {
   var currentRpm = null;
   var IDs = new Object();
-  const clutchSlipStartTimeMs = 1301
+  const clutchSlipStartTimeMs = 1301;
 
   if (executionTime < clutchSlipStartTimeMs) {
-    IDs[0] = store.engines[selectedEngine].powerLookupTable[Math.floor(store.engines[selectedEngine].powerLookupTable.length * 1 / 2)];
-    IDs[1] = store.engines[selectedEngine].maxRpm * 2 / 3;
+    IDs[0] = store.engines[selectedEngine].powerLookupTable[Math.floor((store.engines[selectedEngine].powerLookupTable.length * 1) / 2)];
+    IDs[1] = (store.engines[selectedEngine].maxRpm * 2) / 3;
     return IDs;
   } else {
-    currentRpm =
-      (speed / gearLength) * 3.6 * store.engines[selectedEngine].maxRpm;
+    currentRpm = (speed / gearLength) * 3.6 * store.engines[selectedEngine].maxRpm;
     // console.log(' current rpm: ', Math.round(currentRpm/50)*50, ' power: ', Math.round(_that.powerLookupTable[Math.floor(currentRpm / _that.divRpm)]), ' kW');
     /* HARDCODED */
-    var res =
-      store.engines[selectedEngine].powerLookupTable[
-      Math.floor(currentRpm / _that.divRpm)
-      ];
+    var res = store.engines[selectedEngine].powerLookupTable[Math.floor(currentRpm / _that.divRpm)];
     IDs[0] = res;
     IDs[1] = Math.round(currentRpm / 50) * 50;
     if (isNaN(res)) {
@@ -631,6 +559,16 @@ const calculatePower = (
   font-family: Museo;
   padding: 10px;
   min-height: 100vh;
+}
+
+#app header {
+  display: flex;
+  span {
+    flex-grow: 1;
+  }
+  button {
+    margin: 0.5rem;
+  }
 }
 
 #app .ourForm {
@@ -679,7 +617,7 @@ const calculatePower = (
 
 .myChartContainer .slider:before {
   position: absolute;
-  content: "";
+  content: '';
   height: 26px;
   width: 26px;
   left: 4px;
